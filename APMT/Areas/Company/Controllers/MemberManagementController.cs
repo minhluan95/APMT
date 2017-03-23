@@ -18,8 +18,15 @@ namespace APMT.Areas.Company.Controllers
                         join user in db.APMT_User on UserC.User_id equals user.ID
                         join company in db.APMT_Company on UserC.Company_id equals company.ID
                         where company.ID == 1
-                        select new userCompany { id = UserC.ID, fullName = user.Fullname, email = user.Email, avartar = user.Avatar, createAt = user.Create_at.ToString(), updateAt = user.Update_at.ToString(), isAllowed = UserC.Allowed, role = UserC.Role };
-            //  var lstprocess = db.APMT_Running_Process_Detail.Where(x => x.project_id == id).ToList();
+                        select new userCompany { id = UserC.ID,
+                            fullName = user.Fullname,
+                            email = user.Email,
+                            avartar = user.Avatar,
+                            createAt = user.Create_at.ToString(),
+                            updateAt = user.Update_at.ToString(),
+                            isAllowed = UserC.Allowed,
+                            isAdministrator = UserC.isAdministrator,isCreator=UserC.isCreator,isMember=UserC.isMember};
+      
             ViewBag.List = query.OrderByDescending(x => x.id).ToList();
             return View();
         }
@@ -38,7 +45,7 @@ namespace APMT.Areas.Company.Controllers
             ViewBag.Message = null;
             string trimEmail = "";
             string email = f["somevalue"];
-            string role = f["selectRole"];
+           // string role = f["selectRole"];
             if (email.Contains("("))
             {
                 trimEmail = email.Substring(0, email.IndexOf('(')).Trim();
@@ -51,26 +58,28 @@ namespace APMT.Areas.Company.Controllers
             {
                 var userID = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail)).ID;
                 if (userID != null)
-                {
+                {                  
                     APMT_Company_User companyUser = new APMT_Company_User();
                     companyUser.Company_id = 1;
                     companyUser.User_id = int.Parse(userID.ToString());
                     companyUser.Allowed = 1;
-                    companyUser.Role =int.Parse(role) ;
+                    companyUser.isMember = true;
+                    companyUser.isAdministrator = false;
+                    companyUser.isCreator = false;
                     db.APMT_Company_User.Add(companyUser);
                     db.SaveChanges();
-                    ViewBag.Message = "Successful";
-                    return RedirectToAction("View_List");
+                    TempData["Message"] = "Successful";
+                        return RedirectToAction("View_List");                  
                 }
                 else
                 {
-                    ViewBag.Message = "User not exist !";
+                    TempData["Message"] = "User is not exist !";
                     return RedirectToAction("View_List");
                 }
             }
             catch (Exception e)
             {
-                ViewBag.Message = "Add new Failure !";
+                TempData["Message"] = "Add new Failure !";
                 return RedirectToAction("View_List");
             }
         }
@@ -85,7 +94,14 @@ namespace APMT.Areas.Company.Controllers
         public ActionResult setAdministrator(int? id)
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-            user.Role = 1;
+            if(user.isAdministrator == false)
+            { 
+            user.isAdministrator = true;
+            }
+            else
+            {
+                user.isAdministrator = false;
+            }
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("View_List");
@@ -93,7 +109,14 @@ namespace APMT.Areas.Company.Controllers
         public ActionResult setCreator(int? id)
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-            user.Role = 2;
+            if (user.isCreator == false)
+            {
+                user.isCreator = true;
+            }
+            else
+            {
+                user.isCreator = false;
+            }
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("View_List");
@@ -101,7 +124,14 @@ namespace APMT.Areas.Company.Controllers
         public ActionResult setMember(int? id)
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-            user.Role = 3;
+            if (user.isMember == false)
+            {
+                user.isMember = true;
+            }
+            else
+            {
+                user.isMember = false;
+            }
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("View_List");
