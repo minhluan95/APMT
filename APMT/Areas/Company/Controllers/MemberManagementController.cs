@@ -1,6 +1,7 @@
 ﻿using APMT.Areas.Company.Models;
 using Models;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -78,6 +79,31 @@ namespace APMT.Areas.Company.Controllers
             db.SaveChanges();
             return RedirectToAction("View_List");
         }
+        public ActionResult setAdministrator(int? id)
+        {
+            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+            user.Role = 1;
+            db.Entry(user).State = EntityState.Modified;          
+            db.SaveChanges();
+            return RedirectToAction("View_List");
+        }
+        public ActionResult setCreator(int? id)
+        {
+            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+            user.Role = 2;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("View_List");
+        }
+        public ActionResult setMember(int? id)
+        {
+            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+            user.Role = 3;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("View_List");
+        }
+
 
         //[HttpPost]
         //public ActionResult deleteMember(APMT_Company_User user)

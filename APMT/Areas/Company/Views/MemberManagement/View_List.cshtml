@@ -66,21 +66,78 @@
                                     <td><center>@item.createAt</center></td>  
                                     @if (@item.role == 1)
                                     {
-                                    <td><center>Administrator</center></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <center>
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Administrator
+                                                        <span class="caret"></span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li>@Html.ActionLink("Creator", "setCreator", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Creator?')" })</li>
+                                                        <li>@Html.ActionLink("Member", "setMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Member?')" })</li>
+                                                    </ul>
+                                                </center>
+                                            </div>
+                                        </td>
                                     }
                                     else if (@item.role == 2)
                                     {
-                                        <td><center>Creator</center></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <center>
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Creator
+                                                        <span class="caret"></span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li>@Html.ActionLink("Administrator", "setAdministrator", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Administrator?')" })</li>
+                                                        <li>@Html.ActionLink("Member", "setMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Member?')" })</li>
+                                                    </ul>
+                                                </center>
+                                            </div>
+                                        </td>
                                     }
                                     else
                                     {
-                                        <td><center>Member</center></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <center>
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Member
+                                                        <span class="caret"></span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li>@Html.ActionLink("Administrator", "setAdministrator", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Administrator?')" })</li>
+                                                        <li>@Html.ActionLink("Creator", "setCreator", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Creator?')" })</li>
+
+                                                    </ul>
+                                                </center>
+                                            </div>
+                                        </td>
                                     }
                                     @using (Html.BeginForm(FormMethod.Post))
                                     {
                                         if (@item.isAllowed == 1)
                                         {
-                                            <td><center>Available</center></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <center>
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                            Enable
+                                                            <span class="caret"></span>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                            <li role="separator" class="divider"></li>
+                                                            <li>@Html.ActionLink("Disable", "Index")</li>
+                                                        </ul>
+                                                    </center>
+                                                </div>
+                                            </td>
                                             <td>
                                                 @*<center>
                                                     <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Creator</a><br />
@@ -107,11 +164,6 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                            <li>@Html.ActionLink("Set Creator", "Edit")</li>
-                                                            <li role="separator" class="divider"></li>
-                                                            <li>@Html.ActionLink("Set Administrator", "Edit")</li>
-                                                            <li role="separator" class="divider"></li>
-                                                            <li>@Html.ActionLink("Disable", "Index")</li>
                                                             <li role="separator" class="divider"></li>
                                                             <li>@Html.ActionLink("Delete", "deleteMember", new {id = @item.id}, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
                                                         </ul>
@@ -124,7 +176,22 @@
                                         }
                                         else
                                         {
-                                            <td><center>Disable</center></td>
+                                           
+                                            <td>
+                                                <div class="dropdown">
+                                                    <center>
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                            Disable
+                                                            <span class="caret"></span>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                            <li role="separator" class="divider"></li>
+                                                            <li>@Html.ActionLink("Enable", "Index")</li>
+                                                        </ul>
+                                                    </center>
+                                                </div>
+                                           </td>
                                             <td>
                                                 <div class="dropdown">
                                                     <center>
@@ -135,7 +202,7 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                            
-                                                            <li>@Html.ActionLink("Enable", "Index")</li>
+                                                            <li>@Html.ActionLink("Delete", "deleteMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
                                                            
                                                         </ul>
                                                     </center>
