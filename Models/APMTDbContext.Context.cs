@@ -37,5 +37,6 @@ namespace Models
         public virtual DbSet<APMT_ProductAdmin> APMT_ProductAdmin { get; set; }
         public virtual DbSet<APMT_Project> APMT_Project { get; set; }
         public virtual DbSet<APMT_User> APMT_User { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

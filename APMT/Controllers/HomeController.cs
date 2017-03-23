@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace APMT.Controllers
+namespace APMT_D.o.T_Team.Controllers
 {
     public class HomeController : Controller
     {
@@ -13,22 +13,22 @@ namespace APMT.Controllers
             return View();
         }
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
 
-        //    return View();
-        //}
+            return View();
+        }
 
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
 
-        //    return View();
-        //}
-        //public ActionResult Signin() 
-        //{
-        //    return View();
-        //}
+            return View();
+        }
+        public ActionResult Signin() 
+        {
+            return View();
+        }
     }
 }

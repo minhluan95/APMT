@@ -28,6 +28,7 @@
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Project_APMT_Company_User" />
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Permission_APMT_ProductAdmin" />
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Process_Role_APMT_Process" />
+        <EntityTypeShape EntityType="CP_SPMModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

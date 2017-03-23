@@ -24,6 +24,8 @@ namespace Models
         public int ID { get; set; }
         public Nullable<int> Company_id { get; set; }
         public Nullable<int> User_id { get; set; }
+        public Nullable<int> Allowed { get; set; }
+        public Nullable<int> Role { get; set; }
     
         public virtual APMT_Company APMT_Company { get; set; }
         public virtual APMT_User APMT_User { get; set; }

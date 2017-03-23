@@ -213,6 +213,7 @@
     <Compile Include="Areas\System\Controllers\ClientManagementController.cs" />
     <Compile Include="Areas\System\Controllers\UserManagementController.cs" />
     <Compile Include="Areas\System\SystemAreaRegistration.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -400,6 +401,10 @@
     <Content Include="Areas\Company\Views\MemberManagement\deleteMember.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\User\View_Details.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Signin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\D.o.T - Pham Ngoc Duy\PhanQuyen\StaticResource\StaticResource.csproj">
