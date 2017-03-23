@@ -44,7 +44,9 @@
           <Property Name="Company_id" Type="int" />
           <Property Name="User_id" Type="int" />
           <Property Name="Allowed" Type="int" />
-          <Property Name="Role" Type="int" />
+          <Property Name="isAdministrator" Type="bit" />
+          <Property Name="isCreator" Type="bit" />
+          <Property Name="isMember" Type="bit" />
         </EntityType>
         <EntityType Name="APMT_Controller">
           <Key>
@@ -434,7 +436,9 @@
           <Property Name="Company_id" Type="Int32" />
           <Property Name="User_id" Type="Int32" />
           <Property Name="Allowed" Type="Int32" />
-          <Property Name="Role" Type="Int32" />
+          <Property Name="isAdministrator" Type="Boolean" />
+          <Property Name="isCreator" Type="Boolean" />
+          <Property Name="isMember" Type="Boolean" />
           <NavigationProperty Name="APMT_Company" Relationship="CP_SPMModel.FK_APMT_Company_User_APMT_Company" FromRole="APMT_Company_User" ToRole="APMT_Company" />
           <NavigationProperty Name="APMT_User" Relationship="CP_SPMModel.FK_APMT_Company_User_APMT_User" FromRole="APMT_Company_User" ToRole="APMT_User" />
           <NavigationProperty Name="APMT_Process" Relationship="CP_SPMModel.FK_APMT_Process_APMT_Company_User" FromRole="APMT_Company_User" ToRole="APMT_Process" />
@@ -716,7 +720,9 @@
           <EntitySetMapping Name="APMT_Company_User">
             <EntityTypeMapping TypeName="CP_SPMModel.APMT_Company_User">
               <MappingFragment StoreEntitySet="APMT_Company_User">
-                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="isMember" ColumnName="isMember" />
+                <ScalarProperty Name="isCreator" ColumnName="isCreator" />
+                <ScalarProperty Name="isAdministrator" ColumnName="isAdministrator" />
                 <ScalarProperty Name="Allowed" ColumnName="Allowed" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
                 <ScalarProperty Name="Company_id" ColumnName="Company_id" />
