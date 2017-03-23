@@ -36,7 +36,7 @@ namespace APMT.Areas.System.Controllers
         }
         public ActionResult setStatus(int? id)
         {
-            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+            var user = db.APMT_User.FirstOrDefault(x => x.ID == id);
             if (user.Allowed == 1)
             {
                 user.Allowed = 2;

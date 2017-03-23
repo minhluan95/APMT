@@ -238,6 +238,7 @@
     <Content Include="Content\css\jquery.ui.theme.css" />
     <Content Include="Content\css\registercompany.css" />
     <Content Include="Content\css\site.css" />
+    <Content Include="Content\css\TabPanel.css" />
     <Content Include="Content\css\_all-skins.css" />
     <Content Include="Images\header-bg.jpg" />
     <Content Include="Images\header-bg2.jpg" />
