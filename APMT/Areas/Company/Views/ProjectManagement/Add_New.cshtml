@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = null;
+}
+
+<button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#AddNew">Add Project</button>
+<div id="AddNew" class="box collapse box box-primary">
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" action="~/Company/ManageProject/AddNew/" method="post">
+        <div class="box-body">
+
+            <div class="form-group">
+                <label for="exampleInputFile">Project Name</label>
+                <input type="text" class="form-control pull-right" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Description:</label>
+                <textarea rows="5" cols="50" class="form-control pull-right" name="Descriptions" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Manager:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose a name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">teocute9x@gmail.com</a></li>
+                        <li><a href="#">ti9xhero@gmail.com</a></li>
+                        <li><a href="#">nguyenvanti2008@gmail.com</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+            </div>   
+            <div class="form-group">
+                <label for="exampleInputFile">StartDate:</label>
+                <input data-provide="datepicker">
+                To <input data-provide="datepicker">
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>

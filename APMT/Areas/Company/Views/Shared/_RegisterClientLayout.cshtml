@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A process mamagement tools, process, management process, tool">
+    <title>@ViewBag.Title - A Process Management Tools</title>
+    @Styles.Render("~/Content/css")
+    <script>
+        new WOW().init();
+    </script>
+
+</head>
+<body>
+    <nav id="mainNav" class="navbar navbar-default navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                    </button>*@
+
+                @Html.ActionLink("A.P.M.T", "Index", "Home", new { area = "" }, new { @class = "navbar-brand page-scroll" })
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/agency")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

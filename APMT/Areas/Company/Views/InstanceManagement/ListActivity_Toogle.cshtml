@@ -1,0 +1,326 @@
+﻿
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
+}
+
+<h4><b>Software Development Process</b></h4>
+<div class="box box-primary" style="height:50%">
+    <img src="~/Images/waterfall_software_Process.png" />
+    <h4><span><a href="#" data-toggle="collapse" data-target="#Requirements">Requirements</a>-><a href="#" data-toggle="collapse" data-target="#Design">Design</a>-><a href="#" data-toggle="collapse" data-target="#ListTasksImplement">Implement</a>-><a data-toggle="collapse" data-target="#StepNormalTest" href="#">Test</a>-><a data-toggle="collapse" data-target="#Requirements" href="#">Maintenance</a></span></h4>
+</div>
+
+<div class="box collapse" tabindex="-1" role="dialog" id="Requirements">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Requirements Process</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label for="exampleInputFile">Assign Leader:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose a name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Trần Văn Tèo</a></li>
+                        <li><a href="#">Nguyễn Văn Tí</a></li>
+                        <li><a href="#">Lại Thị Hai</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Description :</label>
+                    <br />
+                    <p>This is a explore all requirement of Customer both they want and they need </p>
+                </div>
+                <img src="~/Images/req-process.jpg" />
+                <h4><span><a data-toggle="collapse" data-target="#ListTasks" href="#">Requirements Elicitation</a>-><a href="#">Requirements Analysis</a>-><a href="#">Requirements Specification</a>-><a href="#">Requirements Validation</a></span></h4>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-target="#Requirements" data-toggle="collapse">Close</button>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+<div class="box collapse" id="ListTasks">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Requirements Elicitation</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputFile">Description :</label>
+                    <br />
+                    <label>This is a explore all requirement of Customer both they want and they need </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">List Tasks :</label>
+                    <br />
+                    <a href="#" data-toggle="collapse" data-target="#StepNormal">Meeting with Customer</a><br />
+                    <a href="#" data-toggle="collapse" data-target="#StepNormal">Repair questions</a><br />
+                    <a href="#" data-toggle="collapse" data-target="#StepNormal">Brainstoming</a>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#ListTasks">Close</button>
+    </div>
+</div>
+
+<div class="box collapse" id="StepNormal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Meeting with Customer</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputFile">Assign to:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose a name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Trần Văn Tèo</a></li>
+                        <li><a href="#">Nguyễn Văn Tí</a></li>
+                        <li><a href="#">Lại Thị Hai</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">StartDate:</label>
+                <input data-provide="datepicker" value="19/10/2016">
+                To <input data-provide="datepicker" value="30/4/2017">
+            </div>
+            <div class="form-group">
+                <label for="plannedhours">Planned Hours</label>
+                <input style="width:130px" type="text" class="form-control" id="txtPlannedHours">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Description :</label>
+                <br />
+                <label>This is a explore all requirement of Customer both they want and they need </label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#StepNormal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+<!--Design-->
+<div class="box collapse" tabindex="-1" role="dialog" id="Design">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Design Process</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label for="exampleInputFile">Assign Leader:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose a name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Trần Văn Tèo</a></li>
+                        <li><a href="#">Nguyễn Văn Tí</a></li>
+                        <li><a href="#">Lại Thị Hai</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Description :</label>
+                    <br />
+                    <p>This is a explore all requirement of Customer both they want and they need </p>
+                </div>
+                <img src="~/Images/req-analysis.jpg" />
+                <h4><span><a data-toggle="collapse" data-target="#ListTasksAnalysis" href="#">Requirements Classification</a>-><a href="#">Conceptual Modeling</a>-><a href="#">Architectural Design & Requirements Allocation</a>-><a href="#">Requirements Negotiation</a></span></h4>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-target="#Design" data-toggle="collapse">Close</button>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+
+<div class="box collapse" id="ListTasksAnalysis">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Requirements Classification</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputFile">Description :</label>
+                    <br />
+                    <label>This is a explore all requirement of Customer both they want and they need </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">List Tasks :</label>
+                    <br />
+                    <a href="#" data-toggle="collapse" data-target="#StepNormalDesign">Enterprise modelling</a><br />
+                    <a href="#" data-toggle="collapse" data-target="#StepNormalDesign">Data modelling</a><br />
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#ListTasksAnalysis">Close</button>
+    </div>
+</div>
+<div class="box collapse" id="StepNormalDesign">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Enterprise modelling</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputFile">Assign to:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose a name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Trần Văn Tèo</a></li>
+                        <li><a href="#">Nguyễn Văn Tí</a></li>
+                        <li><a href="#">Lại Thị Hai</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">StartDate:</label>
+                <input data-provide="datepicker" value="19/10/2016">
+                To <input data-provide="datepicker" value="30/4/2017">
+            </div>
+            <div class="form-group">
+                <label for="plannedhours">Planned Hours</label>
+                <input style="width:130px" type="text" class="form-control" id="txtPlannedHours">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Description :</label>
+                <br />
+                <label>This is a explore all requirement of Customer both they want and they need </label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#StepNormalDesign">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+<!--Implement-->
+<div class="box collapse" id="ListTasksImplement">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Implement</h4>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="exampleInputFile">Description :</label>
+                    <br />
+                    <label>This is a explore all requirement of Customer both they want and they need </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">List Tasks :</label>
+                    <br />
+                    <a href="#" data-toggle="collapse" data-target="#StepNormalImplement">Setup enviroment</a><br />
+                    <a href="#" data-toggle="collapse" data-target="#StepNormalImplement">Commit code</a><br />
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#ListTasksImplement">Close</button>
+    </div>
+</div>
+
+<div class="box collapse" id="StepNormalImplement">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Setup enviroment</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputFile">Assign to:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose a name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Trần Văn Tèo</a></li>
+                        <li><a href="#">Nguyễn Văn Tí</a></li>
+                        <li><a href="#">Lại Thị Hai</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">StartDate:</label>
+                <input data-provide="datepicker" value="19/10/2016">
+                To <input data-provide="datepicker" value="30/4/2017">
+            </div>
+            <div class="form-group">
+                <label for="plannedhours">Planned Hours</label>
+                <input style="width:130px" type="text" class="form-control" id="txtPlannedHours">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Description :</label>
+                <br />
+                <label>This is a explore all requirement of Customer both they want and they need </label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#StepNormalImplement">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+<!--Test-->
+<div class="box collapse" id="StepNormalTest">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Test</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputFile">Assign to:</label>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Choose a name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Trần Văn Tèo</a></li>
+                        <li><a href="#">Nguyễn Văn Tí</a></li>
+                        <li><a href="#">Lại Thị Hai</a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">StartDate:</label>
+                <input data-provide="datepicker" value="19/10/2016">
+                To <input data-provide="datepicker" value="30/4/2017">
+            </div>
+            <div class="form-group">
+                <label for="plannedhours">Planned Hours</label>
+                <input style="width:130px" type="text" class="form-control" id="txtPlannedHours">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Description :</label>
+                <br />
+                <label>This is a explore all requirement of Customer both they want and they need </label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#StepNormalTest">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal -->

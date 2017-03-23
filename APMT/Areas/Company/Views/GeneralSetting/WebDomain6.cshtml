@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "WebDomain";
+    Layout = "~/Areas/Company/Views/Shared/_RegisterClientLayout.cshtml";
+}
+<div class="col-lg-5 col-lg-offset-4">
+    <h1 style="margin-bottom:40px;text-transform:none;">What web domain do you want for your Slack team?</h1>
+    <h4 style="color:gray;text-transform:none;margin-bottom:40px;">
+        Choose the address you’ll use to sign in to Slack.
+    </h4>
+    <form class="form-inline a_registercompany">
+        <h4 style="text-align:left;text-transform:none">Your team domain <strong style="color:gray">(letters, numbers, and dashes only)</strong></h4>
+        <div class="form-group">
+            <input style="height:40px;" type="text" class="form-control" id="password" placeholder="VNG or CSC" size="40">.APMT.com
+        </div>
+        <a style="background-color:#FEC136;border-color:#FEC136;margin-top:40px" href="@Url.Action("Invitation7","GeneralSetting")" class="btn btn-xl btn-lg" role="button">
+            Create Team
+            <i class="fa fa-arrow-right" aria-hidden="true">
+            </i>
+        </a>
+    </form>
+</div>
+

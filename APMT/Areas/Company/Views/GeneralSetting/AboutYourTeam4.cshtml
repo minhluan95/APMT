@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "AboutYourTeam";
+    Layout = "~/Areas/Company/Views/Shared/_RegisterClientLayout.cshtml";
+}
+
+<div class="col-lg-6 col-lg-offset-4">
+    <h1 style="margin-bottom:40px;text-transform:none;">Tell us about your team</h1>
+
+    <form class="form-inline a_registercompany">
+        <div class="dropdown">
+            <h5 style="text-transform:none">What will your team use APMT for?</h5>
+            <button style="width:450px" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Select an option
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Work</a></li>
+                <li><a href="#">School</a></li>
+                <li><a href="#">Shared interest group</a></li>
+                <li><a href="#">Other</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <h5 style="text-transform:none">Great! What kind of company is it?</h5>
+            <button style="width:450px" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Select an option
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Consumer Goods</a></li>
+                <li><a href="#">Financial Services</a></li>
+                <li><a href="#">Government </a></li>
+                <li><a href="#">Media</a></li>
+                <li><a href="#">Software</a></li>
+                <li><a href="#">Technology</a></li>
+                <li><a href="#">Other</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown">
+            <h5 style="text-transform:none">Last one: How big is your company?</h5>
+            <button style="width:450px" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Select an option
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">1-10 people</a></li>
+                <li><a href="#">11-50 people</a></li>
+            </ul>
+        </div>
+        <a style="background-color:#FEC136;border-color:#FEC136;margin-top:40px" href="@Url.Action("CompanyCalled5","GeneralSetting")" class="btn btn-xl btn-lg" role="button">
+            Continue to Company Name
+            <i class="fa fa-arrow-right" aria-hidden="true">
+            </i>
+        </a>
+    </form>
+</div>
+
+

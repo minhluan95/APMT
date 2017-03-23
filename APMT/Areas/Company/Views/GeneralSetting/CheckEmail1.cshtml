@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Company/Views/Shared/_RegisterClientLayout.cshtml";
+}
+
+
+<div class="col-lg-6 col-lg-offset-4">
+    <h1 style="margin-bottom:40px;text-transform:none;">Check your email!</h1>
+    <h4 style="color:gray;text-transform:none;margin-bottom:40px;">We're sent a six-digit confirmation code to <strong style="font-weight:bold !important"> cuminhluan1995@gmail.com</strong>. Enter it below to confirm your email address.</h4>
+    <h5 style="text-transform:none;">Your confirmation code</h5>
+</div>
+<div class="col-lg-7 col-lg-offset-4">
+    <div class="col-lg-1 col-xs-4 col-md-1 col-xs-1 col-sm-1">
+        <input width="100" type="text" maxlength="1" name="text1" size="5" style="height:70px;text-align:center;" />
+    </div>
+    <div class="col-lg-1 col-xs-4 col-md-1 col-xs-1 col-sm-1">
+        <input width="100" type="text" maxlength="1" name="text2" size="5" style="height:70px;text-align:center;" />
+    </div>
+    <div class="col-lg-1 col-xs-4 col-md-1 col-xs-1 col-sm-1">
+        <input width="100" type="text" maxlength="1" name="text3" size="5" style="height:70px;text-align:center;" />
+    </div>
+    @*<i style="width:50px !important;height:100px !important">-</i>*@
+    <div class="col-lg-1 col-xs-4 col-md-1 col-xs-1 col-sm-1">
+        <input width="100" type="text" maxlength="1" name="text4" size="5" style="height:70px;text-align:center;" />
+    </div>
+
+    <div class="col-lg-1 col-xs-4 col-md-1 col-xs-1 col-sm-1">
+        <input width="100" type="text" maxlength="1" name="text5" size="5" style="height:70px;text-align:center;" />
+    </div>
+    <div class="col-lg-1 col-xs-4 col-md-1 col-xs-1 col-sm-1">
+        <input width="100" type="text" maxlength="1" name="text6" size="5" style="height:70px;text-align:center;" />
+    </div>
+</div>
+<div style="margin-top:20px;" class="col-lg-12 col-xs-12 col-lg-offset-4 a_registercompany">
+
+    @*<button style="margin-top:20px;" type="button" class="btn btn-success btn-lg" >SENT</button>*@
+    <a href="@Url.Action("YourName2","GeneralSetting")" class="btn btn-xl btn-lg" role="button" style="background-color:#FEC136;border-color:#FEC136">Sent</a>
+
+
+</div>

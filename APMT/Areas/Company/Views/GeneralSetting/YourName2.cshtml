@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "YourName";
+    Layout = "~/Areas/Company/Views/Shared/_RegisterClientLayout.cshtml";
+}
+
+
+<div class="col-lg-4 col-lg-offset-4">
+    <h1 style="margin-bottom:40px;text-transform:none;">What's your name?</h1>
+    <h4 style="color:gray;text-transform:none;margin-bottom:40px;">
+        Your name will be displayed along with your messages in APMT
+    </h4>
+
+    <form class="form-inline a_registercompany">
+        <h4 style="text-align:left;text-transform:none">Your name</h4>
+        <div class="form-group">
+            <input style="height:40px;" type="text" class="form-control" id="firstname" placeholder="first name">
+        </div>
+        <div class="form-group">
+            <input style="height:40px;" type="text" class="form-control" id="lastname" placeholder="last name">
+        </div>
+        <h4 style="text-align:left;text-transform:none">Username</h4>
+        <div class="form-group">
+            <input style="height:40px;" type="text" class="form-control" id="username" placeholder="username" size="46">
+        </div>
+        <p style="text-align:left;text-transform:none;color:#BBBBBB;font-size:14px;padding-top:10px">Usernames must be all lower case, with no spaces. They can only contain letters numbers, periods, hyphens and underscores .</p>
+        <a style="background-color:#FEC136;border-color:#FEC136" href="@Url.Action("SetYourPassword3","GeneralSetting")" class="btn btn-xl btn-lg" role="button">
+            Continue to Password
+            <i class="fa fa-arrow-right" aria-hidden="true">
+            </i>
+        </a>
+    </form>
+</div>
+
+

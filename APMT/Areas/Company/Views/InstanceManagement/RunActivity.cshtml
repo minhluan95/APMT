@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "SetupActivity";
+    Layout = "~/Areas/Company/Views/Shared/_ClientLayoutPage.cshtml";
+}
+
+<center>
+    <h3>Gather Information	</h3>
+</center>
+<div class="box-body">
+    <div class="form-group">
+        <center>
+            <label>Nguyễn Văn Tèo uploaded 1h ago<strong style="color:#990000"> GatherInformation.docx</strong></label><br />
+            <a href="">Dowload File</a>
+        </center>
+    </div>
+
+    <div class="form-group">
+        <center>
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" rows="5" id="comment" style="width:50%"></textarea>
+            <label for="exampleInputFile">Status</label><br />
+            <!-- Single button -->
+
+            <div class="form-group">
+
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Finish
+                        <span class="caret"></span>
+                    </button>
+                        <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenu1">
+
+                            <li><a href="#">Approved</a></li>
+                            <li><a href="#">Re-Open</a></li>
+                        </ul>
+                </div>
+            </div>
+        </center>
+    </div>
+    <center>
+        <a class="btn btn-primary btn-lg" href="@Url.Action("ListActivity","RunProcess")" role="button">Save</a>
+        <a class="btn btn-default btn-lg" href="@Url.Action("ListActivity","RunProcess")" role="button">Cancel</a>
+    </center>
+</div>

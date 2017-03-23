@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "CompanyCalled";
+    Layout = "~/Areas/Company/Views/Shared/_RegisterClientLayout.cshtml";
+}
+
+<div class="col-lg-6 col-lg-offset-4">
+    <h1 style="margin-bottom:40px;text-transform:none;">What's your company called?</h1>
+
+    <form class="form-inline a_registercompany">
+        <h4 style="text-align:left;text-transform:none">Company name</h4>
+        <div class="form-group">
+            <input style="height:40px;" type="text" class="form-control" id="password" placeholder="VNG or CSC" size="46">
+        </div>
+        <p style="text-align:left;text-transform:none;color:#BBBBBB;font-size:14px;padding-top:10px">We'll uses this to name your APMT company, which you can always change later.</p>
+        <a style="background-color:#FEC136;border-color:#FEC136" href="@Url.Action("WebDomain6", "GeneralSetting")" class="btn btn-xl btn-lg" role="button">
+            Continue to Team Domain
+            <i class="fa fa-arrow-right" aria-hidden="true">
+            </i>
+        </a>
+    </form>
+</div>
+
+

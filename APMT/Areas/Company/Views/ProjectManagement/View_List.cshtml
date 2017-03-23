@@ -1,0 +1,162 @@
+﻿@*@model Model.Framework.APMT_Project *@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
+     int i = 1;
+    // var lst = (List<Model.Framework.APMT_Project>)ViewBag.LstProject;
+}
+<section class="content-header">
+    <h1>
+        Project List
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Project Management</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+           @Html.Partial("Add_New")
+            <br />
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">List Projects</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Project Name
+                                </th>
+                                <th>
+                                    Manager Name
+                                </th>
+                                <th>
+                                   Start Date
+                                </th>
+                                <th>
+                                    End Date
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        @*@foreach (var item in lst)
+            {
+                i++;
+
+                            <tbody>
+                                <tr>
+                                    <td>@i</td>
+                                    <td>
+                                        @Html.ActionLink(item.name, "ListProcess", "ProcessManagement", new { @id = item.id }, null)
+                                    </td>
+                                    <td>Nguyễn văn Tèo</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.APMT_Company.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.APMT_Users.Email)
+                                    </td>
+
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descriptions)
+                                    </td>
+
+                                    @if (@item.status == "1")
+                                    {
+                                        <td>Running</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Blocked</td>
+                                    }
+
+                                    <td>
+                                        <a href="@Url.Action("AddMember","ProjectManagement")" class="btn btn-primary">Add Member</a>
+                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }*@
+
+                        <tbody>
+                            <tr>
+                                <td>@i</td>
+                                <td>
+                                    <a href="" data-toggle="modal" data-target="#myModal">APMT Project</a>
+                                </td>
+                                <td>Nguyễn văn Tèo</td>
+                                <td>
+                                19/10/2016
+                                </td>
+                                <td>
+                                 30/4/2017
+                                </td>
+                                <td>
+                                A Process Management Tool
+                                </td>   
+                                <td>  Running</td>                           
+                            
+                                <td>
+                                    <a href="@Url.Action("AddMember","ProjectManagement")" class="btn btn-primary">Add Member</a>
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                                
+                                </td>
+                              
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">APMT Project Information</h4>
+      </div>
+      <div class="modal-body">
+          <div class="box-body">
+
+              <div class="form-group">
+                  <label for="exampleInputFile">Project Name</label>
+                  <input type="text" class="form-control pull-right" name="name" value="APMT Project" required>
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputFile">Description:</label>
+                  <textarea rows="5" cols="50" class="form-control pull-right" name="Descriptions" required>     A Process Management Tool</textarea>
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputFile">StartDate:</label>
+                  <input data-provide="datepicker" value="19/10/2016">
+                  To <input data-provide="datepicker" value="30/4/2017">
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

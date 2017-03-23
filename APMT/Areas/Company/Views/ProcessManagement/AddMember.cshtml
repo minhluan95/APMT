@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewBag.Title = "AddMember";
+    Layout = "~/Areas/Company/Views/Shared/_ClientLayoutPage.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12 col-lg-12">
+            <button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#AddNew">Add New Member</button>
+            <div id="AddNew" class="box collapse">
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" action="~/Company/ManageProject/AddNew/" method="post">
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Name</label><br />
+                            <!-- Single button -->
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Choose a member
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Cù Minh Luân</a></li>
+                                    <li><a href="#">Lê Công Thắng</a></li>
+                                    <li><a href="#">Du Kim Quang</a></li>
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Role</label><br />
+                            <!-- Single button -->
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Choose a role
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Member</a></li>
+                                    <li><a href="#">Leader</a></li>
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary btn-md">Add</button>
+                    </div>
+                </form>
+            </div>
+            <div class="box">
+                <hr />
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <h1 class="text-center">List Members Of Code Process</h1>
+                    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                            </div>
+                        </form>
+                        <br />
+                    </div>
+                    <br />
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name </th>
+                                <th>Role </th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Trần Văn Tí
+                                </td>
+                                <td>
+                                    Member
+                                </td>
+                                <td>
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    Trần Văn Tèo
+                                </td>
+                                <td>
+                                    Leader
+                                </td>
+                                <td>
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    Trần Văn Tí
+                                </td>
+                                <td>
+                                    Member
+                                </td>
+                                <td>
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>
+                                    Trần Văn Tí
+                                </td>
+                                <td>
+                                    Member
+                                </td>
+                                <td>
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>
+                                    Trần Văn Tí
+                                </td>
+                                <td>
+                                    Member
+                                </td>
+                                <td>
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
+                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name </th>
+                                <th>Role </th>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="col-sm-5 col-lg-5">
+                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                            Showing 1 to 5 of 57 entries
+                        </div>
+
+                    </div>
+                    <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
+
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
