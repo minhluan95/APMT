@@ -9,78 +9,55 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>viewInfor</title>
+    <title>View Information</title>
 </head>
 <body>
-    <div>
-        <h4>APMT_User</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Fullname)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Fullname)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Password)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Password)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Avatar)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Avatar)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Allowed)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Allowed)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Create_at)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Create_at)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Update_at)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Update_at)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.IsProAdmin)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.IsProAdmin)
-            </dd>
-    
-        </dl>
+    <div class="row primary box-body">
+        <div class="col-xs-9"><h1>@Html.DisplayFor(model => model.Fullname)</h1></div>
+        <div class="col-xs-4"><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></div>
+        <div class="col-xs-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Allowed)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Allowed)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Create_at)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Create_at)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Update_at)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Update_at)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsProAdmin)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsProAdmin)
+                </dd>
+
+            </dl>
+        </div>
     </div>
 </body>
 </html>
