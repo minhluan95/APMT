@@ -1,5 +1,8 @@
 ﻿@using APMT.Areas.Company.Models
 @model userCompany
+@*@using PagedList.Mvc;
+    @model PagedList.IPagedList<userCompany>*@
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
@@ -17,153 +20,151 @@
     </ol>
 </section>
 <section class="content">
+    <div class="box-body">
+        <div class="form-group">
+            <form class="form-inline">
+               <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
+               <button type="submit" class="form-control" onclick="">Search</button>
+            </form>
+        </div>
 
+    </div>
     <div class="row">
         <div class="col-xs-12 col-lg-12">
             @Html.Partial("Add_New")
             <p>@TempData["Message"]</p>
+            <p>@ViewBag.Result</p>
             <div class="box box-info">
                 <hr />
                 <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </div>
-                        </form>
-                        <br />
-                    </div>
-                    <br />
-                    <table class="table table-hover table-bordered">
-                        <thead>
+
+                <br />
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>@Html.HiddenFor(x => x.id)</th>
+                            <th><center>No.</center></th>
+                            <th class="col-lg-2"><center>Full Name</center></th>
+                            <th class="col-lg-1"><center>Avatar</center></th>
+                            <th class="col-lg-3"><center>Email </center></th>
+                            <th class="col-lg-2"><center>CreateDate </center></th>
+                            <th class="col-lg-1"><center>Role </center></th>
+                            <th class="col-lg-1"><center>Status </center></th>
+                            <th colspan="2"><center>Action</center></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in lst)
+                        {
+                            i++;
                             <tr>
-                                @Html.HiddenFor(x => x.id)
-                                <th><center>No.</center></th>
-                                <th class="col-lg-2"><center>Full Name</center></th>
-                                <th class="col-lg-1"><center>Avatar</center></th>
-                                <th class="col-lg-3"><center>Email </center></th>
-                                <th class="col-lg-2"><center>CreateDate </center></th>
-                                <th class="col-lg-1"><center>Role </center></th>
-                                <th class="col-lg-1"><center>Status </center></th>
-                                <th colspan="2"><center>Action</center></th>
+                                <td><center>@Html.DisplayFor(x => x.id)</center></td>
+                                <td><center>@i</center></td>
+                                <td>
+                                    <center><a href="/Company/MemberManagement/viewInfor/@item.id" data-toggle="modal" data-target="#myModal">@item.fullName</a></center>
+                                    @* *@
+                                </td>
+                                <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
+                                <td><center>@item.email</center></td>
+                                <td><center>@item.createAt</center></td>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in lst)
-                            {
+                                <td>
+                                    <div class="dropdown">
+                                        @if (@item.isAdministrator == true)
+                                        {
+                                            <center> <label>Administrator</label></center>
+                                        }
+                                        @if (@item.isCreator == true)
+                                        {
+                                            <center> <label>Creator</label></center>
+                                        }
+                                        @if (@item.isMember == true)
+                                        { <center> <label>Member</label></center>
+                                        }
+                                    </div>
+                                </td>
 
-                                i++;
-                                <tr>
-                                    @Html.DisplayFor(model => model.id, new { htmlAttributes = new { @class = "form-control" } })
-                                    <td><center>@i</center></td>
-                                    <td>
-                                        <center><a href="/Company/MemberManagement/viewInfor/@item.id" data-toggle="modal" data-target="#myModal">@item.fullName</a></center>
-                                       @* *@
-                                    </td>
-                                    <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
-                                    <td><center>@item.email</center></td>
-                                    <td><center>@item.createAt</center></td>
 
-                                    <td>
-                                        <div class="dropdown">
-                                            @if (@item.isAdministrator == true)
+                                <td>
+                                    <div class="dropdown">
+                                        <center>
+                                            @if (@item.isAllowed == 1)
                                             {
-                                                <center> <label>Administrator</label></center>
+                                                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    Enable
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li role="separator" class="divider"></li>
+                                                    <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.id })</li>
+                                                </ul>
                                             }
-                                            @if (@item.isCreator == true)
+                                            else
                                             {
-                                              <center> <label>Creator</label></center>
+                                                <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    Disable
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li role="separator" class="divider"></li>
+                                                    <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.id })</li>
+                                                </ul>
                                             }
-                                            @if (@item.isMember == true)
-                                            { <center> <label>Member</label></center>
-                                            }
-                                        </div>
-                                    </td>
+                                        </center>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <center>
+                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                Choose
+                                                <span class="caret"></span>
+                                            </button>
 
-
-                                    <td>
-                                        <div class="dropdown">
-                                            <center>
-                                                @if (@item.isAllowed == 1)
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                @if (@item.isAdministrator == false)
                                                 {
-                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Enable
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.id })</li>
-                                                    </ul>
+                                                    <li>@Html.ActionLink("Set Administrator", "setAdministrator", new { id = @item.id })</li>
                                                 }
                                                 else
                                                 {
-                                                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Disable
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.id })</li>
-                                                    </ul>
+                                                    <li>@Html.ActionLink("Set Member", "setMember", new { id = @item.id })</li>
                                                 }
-                                            </center>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <center>
-                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                    Choose
-                                                    <span class="caret"></span>
-                                                </button>
+                                                @if (@item.isCreator == false)
+                                                {
+                                                    <li>@Html.ActionLink("Set Creator", "setCreator", new { id = @item.id })</li>
+                                                }
+                                                else
+                                                {
+                                                    <li>@Html.ActionLink("Delete Role Creator", "setCreator", new { id = @item.id })</li>
+                                                }
 
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    @if (@item.isAdministrator == false)
-                                                    {
-                                                        <li>@Html.ActionLink("Set Administrator", "setAdministrator", new { id = @item.id })</li>
-                                                    }
-                                                    else
-                                                    {
-                                                        <li>@Html.ActionLink("Set Member", "setMember", new { id = @item.id })</li>
-                                                    }
-                                                    @if (@item.isCreator == false)
-                                                    {
-                                                        <li>@Html.ActionLink("Set Creator", "setCreator", new { id = @item.id })</li>
-                                                    }
-                                                    else
-                                                    {
-                                                        <li>@Html.ActionLink("Delete Role Creator", "setCreator", new { id = @item.id })</li>
-                                                    }
-                                                  
-                                                   
-                                                    <li>@Html.ActionLink("Delete Member", "deleteMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
 
-                                                </ul>
-                                            </center>
-                                        </div>
-                                    </td>
+                                                <li>@Html.ActionLink("Delete Member", "deleteMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
 
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <div class="col-sm-5 col-lg-5">
-                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                            Showing 1 to 5 of 57 entries
-                        </div>
+                                            </ul>
+                                        </center>
+                                    </div>
+                                </td>
 
-                    </div>
-                    <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @*<div class="col-sm-5 col-lg-5">
+                    <div>
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                     new { page = page }))
+                    </div>*@
 
-                </div>
-
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
         </div>
-        <!-- /.col -->
+
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    </div>
+    <!-- /.col -->
     </div>
     <!-- /.row -->
 </section>
