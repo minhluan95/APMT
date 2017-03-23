@@ -38,6 +38,7 @@ namespace APMT.Areas.Company.Controllers
             ViewBag.Message = null;
             string trimEmail = "";
             string email = f["somevalue"];
+            string role = f["selectRole"];
             if (email.Contains("("))
             {
                 trimEmail = email.Substring(0, email.IndexOf('(')).Trim();
@@ -55,7 +56,7 @@ namespace APMT.Areas.Company.Controllers
                     companyUser.Company_id = 1;
                     companyUser.User_id = int.Parse(userID.ToString());
                     companyUser.Allowed = 1;
-                    companyUser.Role = 3;
+                    companyUser.Role =int.Parse(role) ;
                     db.APMT_Company_User.Add(companyUser);
                     db.SaveChanges();
                     ViewBag.Message = "Successful";
