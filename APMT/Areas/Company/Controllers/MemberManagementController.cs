@@ -17,10 +17,9 @@ namespace APMT.Areas.Company.Controllers
                         join user in db.APMT_User on UserC.User_id equals user.ID
                         join company in db.APMT_Company on UserC.Company_id equals company.ID
                         where company.ID == 1
-                        select new userCompany { id = UserC.ID, fullName = user.Fullname, email = user.Email, avartar = user.Avatar, createAt = user.Create_at.ToString(), updateAt = user.Update_at.ToString(), isAllowed = user.Allowed };
+                        select new userCompany { id = UserC.ID, fullName = user.Fullname, email = user.Email, avartar = user.Avatar, createAt = user.Create_at.ToString(), updateAt = user.Update_at.ToString(), isAllowed = UserC.Allowed,role = UserC.Role };
             //  var lstprocess = db.APMT_Running_Process_Detail.Where(x => x.project_id == id).ToList();
-            ViewBag.List = query.ToList();
-
+            ViewBag.List = query.OrderByDescending(x => x.id).ToList();
             return View();
         }
 
@@ -75,15 +74,17 @@ namespace APMT.Areas.Company.Controllers
         public ActionResult deleteMember(int? id)
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-            return View(user);
-        }
-
-        [HttpPost]
-        public ActionResult deleteMember(APMT_Company_User user)
-        {
             db.APMT_Company_User.Remove(user);
             db.SaveChanges();
             return RedirectToAction("View_List");
         }
+
+        //[HttpPost]
+        //public ActionResult deleteMember(APMT_Company_User user)
+        //{
+        //    db.APMT_Company_User.Remove(user);
+        //    db.SaveChanges();
+        //    return RedirectToAction("View_List");
+        //}
     }
 }
