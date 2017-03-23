@@ -209,6 +209,7 @@
     <Compile Include="Areas\Company\Controllers\ProjectManagementController.cs" />
     <Compile Include="Areas\Company\Models\AuthorizeSystem.cs" />
     <Compile Include="Areas\Company\Models\ReflectionController.cs" />
+    <Compile Include="Areas\Company\Models\userCompany.cs" />
     <Compile Include="Areas\System\Controllers\ClientManagementController.cs" />
     <Compile Include="Areas\System\Controllers\UserManagementController.cs" />
     <Compile Include="Areas\System\SystemAreaRegistration.cs" />
@@ -241,8 +242,13 @@
     <Content Include="Images\header-bg2.jpg" />
     <Content Include="Images\req-analysis.jpg" />
     <Content Include="Images\req-process.jpg" />
+    <Content Include="Images\user\goku-1.jpg" />
+    <Content Include="Images\user\luffy-1.png" />
+    <Content Include="Images\user\naruto-1.png" />
+    <Content Include="Images\user\natsun-1.jpg" />
     <Content Include="Images\user\person-flat.png" />
     <Content Include="Images\user\quang-1.jpg" />
+    <Content Include="Images\user\sasuke-1.jpg" />
     <Content Include="Images\waterfall_software_Process.png" />
     <Content Include="Scripts\beautifyhtml.js" />
     <Content Include="Content\css\definepro.css" />
