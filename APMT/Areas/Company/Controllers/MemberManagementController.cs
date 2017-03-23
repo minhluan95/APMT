@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Models;
+using APMT.Areas.Company.Models;
 namespace APMT.Areas.Company.Controllers
 {
 
