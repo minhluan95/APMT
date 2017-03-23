@@ -209,6 +209,7 @@
     <Compile Include="Areas\Company\Controllers\ProjectManagementController.cs" />
     <Compile Include="Areas\Company\Models\AuthorizeSystem.cs" />
     <Compile Include="Areas\Company\Models\ReflectionController.cs" />
+    <Compile Include="Areas\Company\Models\userCompany.cs" />
     <Compile Include="Areas\System\Controllers\ClientManagementController.cs" />
     <Compile Include="Areas\System\Controllers\UserManagementController.cs" />
     <Compile Include="Areas\System\SystemAreaRegistration.cs" />

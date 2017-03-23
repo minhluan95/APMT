@@ -1,17 +1,15 @@
 ﻿using APMT.Areas.Company.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using Models;
-using APMT.Areas.Company.Models;
+using System;
+using System.Linq;
+using System.Web.Mvc;
+
 namespace APMT.Areas.Company.Controllers
 {
-
     public class MemberManagementController : Controller
     {
-        CP_SPMEntities1 db = new CP_SPMEntities1();
+        private CP_SPMEntities1 db = new CP_SPMEntities1();
+
         // GET: Company/ManageMember
         public ActionResult View_List()
         {
@@ -28,13 +26,13 @@ namespace APMT.Areas.Company.Controllers
 
         public ActionResult autocomplete(string term)
         {
-
             var query = from user in db.APMT_User
                         where (user.Email.Contains(term) || user.Fullname.Contains(term)) && user.Allowed == 1
                         select user.Email + " (" + user.Fullname + ")";
             var filteredItems = query.ToList();
             return Json(filteredItems, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult Add_New(FormCollection f)
         {
             ViewBag.Message = null;
@@ -50,7 +48,6 @@ namespace APMT.Areas.Company.Controllers
             }
             try
             {
-
                 var userID = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail)).ID;
                 if (userID != null)
                 {
@@ -73,17 +70,17 @@ namespace APMT.Areas.Company.Controllers
                 ViewBag.Message = "Add new Failure !";
                 return RedirectToAction("View_List");
             }
-
         }
-        
+
         public ActionResult deleteMember(int? id)
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
             return View(user);
         }
+
         [HttpPost]
         public ActionResult deleteMember(APMT_Company_User user)
-        {      
+        {
             db.APMT_Company_User.Remove(user);
             db.SaveChanges();
             return RedirectToAction("View_List");

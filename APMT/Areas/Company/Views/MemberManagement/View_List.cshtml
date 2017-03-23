@@ -67,7 +67,7 @@
                                         if (@item.isAllowed == 1)
                                         {
                                             <td>
-                                                <center>
+                                                @*<center>
                                                     <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Creator</a><br />
                                                     <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Administrator</a>
                                                 </center>
@@ -82,9 +82,27 @@
                                                         <a href="/controller/deleteMember/@item.id" />Delete
                                                     </div>
 
-                                                </center>
+                                                </center>*@
+
+                                                <div class="dropdown">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Action
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li>@Html.ActionLink("Set Creator", "Edit")</li>
+                                                        <li role="separator" class="divider"></li>
+                                                        <li>@Html.ActionLink("Set Administrator", "Edit")</li>
+                                                        <li role="separator" class="divider"></li>
+                                                        <li>@Html.ActionLink("Disable", "Index")</li>
+                                                        <li role="separator" class="divider"></li>
+                                                        <li>@Html.ActionLink("Delete", "Delete")</li>
+                                                    </ul>
+                                                </div>
+
                                             </td>
 
+                                         
                                         }
                                         else
                                         {
