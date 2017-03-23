@@ -1,10 +1,10 @@
-﻿@*@using APMT.Areas.Company.Models;
-@model userCompany*@
+﻿@using APMT.Areas.Company.Models
+@model userCompany
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
-    //var lst = (List<userCompany>)ViewBag.List;
-    //int i = 0;
+    var lst = (List<userCompany>)ViewBag.List;
+    int i = 0;
 
 }
 <section class="content-header">
@@ -38,7 +38,7 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                @*@Html.HiddenFor(x => x.id);*@
+                                @Html.HiddenFor(x => x.id)
                                 <th><center>No.</center></th>
                                 <th class="col-lg-2"><center>Full Name</center></th>
                                 <th class="col-lg-1"><center>Avatar</center></th>
@@ -49,12 +49,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in lst)
+                            @foreach (var item in lst)
                             {
 
                                 i++;
                                 <tr>
-                                    @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.DisplayFor(model => model.id, new { htmlAttributes = new { @class = "form-control" } })
                                     <td><center>@i</center></td>
                                     <td>
                                         <center> @item.fullName</center>
@@ -62,29 +62,37 @@
                                     <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
                                     <td><center>@item.email</center></td>
                                     <td><center>@item.createAt</center></td>
-                                    @if (@item.isAllowed == true)
+                                    @using (Html.BeginForm(FormMethod.Post))
                                     {
-                                        <td>
-                                            <center>
-                                                <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Creator</a><br />
-                                                <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Administrator</a>
-                                            </center>
-                                        </td>
-                                        <td>
-                                            <center>
-                                                @*<a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />*@
-                                                <a href="/controller/deleteMember/" +@item.id />Delete
-                                            </center>
-                                        </td>
+                                        if (@item.isAllowed == 1)
+                                        {
+                                            <td>
+                                                <center>
+                                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Creator</a><br />
+                                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Administrator</a>
+                                                </center>
+                                            </td>
+                                            <td>
+                                                <center>
+                                                    <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
 
-                                    }
-                                    @*else
+                                                    @Html.AntiForgeryToken()
+
+                                                    <div class="form-actions no-color">
+                                                        <a href="/controller/deleteMember/@item.id" />Delete
+                                                    </div>
+
+                                                </center>
+                                            </td>
+
+                                        }
+                                        else
                                         {
                                             <td>
                                                 <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Enable</a><br />
                                             </td>
-                                        }*@
-
+                                        }
+                                    }
                                 </tr>
 
                             }
@@ -108,4 +116,3 @@
     </div>
     <!-- /.row -->
 </section>
-
