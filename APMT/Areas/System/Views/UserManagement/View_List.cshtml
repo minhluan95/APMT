@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/System/Views/Shared/_SystemLayoutPage.cshtml";
+    var lst = (List<APMT_User>)ViewBag.List;
+    int i = 0;
+
 }
 <section class="content-header">
     <h1>
@@ -29,58 +32,136 @@
                         <br />
                     </div>
                     <br />
-                    <table class="table table-hover">
+                    <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th class="col-lg-2">Full Name</th>
-                                <th>Email </th>
-                                <th>Date Created</th>
-                                <th>Action</th>
+                                <th><center>No.</center></th>
+                                <th class="col-lg-2"><center>Full Name</center></th>
+                                <th class="col-lg-1"><center>Avatar</center></th>
+                                <th class="col-lg-3"><center>Email </center></th>
+                                <th class="col-lg-2"><center>CreateDate </center></th>
+                                <th class="col-lg-1"><center>Role </center></th>
+                                <th class="col-lg-1"><center>Status </center></th>
+                                <th colspan="2"><center>Action</center></th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
+
+                                i++;
                                 <tr>
-                                    <td scope="row">@item.ID</td>
+                                    @Html.DisplayFor(model => model.id, new { htmlAttributes = new { @class = "form-control" } })
+                                    <td><center>@i</center></td>
                                     <td>
-                                        <img style="width:100%;" src="@Url.Content("~/Images/user/"+item.Avatar)" />
-                                        <center> @item.Fullname </center>
+                                        <center> @item.Fullname</center>
                                     </td>
-                                    <td>
-                                        @item.Email
-                                    </td>
-                                    <td>@item.Create_at</td>
+                                    <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
+                                    <td><center>@item.Email</center></td>
+                                    <td><center>@item.Create_at</center></td>
+                                    @if (@item.IsProAdmin == true)
+                                    {
+                                        <td>
+                                            <div class="dropdown">
+                                                <center>
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                      Product Administrator
+                                                        <span class="caret"></span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li>@Html.ActionLink("User", "setUser", new { id = @item.ID })</li>
+                                                    </ul>
+                                                </center>
+                                            </div>
+                                        </td>
+                                    }
+                                    else if (@item.IsProAdmin == false)
+                                    {
+                                        <td>
+                                            <div class="dropdown">
+                                                <center>
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        User
+                                                        <span class="caret"></span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li>@Html.ActionLink("Product Administrator", "setProAdministrator", new { id = @item.ID })</li>
+                                                    </ul>
+                                                </center>
+                                            </div>
+                                        </td>
+                                    }
+
+                                    @if (@item.Allowed == 1)
+                                    {
+                                        <td>
+                                            <div class="dropdown">
+                                                <center>
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Enable
+                                                        <span class="caret"></span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li role="separator" class="divider"></li>
+                                                        <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.id })</li>
+                                                    </ul>
+                                                </center>
+                                            </div>
+                                        </td>
+
+                                    }
+                                    else
+                                    {
+
+                                        <td>
+                                            <div class="dropdown">
+                                                <center>
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        Disable
+                                                        <span class="caret"></span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li role="separator" class="divider"></li>
+                                                        <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.id })</li>
+                                                    </ul>
+                                                </center>
+                                            </div>
+                                        </td>
+                                    }
                                     <td>
                                         <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                Action
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                <li>@Html.ActionLink("Set Product Administrator", "Edit", new { id = item.ID })</li>
-                                                <li role="separator" class="divider"></li>
-                                                <li>@Html.ActionLink("Disable", "Index", new { id = item.ID })</li>
-                                                <li role="separator" class="divider"></li>
-                                                <li>@Html.ActionLink("Delete", "Delete", new { id = item.ID })</li>
-                                            </ul>
+                                            <center>
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    Action
+                                                    <span class="caret"></span>
+                                                </button>
+
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+
+                                                    <li>@Html.ActionLink("Delete", "deleteMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
+
+                                                </ul>
+                                            </center>
                                         </div>
                                     </td>
+                                    }
                                 </tr>
                             }
                         </tbody>
                     </table>
+
                     <div class="col-sm-5 col-lg-5">
                         <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
                             Showing 1 to 5 of 57 entries
                         </div>
-
                     </div>
                     <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
-
                 </div>
-
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->

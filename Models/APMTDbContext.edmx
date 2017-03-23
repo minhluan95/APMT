@@ -116,13 +116,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="100" />
-          <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="64" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Avatar" Type="nvarchar" MaxLength="500" />
-          <Property Name="Allowed" Type="int" />
-          <Property Name="Create_at" Type="date" />
-          <Property Name="Update_at" Type="date" />
+          <Property Name="Allowed" Type="int" Nullable="false" />
+          <Property Name="Create_at" Type="date" Nullable="false" />
+          <Property Name="Update_at" Type="date" Nullable="false" />
+          <Property Name="IsProAdmin" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -342,6 +343,7 @@
           <EntitySet Name="APMT_ProductAdmin" EntityType="CP_SPMModel.APMT_ProductAdmin" />
           <EntitySet Name="APMT_Project" EntityType="CP_SPMModel.APMT_Project" />
           <EntitySet Name="APMT_User" EntityType="CP_SPMModel.APMT_User" />
+          <EntitySet Name="sysdiagrams" EntityType="CP_SPMModel.sysdiagram" />
           <AssociationSet Name="FK_APMT_Action_APMT_Controller" Association="CP_SPMModel.FK_APMT_Action_APMT_Controller">
             <End Role="APMT_Controller" EntitySet="APMT_Controller" />
             <End Role="APMT_Action" EntitySet="APMT_Action" />
@@ -386,7 +388,6 @@
             <End Role="APMT_Process" EntitySet="APMT_Process" />
             <End Role="APMT_Process_Role" EntitySet="APMT_Process_Role" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="CP_SPMModel.sysdiagram" />
         </EntityContainer>
         <EntityType Name="APMT_Action">
           <Key>
@@ -432,12 +433,12 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Company_id" Type="Int32" />
           <Property Name="User_id" Type="Int32" />
+          <Property Name="Allowed" Type="Int32" />
+          <Property Name="Role" Type="Int32" />
           <NavigationProperty Name="APMT_Company" Relationship="CP_SPMModel.FK_APMT_Company_User_APMT_Company" FromRole="APMT_Company_User" ToRole="APMT_Company" />
           <NavigationProperty Name="APMT_User" Relationship="CP_SPMModel.FK_APMT_Company_User_APMT_User" FromRole="APMT_Company_User" ToRole="APMT_User" />
           <NavigationProperty Name="APMT_Process" Relationship="CP_SPMModel.FK_APMT_Process_APMT_Company_User" FromRole="APMT_Company_User" ToRole="APMT_Process" />
           <NavigationProperty Name="APMT_Project" Relationship="CP_SPMModel.FK_APMT_Project_APMT_Company_User" FromRole="APMT_Company_User" ToRole="APMT_Project" />
-          <Property Name="Allowed" Type="Int32" />
-          <Property Name="Role" Type="Int32" />
         </EntityType>
         <EntityType Name="APMT_Controller">
           <Key>
@@ -519,15 +520,26 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Allowed" Type="Int32" />
-          <Property Name="Create_at" Type="DateTime" Precision="0" />
-          <Property Name="Update_at" Type="DateTime" Precision="0" />
+          <Property Name="Allowed" Type="Int32" Nullable="false" />
+          <Property Name="Create_at" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Update_at" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsProAdmin" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="APMT_Company" Relationship="CP_SPMModel.FK_APMT_Company_APMT_User" FromRole="APMT_User" ToRole="APMT_Company" />
           <NavigationProperty Name="APMT_Company_User" Relationship="CP_SPMModel.FK_APMT_Company_User_APMT_User" FromRole="APMT_User" ToRole="APMT_Company_User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_APMT_Action_APMT_Controller">
           <End Type="CP_SPMModel.APMT_Controller" Role="APMT_Controller" Multiplicity="0..1" />
@@ -661,17 +673,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -796,6 +798,7 @@
           <EntitySetMapping Name="APMT_User">
             <EntityTypeMapping TypeName="CP_SPMModel.APMT_User">
               <MappingFragment StoreEntitySet="APMT_User">
+                <ScalarProperty Name="IsProAdmin" ColumnName="IsProAdmin" />
                 <ScalarProperty Name="Update_at" ColumnName="Update_at" />
                 <ScalarProperty Name="Create_at" ColumnName="Create_at" />
                 <ScalarProperty Name="Allowed" ColumnName="Allowed" />

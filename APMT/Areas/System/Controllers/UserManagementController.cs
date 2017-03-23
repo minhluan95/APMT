@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Models;
+using System.Data.Entity;
 
 namespace APMT.Areas.System.Controllers
 {
@@ -16,6 +17,39 @@ namespace APMT.Areas.System.Controllers
             var lstUser = db.APMT_User.ToList();
             return View(lstUser);
         }
+
+        public ActionResult setProAdministrator(int? id)
+        {
+            var user = db.APMT_User.FirstOrDefault(x => x.ID == id);
+            user.IsProAdmin = true;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("View_List");
+        }
+        public ActionResult setUser(int? id)
+        {
+            var user = db.APMT_User.FirstOrDefault(x => x.ID == id);
+            user.IsProAdmin = false;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("View_List");
+        }
+        public ActionResult setStatus(int? id)
+        {
+            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+            if (user.Allowed == 1)
+            {
+                user.Allowed = 2;
+            }
+            else
+            {
+                user.Allowed = 1;
+            }
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("View_List");
+        }
+
         public ActionResult View_Details()
         {
             return View();

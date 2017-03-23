@@ -404,6 +404,9 @@
     <Content Include="Areas\Company\Views\MemberManagement\setMember.cshtml" />
     <Content Include="Areas\Company\Views\MemberManagement\setStatus.cshtml" />
     <Content Include="Areas\System\Views\ClientManagement\setStatus.cshtml" />
+    <Content Include="Areas\System\Views\UserManagement\setProAdministrator.cshtml" />
+    <Content Include="Areas\System\Views\UserManagement\setUser.cshtml" />
+    <Content Include="Areas\System\Views\UserManagement\setStatus.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\User\View_Details.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
