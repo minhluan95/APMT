@@ -242,6 +242,7 @@
     <Content Include="Images\req-analysis.jpg" />
     <Content Include="Images\req-process.jpg" />
     <Content Include="Images\user\person-flat.png" />
+    <Content Include="Images\user\quang-1.jpg" />
     <Content Include="Images\waterfall_software_Process.png" />
     <Content Include="Scripts\beautifyhtml.js" />
     <Content Include="Content\css\definepro.css" />

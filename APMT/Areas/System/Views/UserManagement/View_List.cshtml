@@ -1,17 +1,18 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/System/Views/Shared/_SystemLayoutPage.cshtml";
-}
-<section class="content-header">
-    <h1>
-        User List
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">User Management</li>
-    </ol>
- </section>
+﻿@using Models;
+@model  IEnumerable<APMT_User>
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Areas/System/Views/Shared/_SystemLayoutPage.cshtml";
+    }
+    <section class="content-header">
+        <h1>
+            User List
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">User Management</li>
+        </ol>
+    </section>
     <section class="content">
         <div class="row">
             <div class="col-xs-12 col-lg-12">
@@ -39,56 +40,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td scope="row">1</td>
-                                    <td>
-                                      
-                                        <img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" />
-                                      <center> Trần Văn Tí</center> 
-                                    </td>
-                                    <td>
-                                        ticute9x@gmail.com
-                                    </td>
-                                    <td>26/03/1995</td>
-                                    <td>
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Administrator</a><br />
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a><br />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">2</td>
-                                    <td>
-                                       
-                                        <img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" />
-                                        <center> Trần Văn Tí</center> 
-                                    </td>
-                                    <td>
-                                        ticute9x@gmail.com
-                                    </td>
-                                    <td>26/03/1995</td>
-                                    <td>
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Administrator</a><br />
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a><br />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">3</td>
-                                    <td>
-                                        <img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" />
-                                        <center> Trần Văn Tí</center> 
-                                    </td>
-                                    <td>
-                                        ticute9x@gmail.com
-                                    </td>
-                                    <td>26/03/1995</td>
-                                    <td>
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Administrator</a><br />
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
-                                        <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a><br />
-                                    </td>
-                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td scope="row">@item.ID</td>
+                                        <td>
+
+                                            <img style="width:100%;" src="@Url.Content("~/Images/user/"+item.Avatar)" />
+                                            <center> @item.Fullname </center>
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td>@item.Create_at</td>
+                                        <td>
+                                            <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Administrator</a><br />
+                                            <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Disable</a><br />
+                                            <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-delete">Delete</a><br />
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                         <div class="col-sm-5 col-lg-5">
@@ -109,4 +80,3 @@
         </div>
         <!-- /.row -->
     </section>
-
