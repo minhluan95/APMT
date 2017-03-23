@@ -14,5 +14,7 @@ namespace APMT.Areas.Company.Models
         public string avartar { get; set; }
         public string createAt { get; set; }
         public string updateAt { get; set; }
+        public int? role { get; set; }
+        
     }
 }

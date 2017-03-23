@@ -397,6 +397,7 @@
     <Content Include="Areas\System\Views\UserManagement\Update_Profile.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\View_Details.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\View_List.cshtml" />
+    <Content Include="Areas\Company\Views\MemberManagement\deleteMember.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\User\View_Details.cshtml" />
   </ItemGroup>

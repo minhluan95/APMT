@@ -44,6 +44,8 @@
                                 <th class="col-lg-1"><center>Avatar</center></th>
                                 <th class="col-lg-3"><center>Email </center></th>
                                 <th class="col-lg-2"><center>CreateDate </center></th>
+                                <th class="col-lg-1"><center>Role </center></th>
+                                <th class="col-lg-1"><center>Status </center></th>
                                 <th colspan="2"><center>Action</center></th>
 
                             </tr>
@@ -61,11 +63,24 @@
                                     </td>
                                     <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
                                     <td><center>@item.email</center></td>
-                                    <td><center>@item.createAt</center></td>
+                                    <td><center>@item.createAt</center></td>  
+                                    @if (@item.role == 1)
+                                    {
+                                    <td><center>Administrator</center></td>
+                                    }
+                                    else if (@item.role == 2)
+                                    {
+                                        <td><center>Creator</center></td>
+                                    }
+                                    else
+                                    {
+                                        <td><center>Member</center></td>
+                                    }
                                     @using (Html.BeginForm(FormMethod.Post))
                                     {
                                         if (@item.isAllowed == 1)
                                         {
+                                            <td><center>Available</center></td>
                                             <td>
                                                 @*<center>
                                                     <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-SetRole">Set Creator</a><br />
@@ -85,29 +100,46 @@
                                                 </center>*@
 
                                                 <div class="dropdown">
-                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Action
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li>@Html.ActionLink("Set Creator", "Edit")</li>
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Set Administrator", "Edit")</li>
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Disable", "Index")</li>
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Delete", "Delete")</li>
-                                                    </ul>
+                                                    <center>
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                            Action
+                                                            <span class="caret"></span>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                            <li>@Html.ActionLink("Set Creator", "Edit")</li>
+                                                            <li role="separator" class="divider"></li>
+                                                            <li>@Html.ActionLink("Set Administrator", "Edit")</li>
+                                                            <li role="separator" class="divider"></li>
+                                                            <li>@Html.ActionLink("Disable", "Index")</li>
+                                                            <li role="separator" class="divider"></li>
+                                                            <li>@Html.ActionLink("Delete", "deleteMember", new {id = @item.id}, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
+                                                        </ul>
+                                                    </center>
                                                 </div>
 
                                             </td>
 
-                                         
+
                                         }
                                         else
                                         {
+                                            <td><center>Disable</center></td>
                                             <td>
-                                                <a href="#" data-href="#" data-toggle="modal" data-target="#confirm-disable">Enable</a><br />
+                                                <div class="dropdown">
+                                                    <center>
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                            Action
+                                                            <span class="caret"></span>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                           
+                                                            <li>@Html.ActionLink("Enable", "Index")</li>
+                                                           
+                                                        </ul>
+                                                    </center>
+                                                </div>
                                             </td>
                                         }
                                     }
