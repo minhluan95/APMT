@@ -1,0 +1,252 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<header>
+    <div class="container">
+        <div class="intro-text wow bounceInUp">
+            <div class="intro-lead-in">Welcome To Our Product!</div>
+            <div class="intro-heading">A PROCESS MANAGEMENT TOOL</div>
+            <div class="row trial">
+                <div class="col-lg-4 col-lg-offset-3 col-sm-12 col-xs-12">
+                    <input type="text" style="height:68px;width:290px; color:black;" placeholder="Enter your email here..." />
+                </div>
+                <div class="col-lg-2 col-sm-12 col-xs-12">
+                    @Html.ActionLink("Create a new company", "Index", "System/RegisterCompany/", new { area = "" }, new { @class = "page-scroll btn btn-xl", @style = "width:290px;" })
+                </div>
+                <br>
+                <div class="col-lg-12 col-sm-12 col-xs-12"><p>Your company already uses APMT? <a href="~/Areas/System/Views/ManageUser/Login.cshtml">Sign in</a> or <a href="#">find your company.</a></p></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center wow bounceInDown">
+                <h2 class="section-heading">Services</h2>
+            </div>
+        </div>
+        <div class="row text-center wow bounceInUp">
+            <div style="visibility: visible; animation-delay: 0.5s;" class="col-md-4 col-sm-4 col-xs-12 col-lg-4 wow bounceInLeft img-hover" data-wow-duration="1s" data-wow-delay="0.5s">
+                <span class="fa-stack fa-4x img-hover">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-link fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Define process</h4>
+                <p class="text-muted">
+                    Allow creator to define the sets of process templates. These user-defined templates should be used for software development process or other business processes in company such as Customer Support Process, Customer Relationship Management Process …
+                </p>
+            </div>
+            <div style="visibility: visible; animation-delay: 0.5s;" class="col-md-4 col-sm-4 col-xs-12 col-lg-4 wow rollIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-object-group fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Manage Process</h4>
+                <p class="text-muted">Allow executor to access the selected template and use it to control the business workflow. Administrator can access the system and track the progress of process workflow at any time. There should be the report mechanism to extract statistics data as Administrator demand..</p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12 col-lg-4 wow bounceInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-list-alt fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Report</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Team Section -->
+<section id="team" class="bg-light-gray">
+    <div class="container">
+        <div class="row wow bounceIn">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Our Amazing Team</h2>
+                <h3 class="section-subheading text-muted">WE MAKING A GREAT THING POSSIBLE</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-lg-4 col-md-4 col-xs-12 img-hover wow bounceInLeft">
+                <div class="team-member">
+                    <img style="height:360px;width:100%;" src="~/Content/Images/Members/quang.jpg" class="img-responsive img-circle effect1" alt="">
+                    <h4>Du Kim Quang</h4>
+                    <p class="text-muted">Lead Designer</p>
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4 col-lg-4 col-md-4 col-xs-12 img-hover wow flipInX">
+                <div class="team-member">
+                    <img style="height:360px;width:100%;" src="~/Content/Images/Members/thang.jpg" class="img-responsive img-circle" alt="">
+                    <h4>Le Cong Thang</h4>
+                    <p class="text-muted">Project Manager</p>
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4 col-lg-4 col-md-4 col-xs-12 img-hover wow bounceInRight">
+                <div class="team-member">
+                    <img style="height:360px;width:100%;" src="~/Content/Images/Members/luan.jpg" class="img-responsive img-circle" alt="">
+                    <h4>Cu Minh Luan</h4>
+                    <p class="text-muted">Lead Developer</p>
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row wow scale_down">
+            <div class="col-sm-3 col-lg-3 col-md-3 col-xs-12 img-hover wow rollIn">
+                <div class="team-member">
+                    <img style="height:262.5px;width:100%;" src="~/Content/Images/Members/hung.jpg" class="img-responsive img-circle" alt="">
+                    <h4>Mai Phuoc Hung</h4>
+                    <p class="text-muted">Lead Developer</p>
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3 col-lg-3 col-md-3 col-xs-12 img-hover wow rollIn">
+                <div class="team-member">
+                    <img style="height:262.5px;width:100%;" src="~/Content/Images/Members/nghia.jpg" class="img-responsive img-circle" alt="">
+                    <h4>Nguyen Trong Nghia</h4>
+                    <p class="text-muted">Lead Developer</p>
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3 col-lg-3 col-md-3 col-xs-12 img-hover wow rollIn">
+                <div class="team-member">
+                    <img style="height:262.5px;width:100%;" src="~/Content/Images/Members/minh.jpg" class="img-responsive img-circle" alt="">
+                    <h4>Luu Quang Minh</h4>
+                    <p class="text-muted">Lead Developer</p>
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3 col-lg-3 col-md-3 col-xs-12 img-hover wow rollIn">
+                <div class="team-member">
+                    <img style="height:262.5px;width:100%;" src="~/Content/Images/Members/quan.jpg" class="img-responsive img-circle" alt="">
+                    <h4>Le Minh Quan</h4>
+                    <p class="text-muted">Lead Developer</p>
+                    <ul class="list-inline social-buttons">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+            <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+        </div>
+    </div>
+</section>
+<!-- Contact Section -->
+<section id="contact">
+    <div class="container wow bounceIn">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Contact Us</h2>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <form name="sentMessage" id="contactForm" novalidate method="post" action="index">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button type="submit" class="btn btn-xl">Send Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
