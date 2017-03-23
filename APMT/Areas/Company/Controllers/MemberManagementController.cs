@@ -18,7 +18,7 @@ namespace APMT.Areas.Company.Controllers
                         join user in db.APMT_User on UserC.User_id equals user.ID
                         join company in db.APMT_Company on UserC.Company_id equals company.ID
                         where company.ID == 1
-                        select new userCompany { id = UserC.ID, fullName = user.Fullname, email = user.Email, avartar = user.Avatar, createAt = user.Create_at.ToString(), updateAt = user.Update_at.ToString(), isAllowed = UserC.Allowed,role = UserC.Role };
+                        select new userCompany { id = UserC.ID, fullName = user.Fullname, email = user.Email, avartar = user.Avatar, createAt = user.Create_at.ToString(), updateAt = user.Update_at.ToString(), isAllowed = UserC.Allowed, role = UserC.Role };
             //  var lstprocess = db.APMT_Running_Process_Detail.Where(x => x.project_id == id).ToList();
             ViewBag.List = query.OrderByDescending(x => x.id).ToList();
             return View();
@@ -54,6 +54,8 @@ namespace APMT.Areas.Company.Controllers
                     APMT_Company_User companyUser = new APMT_Company_User();
                     companyUser.Company_id = 1;
                     companyUser.User_id = int.Parse(userID.ToString());
+                    companyUser.Allowed = 1;
+                    companyUser.Role = 3;
                     db.APMT_Company_User.Add(companyUser);
                     db.SaveChanges();
                     ViewBag.Message = "Successful";
@@ -83,7 +85,7 @@ namespace APMT.Areas.Company.Controllers
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
             user.Role = 1;
-            db.Entry(user).State = EntityState.Modified;          
+            db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("View_List");
         }
@@ -103,7 +105,21 @@ namespace APMT.Areas.Company.Controllers
             db.SaveChanges();
             return RedirectToAction("View_List");
         }
-
+        public ActionResult setStatus(int? id)
+        {
+            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+            if (user.Allowed == 1)
+            {
+                user.Allowed = 2;
+            }
+            else
+            {
+                user.Allowed = 1;
+            }
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("View_List");
+        }
 
         //[HttpPost]
         //public ActionResult deleteMember(APMT_Company_User user)

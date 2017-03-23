@@ -93,7 +93,7 @@
                                                     </button>
 
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li>@Html.ActionLink("Administrator", "setAdministrator", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Administrator?')" })</li>
+                                                        <li>@Html.ActionLink("Administrator", "setAdministrator")</li>
                                                         <li>@Html.ActionLink("Member", "setMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Member?')" })</li>
                                                     </ul>
                                                 </center>
@@ -111,7 +111,7 @@
                                                     </button>
 
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li>@Html.ActionLink("Administrator", "setAdministrator", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Administrator?')" })</li>
+                                                        <li>@Html.ActionLink("Administrator", "setAdministrator")</li>
                                                         <li>@Html.ActionLink("Creator", "setCreator", new { id = @item.id }, new { onclick = "return confirm('Do you really want to Set " + @item.fullName + " becomes Creator?')" })</li>
 
                                                     </ul>
@@ -119,9 +119,8 @@
                                             </div>
                                         </td>
                                     }
-                                    @using (Html.BeginForm(FormMethod.Post))
-                                    {
-                                        if (@item.isAllowed == 1)
+                                  
+                                        @if (@item.isAllowed == 1)
                                         {
                                             <td>
                                                 <div class="dropdown">
@@ -133,7 +132,7 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                             <li role="separator" class="divider"></li>
-                                                            <li>@Html.ActionLink("Disable", "Index")</li>
+                                                            <li>@Html.ActionLink("Disable", "setStatus")</li>
                                                         </ul>
                                                     </center>
                                                 </div>
@@ -165,7 +164,7 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                             <li role="separator" class="divider"></li>
-                                                            <li>@Html.ActionLink("Delete", "deleteMember", new {id = @item.id}, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
+                                                            <li>@Html.ActionLink("Delete", "deleteMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
                                                         </ul>
                                                     </center>
                                                 </div>
@@ -176,7 +175,7 @@
                                         }
                                         else
                                         {
-                                           
+
                                             <td>
                                                 <div class="dropdown">
                                                     <center>
@@ -187,7 +186,7 @@
 
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                             <li role="separator" class="divider"></li>
-                                                            <li>@Html.ActionLink("Enable", "Index")</li>
+                                                            <li>@Html.ActionLink("Enable", "setStatus")</li>
                                                         </ul>
                                                     </center>
                                                 </div>
@@ -211,7 +210,6 @@
                                         }
                                     }
                                 </tr>
-
                             }
                         </tbody>
                     </table>
