@@ -59,7 +59,8 @@
                                     @Html.DisplayFor(model => model.id, new { htmlAttributes = new { @class = "form-control" } })
                                     <td><center>@i</center></td>
                                     <td>
-                                        <center> @item.fullName</center>
+                                        <center><a href="/Company/MemberManagement/viewInfor/@item.id" data-toggle="modal" data-target="#myModal">@item.fullName</a></center>
+                                       @* *@
                                     </td>
                                     <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
                                     <td><center>@item.email</center></td>
@@ -69,42 +70,14 @@
                                         <div class="dropdown">
                                             @if (@item.isAdministrator == true)
                                             {
-                                                <center>
-                                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Administrator
-                                                        <span class="caret"></span>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li>@Html.ActionLink("Delete", "deleteRole", new { id = @item.id })</li>
-                                                    </ul>
-                                                </center>
+                                                <center> <label>Administrator</label></center>
                                             }
                                             @if (@item.isCreator == true)
                                             {
-                                                <center>
-                                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Creator
-                                                        <span class="caret"></span>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li>@Html.ActionLink("Delete", "deleteRole", new { id = @item.id })</li>
-                                                    </ul>
-                                                </center>
+                                              <center> <label>Creator</label></center>
                                             }
                                             @if (@item.isMember == true)
-                                            {
-                                                <center>
-                                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Member
-                                                        <span class="caret"></span>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li>@Html.ActionLink("Delete", "deleteRole", new { id = @item.id })</li>
-                                                    </ul>
-                                                </center>
+                                            { <center> <label>Member</label></center>
                                             }
                                         </div>
                                     </td>
@@ -132,7 +105,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                         <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.id })</li>
+                                                        <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.id })</li>
                                                     </ul>
                                                 }
                                             </center>
@@ -142,7 +115,7 @@
                                         <div class="dropdown">
                                             <center>
                                                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                    Action
+                                                    Choose
                                                     <span class="caret"></span>
                                                 </button>
 
@@ -153,9 +126,9 @@
                                                     }
                                                     else
                                                     {
-                                                        <li>@Html.ActionLink("Delete Role Administrator", "setAdministrator", new { id = @item.id })</li>
+                                                        <li>@Html.ActionLink("Set Member", "setMember", new { id = @item.id })</li>
                                                     }
-                                                    @if (@item.isAdministrator == false)
+                                                    @if (@item.isCreator == false)
                                                     {
                                                         <li>@Html.ActionLink("Set Creator", "setCreator", new { id = @item.id })</li>
                                                     }
@@ -163,16 +136,9 @@
                                                     {
                                                         <li>@Html.ActionLink("Delete Role Creator", "setCreator", new { id = @item.id })</li>
                                                     }
-                                                    @if (@item.isAdministrator == false)
-                                                    {
-                                                        <li>@Html.ActionLink("Set Member", "setMember", new { id = @item.id })</li>
-                                                    }
-                                                    else
-                                                    {
-                                                        <li>@Html.ActionLink("Delete Role Member", "setMember", new { id = @item.id })</li>
-                                                    }
+                                                  
                                                    
-                                                    <li>@Html.ActionLink("Delete", "deleteMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
+                                                    <li>@Html.ActionLink("Delete Member", "deleteMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
 
                                                 </ul>
                                             </center>
