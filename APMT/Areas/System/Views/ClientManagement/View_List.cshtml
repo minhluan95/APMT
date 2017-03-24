@@ -1,5 +1,5 @@
 ﻿@using Models;
-@model  IEnumerable<APMT_Company>
+@model IEnumerable<APMT_Company>
 <!--list chua cac danh sach company dc load len-->
 @{
     ViewBag.Title = "Index";
@@ -19,41 +19,45 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
+            <form class="form-inline">
+                <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
+                <button type="submit" class="form-control" onclick="">Search</button>
+            </form>
             <div class="box">
                 <!-- /.box-header -->
+                <div class="box-header">
+                    <h3 class="box-title">Client Table</h3>
+                </div>
                 <div class="box-body">
-                    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
-                        <div class="form-group">
-                            <form class="form-inline">
-                                <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
-                                <button type="submit" class="form-control" onclick="">Search</button>
-                            </form>
-                        </div>
-                        <br />
-                    </div>
-                    <table id="example1" class="table table-bordered table-striped">
+
+                    <p>@ViewBag.Result</p>
+                    <table id="clientlist" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Client Name</th>
-                                <th>Date Created</th>
-                                <th>Status</th>
+                                <th><center>No.</center></th>
+                                <th><center>Client Name</center></th>
+                                <th><center>Date Created</center></th>
+                                <th><center>Status</center></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in lst)
                             {
+                                i++;
                                 <tr>
-                                    <td>@item.ID</td>
-                                    <td>@item.Name</td>
+                                    <td><center>@i</center></td>
+                                    <td><center>@item.Name</center></td>
                                     <td>
-                                        @item.Register_at
+                                        <center>
+                                            @item.Register_at
+                                        </center>
                                     </td>
                                     @if (@item.Allowed == true)
                                     {
                                         <td>
                                             <div class="dropdown">
-                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <center>
+                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                         Enable
                                                         <span class="caret"></span>
                                                     </button>
@@ -62,6 +66,7 @@
                                                         <li role="separator" class="divider"></li>
                                                         <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</li>
                                                     </ul>
+                                                </center>
                                             </div>
                                         </td>
 
@@ -71,6 +76,7 @@
 
                                         <td>
                                             <div class="dropdown">
+                                                <center>
                                                     <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                         Disable
                                                         <span class="caret"></span>
@@ -80,23 +86,36 @@
                                                         <li role="separator" class="divider"></li>
                                                         <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</li>
                                                     </ul>
+                                                </center>
                                             </div>
                                         </td>
                                     }
                                 </tr>
                             }
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td>No.</td>
-                                <th>Client Name</th>
-                                <th>Date Created</th>
-                                <th>Status</th>
-                            </tr>
-                        </tfoot>
+                        @*<tfoot>
+                                <tr>
+                                    <th>Client Name</th>
+                                    <th>Date Created</th>
+                                    <th>Status</th>
+                                </tr>
+                            </tfoot>*@
                     </table>
-                    <div class="col-sm-5"><div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 5 of 57 entries</div></div>
-                    <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
+
+                    <div class="col-sm-7">
+                        <script>
+                            $(function () {
+                                $('#clientlist').DataTable({
+                                    "paging": true,
+                                    "lengthChange": false,
+                                    "searching": false,
+                                    "ordering": true,
+                                    "info": true,
+                                    "autoWidth": false
+                                });
+                            });
+                        </script>
+                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>

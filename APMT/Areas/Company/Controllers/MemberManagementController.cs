@@ -166,10 +166,18 @@ namespace APMT.Areas.Company.Controllers
 
         public ActionResult deleteMember(int? id)
         {
-            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-            db.APMT_Company_User.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("View_List");
+            try
+            {
+                var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+                db.APMT_Company_User.Remove(user);
+                db.SaveChanges();
+                return RedirectToAction("View_List");
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Message = "Can't delete this member!";
+                return RedirectToAction("View_List");
+            }
         }
 
         public ActionResult setAdministrator(int? id)
@@ -238,7 +246,7 @@ namespace APMT.Areas.Company.Controllers
             return RedirectToAction("View_List");
         }
 
-        public ActionResult viewInfor(int? id)
+        public ActionResult viewInfor_MB(int? id)
         {
             var userCompany = db.APMT_Company_User.SingleOrDefault(x => x.ID == id);
             int? userID = userCompany.User_id;
@@ -246,13 +254,5 @@ namespace APMT.Areas.Company.Controllers
             ViewBag.User = user;
             return View(user);
         }
-
-        //[HttpPost]
-        //public ActionResult deleteMember(APMT_Company_User user)
-        //{
-        //    db.APMT_Company_User.Remove(user);
-        //    db.SaveChanges();
-        //    return RedirectToAction("View_List");
-        //}
     }
 }

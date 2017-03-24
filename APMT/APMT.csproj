@@ -81,6 +81,14 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -231,15 +239,18 @@
     <Content Include="Content\css\agency.min.css" />
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\dataTables.bootstrap.min.js" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\ihover.css" />
     <Content Include="Content\css\ihover.min.css" />
+    <Content Include="Content\css\jquery.dataTables.js" />
     <Content Include="Content\css\jquery.ui.theme.css" />
     <Content Include="Content\css\registercompany.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\css\TabPanel.css" />
     <Content Include="Content\css\_all-skins.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Images\header-bg.jpg" />
     <Content Include="Images\header-bg2.jpg" />
     <Content Include="Images\req-analysis.jpg" />
@@ -408,6 +419,8 @@
     <Content Include="Areas\System\Views\UserManagement\setProAdministrator.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\setUser.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\setStatus.cshtml" />
+    <Content Include="Areas\Company\Views\MemberManagement\viewInfor_MB.cshtml" />
+    <Content Include="Areas\System\Views\UserManagement\viewInfor_User.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\User\View_Details.cshtml" />
     <Content Include="Views\Home\About.cshtml" />

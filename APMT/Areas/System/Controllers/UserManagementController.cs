@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Models;
+﻿using Models;
+using PagedList;
 using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace APMT.Areas.System.Controllers
 {
     public class UserManagementController : Controller
     {
-        CP_SPMEntities1 db = new CP_SPMEntities1();
+        private CP_SPMEntities1 db = new CP_SPMEntities1();
+
         // GET: System/ManageUser
         public ActionResult View_List(string searchString)
         {
@@ -20,8 +19,10 @@ namespace APMT.Areas.System.Controllers
                             where (user.Fullname.Contains(searchString) || user.Email.Contains(searchString))
                             select user;
 
-                ViewBag.List = query.OrderByDescending(x => x.ID).ToList();
                 int count = query.ToList().Count();
+
+                ViewBag.List = query.OrderByDescending(x => x.ID).ToList();
+
                 if (count > 0 && searchString.Length != 0)
                 {
                     ViewBag.Result = "Finded " + count + " Result(s)";
@@ -38,16 +39,20 @@ namespace APMT.Areas.System.Controllers
                                  select user;
 
                     ViewBag.List = query1.OrderByDescending(x => x.ID).ToList();
+                    return View(ViewBag.List);
                 }
                 return View();
             }
             else
             {
                 var lstUser = db.APMT_User.ToList();
+
+                ViewBag.Count = lstUser.Count();
+
                 ViewBag.List = lstUser;
+
                 return View();
             }
-
         }
 
         public ActionResult setProAdministrator(int? id)
@@ -58,6 +63,7 @@ namespace APMT.Areas.System.Controllers
             db.SaveChanges();
             return RedirectToAction("View_List");
         }
+
         public ActionResult setUser(int? id)
         {
             var user = db.APMT_User.FirstOrDefault(x => x.ID == id);
@@ -66,6 +72,7 @@ namespace APMT.Areas.System.Controllers
             db.SaveChanges();
             return RedirectToAction("View_List");
         }
+
         public ActionResult setStatus(int? id)
         {
             var user = db.APMT_User.FirstOrDefault(x => x.ID == id);
@@ -82,14 +89,25 @@ namespace APMT.Areas.System.Controllers
             return RedirectToAction("View_List");
         }
 
+        public ActionResult viewInfor_User(int? id)
+        {
+            var userCompany = db.APMT_Company_User.SingleOrDefault(x => x.ID == id);
+            int? userID = userCompany.User_id;
+            APMT_User user = db.APMT_User.Find(userID);
+            ViewBag.User = user;
+            return View(user);
+        }
+
         public ActionResult View_Details()
         {
             return View();
         }
+
         public ActionResult Update_Profile()
         {
             return View();
         }
+
         //[HttpGet]
         //public ActionResult Login()
         //{

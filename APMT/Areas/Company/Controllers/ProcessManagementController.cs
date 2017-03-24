@@ -10,7 +10,7 @@ namespace APMT.Areas.Company.Controllers
     public class ProcessManagementController : Controller
     {
         //GET: Company/ManageProcess
-        public ActionResult ListProcess(int? id)
+        public ActionResult ListProcess()
         {
             //if (id == null)
             //{

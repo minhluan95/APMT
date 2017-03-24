@@ -17,16 +17,14 @@
     <!-- Theme style -->
     <link href="~/Content/Titatoogle/dist/titatoggle-dist.css" rel="stylesheet" />
 
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+
     <link href="~/Content/css/_all-skins.css" rel="stylesheet" />
+
     <link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+    <link href="~/Content/css/dataTables.bootstrap.css" rel="stylesheet" />
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -53,20 +51,28 @@
     </div>
     <!-- ./wrapper -->
     <!-- jQuery 2.2.3 -->
-
-    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
 
     <script src="~/Scripts/bootstrap.min.js"></script>
+
     <script src="~/Content/Boostrap Confirmation/bootstrap-confirmation.js"></script>
+
     <script src="~/Scripts/app.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script type="text/javascript">
         $(function () {
             $('#datetimepicker').datepicker();
         });
     </script>
+
+    <script src="~/Content/css/jquery.dataTables.js"></script>
+
+    <script src="~/Content/css/dataTables.bootstrap.min.js"></script>
+
     <!--Confirm Setrole Form-->
     <div class="modal fade" id="confirm-SetRole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -150,36 +156,15 @@
     <script type="text/javascript" language="javascript">
 
         $(document).ready(function (request) {
-        $('#somevalue').autocomplete({
-            source: 'autocomplete',
-            data: "{ 'term': '" + request.term + "'}",
+            $('#somevalue').autocomplete({
+                source: 'autocomplete',
+                data: "{ 'term': '" + request.term + "'}",
 
-        });
-    })
+            });
+        })
     </script>
-    <div class="container">
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">User Information</h4>
-                    </div>
-                    <div class="modal-body">
-                        @Html.Partial("viewInfor")
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
+    <!-- Modal -->
+    
 
     <!-- Sparkline -->
     <!-- ChartJS 1.0.1 -->

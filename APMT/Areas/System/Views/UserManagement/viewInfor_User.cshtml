@@ -1,0 +1,54 @@
+﻿@model Models.APMT_User
+
+@{
+    Layout = null;
+}
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">User Information</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row primary box-body">
+                    <div class="col-xs-9"><h1>@Html.DisplayFor(model => model.Fullname)</h1></div>
+                    <div class="col-xs-4"><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></div>
+                    <div class="col-xs-6">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Email)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Create_at)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Create_at)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Update_at)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Update_at)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

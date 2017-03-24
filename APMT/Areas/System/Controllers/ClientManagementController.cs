@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Models;
+﻿using Models;
+using System;
 using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace APMT.Areas.System.Controllers
 {
     public class ClientManagementController : Controller
     {
-        CP_SPMEntities1 db = new CP_SPMEntities1();
+        private CP_SPMEntities1 db = new CP_SPMEntities1();
+
         // GET: System/Client
         public ActionResult View_List(string searchString)
         {
@@ -21,7 +20,9 @@ namespace APMT.Areas.System.Controllers
                             select company;
 
                 ViewBag.List = query.OrderByDescending(x => x.ID).ToList();
+
                 int count = query.ToList().Count();
+
                 if (count > 0 && searchString.Length != 0)
                 {
                     ViewBag.Result = "Finded " + count + " Result(s)";
@@ -44,10 +45,15 @@ namespace APMT.Areas.System.Controllers
             else
             {
                 var lstCompany = db.APMT_Company.ToList();
+
                 ViewBag.List = lstCompany;
+
+                ViewBag.Count = lstCompany.Count();
+
                 return View();
             }
         }
+
         public ActionResult setStatus(int? id)
         {
             var company = db.APMT_Company.FirstOrDefault(x => x.ID == id);
