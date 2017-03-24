@@ -12,10 +12,42 @@ namespace APMT.Areas.System.Controllers
     {
         CP_SPMEntities1 db = new CP_SPMEntities1();
         // GET: System/ManageUser
-        public ActionResult View_List()
+        public ActionResult View_List(string searchString)
         {
-            var lstUser = db.APMT_User.ToList();
-            return View(lstUser);
+            if (searchString != null)
+            {
+                var query = from user in db.APMT_User
+                            where (user.Fullname.Contains(searchString) || user.Email.Contains(searchString))
+                            select user;
+
+                ViewBag.List = query.OrderByDescending(x => x.ID).ToList();
+                int count = query.ToList().Count();
+                if (count > 0 && searchString.Length != 0)
+                {
+                    ViewBag.Result = "Finded " + count + " Result(s)";
+                }
+                else if (count > 0 && searchString.Length == 0)
+                {
+                    ViewBag.Result = "";
+                }
+                else
+                {
+                    ViewBag.Result = "Haven't result to find";
+                    var query1 = from user in db.APMT_User
+                                 where (user.Fullname.Contains(searchString) || user.Email.Contains(searchString))
+                                 select user;
+
+                    ViewBag.List = query1.OrderByDescending(x => x.ID).ToList();
+                }
+                return View();
+            }
+            else
+            {
+                var lstUser = db.APMT_User.ToList();
+                ViewBag.List = lstUser;
+                return View();
+            }
+
         }
 
         public ActionResult setProAdministrator(int? id)

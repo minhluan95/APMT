@@ -23,11 +23,12 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <input style="width:100%" type="text" class="form-control" placeholder="Search">
-                            </div>
-                        </form>
+                        <div class="form-group">
+                            <form class="form-inline">
+                                <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
+                                <button type="submit" class="form-control" onclick="">Search</button>
+                            </form>
+                        </div>
                         <br />
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
@@ -40,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in lst)
                             {
                                 <tr>
                                     <td>@item.ID</td>
@@ -52,7 +53,6 @@
                                     {
                                         <td>
                                             <div class="dropdown">
-                                                <center>
                                                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                         Enable
                                                         <span class="caret"></span>
@@ -62,7 +62,6 @@
                                                         <li role="separator" class="divider"></li>
                                                         <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</li>
                                                     </ul>
-                                                </center>
                                             </div>
                                         </td>
 
@@ -72,8 +71,7 @@
 
                                         <td>
                                             <div class="dropdown">
-                                                <center>
-                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                         Disable
                                                         <span class="caret"></span>
                                                     </button>
@@ -82,7 +80,6 @@
                                                         <li role="separator" class="divider"></li>
                                                         <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</li>
                                                     </ul>
-                                                </center>
                                             </div>
                                         </td>
                                     }

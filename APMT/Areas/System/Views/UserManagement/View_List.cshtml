@@ -18,169 +18,168 @@
     </ol>
 </section>
 
-<div class="col-md-12">
-    <div class="panel with-nav-tabs panel-default">
-        <div class="panel-heading">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1default" data-toggle="tab">Default 1</a></li>
-                <li><a href="#tab2default" data-toggle="tab">Default 2</a></li>
-                <li><a href="#tab3default" data-toggle="tab">Default 3</a></li>
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#tab4default" data-toggle="tab">Default 4</a></li>
-                        <li><a href="#tab5default" data-toggle="tab">Default 5</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="panel-body">
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="tab1default">
-                    <section class="content">
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-12">
-                                <div class="box">
-                                    <hr />
-                                    <!-- /.box-header -->
-                                    <div class="box-body">
-                                        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
-                                            <form class="form-inline">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Search">
-                                                </div>
-                                            </form>
-                                            <br />
-                                        </div>
-                                        <br />
-                                        <table class="table table-hover table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th class="col-lg-1"><center>No.</center></th>
-                                                    <th class="col-lg-2"><center>Full Name</center></th>
-                                                    <th class="col-lg-1"><center>Avatar</center></th>
-                                                    <th class="col-lg-3"><center>Email </center></th>
-                                                    <th class="col-lg-2"><center>CreateDate </center></th>
-                                                    <th class="col-lg-1"><center>Role </center></th>
-                                                    <th class="col-lg-1"><center>Status </center></th>
+@*<div class="col-md-12">
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Default 1</a></li>
+                    <li><a href="#tab2default" data-toggle="tab">Default 2</a></li>
+                    <li><a href="#tab3default" data-toggle="tab">Default 3</a></li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#tab4default" data-toggle="tab">Default 4</a></li>
+                            <li><a href="#tab5default" data-toggle="tab">Default 5</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default">
+                        <section class="content">
+                            <div class="row">
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var item in Model)
-                                                {
-
-                                                    i++;
-                                                    <tr>
-                                                        <td><center>@i</center></td>
-                                                        <td>
-                                                            <center> @item.Fullname</center>
-                                                        </td>
-                                                        <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
-                                                        <td><center>@item.Email</center></td>
-                                                        <td><center>@item.Create_at</center></td>
-                                                        @if (@item.IsProAdmin == true)
-                                                        {
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <center>
-                                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                                            Product Administrator
-                                                                            <span class="caret"></span>
-                                                                        </button>
-
-                                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                                            <li>@Html.ActionLink("User", "setUser", new { id = @item.ID })</li>
-                                                                        </ul>
-                                                                    </center>
-                                                                </div>
-                                                            </td>
-                                                        }
-                                                        else if (@item.IsProAdmin == false)
-                                                        {
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <center>
-                                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                                            User
-                                                                            <span class="caret"></span>
-                                                                        </button>
-
-                                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                                            <li>@Html.ActionLink("Product Administrator", "setProAdministrator", new { id = @item.ID })</li>
-                                                                        </ul>
-                                                                    </center>
-                                                                </div>
-                                                            </td>
-                                                        }
-
-                                                        @if (@item.Allowed == 1)
-                                                        {
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <center>
-                                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                                            Enable
-                                                                            <span class="caret"></span>
-                                                                        </button>
-
-                                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                                            <li role="separator" class="divider"></li>
-                                                                            <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</li>
-                                                                        </ul>
-                                                                    </center>
-                                                                </div>
-                                                            </td>
-
-                                                        }
-                                                        else
-                                                        {
-
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <center>
-                                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                                            Disable
-                                                                            <span class="caret"></span>
-                                                                        </button>
-
-                                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                                            <li role="separator" class="divider"></li>
-                                                                            <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</li>
-                                                                        </ul>
-                                                                    </center>
-                                                                </div>
-                                                            </td>
-                                                        }
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-
-                                        <div class="col-sm-5 col-lg-5">
-                                            <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
-                                                Showing 1 to 5 of 57 entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
-                                    </div>
-                                    <!-- /.box-body -->
-                                </div>
-                                <!-- /.box -->
+                                <!-- /.col -->
                             </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </section>
+                            <!-- /.row -->
+                        </section>
+                    </div>
+                    <div class="tab-pane fade" id="tab2default">Default 2</div>
+                    <div class="tab-pane fade" id="tab3default">Default 3</div>
+                    <div class="tab-pane fade" id="tab4default">Default 4</div>
+                    <div class="tab-pane fade" id="tab5default">Default 5</div>
                 </div>
-                <div class="tab-pane fade" id="tab2default">Default 2</div>
-                <div class="tab-pane fade" id="tab3default">Default 3</div>
-                <div class="tab-pane fade" id="tab4default">Default 4</div>
-                <div class="tab-pane fade" id="tab5default">Default 5</div>
             </div>
         </div>
+    </div>*@
+
+<div class="box">
+    <hr />
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
+            <div class="form-group">
+                <form class="form-inline">
+                    <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
+                    <button type="submit" class="form-control" onclick="">Search</button>
+                </form>
+            </div>
+            <br />
+        </div>
+        <br />
+        <p>@ViewBag.Result</p>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-lg-1"><center>No.</center></th>
+                    <th class="col-lg-2"><center>Full Name</center></th>
+                    <th class="col-lg-1"><center>Avatar</center></th>
+                    <th class="col-lg-3"><center>Email </center></th>
+                    <th class="col-lg-2"><center>CreateDate </center></th>
+                    <th class="col-lg-1"><center>Role </center></th>
+                    <th class="col-lg-1"><center>Status </center></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in lst)
+                {
+
+                    i++;
+                    <tr>
+                        <td><center>@i</center></td>
+                        <td>
+                            <center> @item.Fullname</center>
+                        </td>
+                        <td><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></td>
+                        <td><center>@item.Email</center></td>
+                        <td><center>@item.Create_at</center></td>
+                        @if (@item.IsProAdmin == true)
+                        {
+                            <td>
+                                <div class="dropdown">
+                                    <center>
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Product Administrator
+                                            <span class="caret"></span>
+                                        </button>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li>@Html.ActionLink("User", "setUser", new { id = @item.ID })</li>
+                                        </ul>
+                                    </center>
+                                </div>
+                            </td>
+                        }
+                        else if (@item.IsProAdmin == false)
+                        {
+                            <td>
+                                <div class="dropdown">
+                                    <center>
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            User
+                                            <span class="caret"></span>
+                                        </button>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li>@Html.ActionLink("Product Administrator", "setProAdministrator", new { id = @item.ID })</li>
+                                        </ul>
+                                    </center>
+                                </div>
+                            </td>
+                        }
+
+                        @if (@item.Allowed == 1)
+                        {
+                            <td>
+                                <div class="dropdown">
+                                    <center>
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Enable
+                                            <span class="caret"></span>
+                                        </button>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li role="separator" class="divider"></li>
+                                            <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</li>
+                                        </ul>
+                                    </center>
+                                </div>
+                            </td>
+
+                        }
+                        else
+                        {
+
+                            <td>
+                                <div class="dropdown">
+                                    <center>
+                                        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Disable
+                                            <span class="caret"></span>
+                                        </button>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li role="separator" class="divider"></li>
+                                            <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</li>
+                                        </ul>
+                                    </center>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="col-sm-5 col-lg-5">
+            <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                Showing 1 to 5 of 57 entries
+            </div>
+        </div>
+        <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
     </div>
+    <!-- /.box-body -->
 </div>
-
-
-
+<!-- /.box -->
