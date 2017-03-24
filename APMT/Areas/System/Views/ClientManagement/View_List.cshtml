@@ -58,13 +58,13 @@
                                             <div class="dropdown">
                                                 <center>
                                                     <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Enable
+                                                        <b> Enable</b>
                                                         <span class="caret"></span>
                                                     </button>
 
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                         <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</li>
+                                                        <li><b>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</b></li>
                                                     </ul>
                                                 </center>
                                             </div>
@@ -78,13 +78,13 @@
                                             <div class="dropdown">
                                                 <center>
                                                     <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Disable
+                                                        <b> Disable</b>
                                                         <span class="caret"></span>
                                                     </button>
 
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                         <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</li>
+                                                        <li><b>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</b></li>
                                                     </ul>
                                                 </center>
                                             </div>
