@@ -216,6 +216,7 @@
     <Compile Include="Areas\Company\Controllers\ProcessManagementController.cs" />
     <Compile Include="Areas\Company\Controllers\ProjectManagementController.cs" />
     <Compile Include="Areas\Company\Models\AuthorizeSystem.cs" />
+    <Compile Include="Areas\Company\Models\managerProject.cs" />
     <Compile Include="Areas\Company\Models\ReflectionController.cs" />
     <Compile Include="Areas\Company\Models\userCompany.cs" />
     <Compile Include="Areas\System\Controllers\ClientManagementController.cs" />
@@ -391,7 +392,7 @@
     <Content Include="Areas\Company\Views\MemberManagement\Add_New.cshtml" />
     <Content Include="Areas\Company\Views\MemberManagement\View_List.cshtml" />
     <Content Include="Areas\Company\Views\ProcessManagement\AddMember.cshtml" />
-    <Content Include="Areas\Company\Views\ProcessManagement\ListProcess.cshtml" />
+    <Content Include="Areas\Company\Views\ProcessManagement\View_List.cshtml" />
     <Content Include="Areas\Company\Views\ProjectManagement\AddMember.cshtml" />
     <Content Include="Areas\Company\Views\ProjectManagement\Add_New.cshtml" />
     <Content Include="Areas\Company\Views\ProjectManagement\View_List.cshtml" />
@@ -419,8 +420,9 @@
     <Content Include="Areas\System\Views\UserManagement\setProAdministrator.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\setUser.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\setStatus.cshtml" />
-    <Content Include="Areas\Company\Views\MemberManagement\viewInfor_MB.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\viewInfor_User.cshtml" />
+    <Content Include="Areas\Company\Views\MemberManagement\viewInfor_MB.cshtml" />
+    <Content Include="Areas\Company\Views\ProjectManagement\viewInfor_Project.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\User\View_Details.cshtml" />
     <Content Include="Views\Home\About.cshtml" />

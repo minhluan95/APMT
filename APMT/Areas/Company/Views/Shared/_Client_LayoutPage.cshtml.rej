@@ -1,0 +1,9 @@
+diff a/APMT/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml b/APMT/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml	(rejected hunks)
+@@ -180,7 +180,6 @@
+         </div>
+ 
+     </div>
+-    @* <script src="~/Scripts/dashboard2.js"></script>*@
+ 
+     <!-- Sparkline -->
+     <!-- ChartJS 1.0.1 -->

@@ -145,7 +145,7 @@ namespace APMT.Areas.Company.Controllers
                         }
                         else
                         {
-                            TempData["Message"] = "User is not exist !";
+                            TempData["Message"] = "This user was existed in this company!";
                             return RedirectToAction("View_List");
                         }
                     }
@@ -249,9 +249,13 @@ namespace APMT.Areas.Company.Controllers
         public ActionResult viewInfor_MB(int? id)
         {
             var userCompany = db.APMT_Company_User.SingleOrDefault(x => x.ID == id);
+
             int? userID = userCompany.User_id;
+
             APMT_User user = db.APMT_User.Find(userID);
+
             ViewBag.User = user;
+
             return View(user);
         }
     }

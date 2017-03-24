@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -7,7 +6,7 @@
 <div id="AddNew" class="box collapse box box-primary">
     <!-- /.box-header -->
     <!-- form start -->
-    <form role="form" action="~/Company/ManageProject/AddNew/" method="post">
+    <form role="form" action="/Company/ProjectManagement/Add_New/" method="post">
         <div class="box-body">
 
             <div class="form-group">
@@ -26,17 +25,16 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">teocute9x@gmail.com</a></li>
-                        <li><a href="#">ti9xhero@gmail.com</a></li>
-                        <li><a href="#">nguyenvanti2008@gmail.com</a></li>
+                        <li><a href="#">Cù Minh Luân</a></li>
+                        <li><a href="#">Du Kim Quang</a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
                 </div>
             </div>   
             <div class="form-group">
-                <label for="exampleInputFile">StartDate:</label>
-                <input data-provide="datepicker">
-                To <input data-provide="datepicker">
+                <label for="exampleInputFile">Start Date:</label>
+                <input name="startday" data-provide="datepicker">
+                To <input name="endday" data-provide="datepicker">
             </div>
         </div>
         <!-- /.box-body -->

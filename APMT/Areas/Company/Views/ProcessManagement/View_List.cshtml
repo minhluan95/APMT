@@ -1,10 +1,10 @@
-﻿@*@using APMT_D.o.T_Team.Areas.Company.Models
-@model lstProcess_Running*@
+﻿@using Models
+@model APMT_Process
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
-    //var lst = (List<lstProcess_Running>)ViewBag.List;
-    //int i = 0;
+    var lst = (List<APMT_Process>)ViewBag.lstProcess;
+    int i = 0;
 }
 <script src="~/Content/LoginPartial/js/datetimepicker).js"></script>
 <br />
@@ -64,36 +64,22 @@
                                 <th>No.</th>
                                 <th>Name</th>
 
-                                <th>Target Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in lst)
+                            @foreach (var item in lst)
                             {
                                 i++;
                                 <tr>
                                     <td>@i</td>
-                                    <td>@item.name_process</td>
-                                    <td>@item.process_targetdate</td>
+                                    <td>@item.Name</td>
                                     <td>
                                         <a href="@Url.Action("AddMember","ProcessManagement")" class="btn btn-primary">Add Member</a>
                                     </td>
                                 </tr>
-                            }*@
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        Action
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        @*<li>@Html.ActionLink("Edit ", "Edit")</li>*@
-                                        <li role="separator" class="divider"></li>
-                                        @*<li>@Html.ActionLink("Delete", "Delete")</li>*@
-                                    </ul>
-                                </div>
-                            </td>
+                            }
+                          
                         </tbody>
                     </table>
                 </div>

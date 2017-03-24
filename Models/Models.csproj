@@ -99,6 +99,12 @@
     <Compile Include="APMT_Project.cs">
       <DependentUpon>APMTDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="APMT_Project_User.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Task.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="APMT_User.cs">
       <DependentUpon>APMTDbContext.tt</DependentUpon>
     </Compile>

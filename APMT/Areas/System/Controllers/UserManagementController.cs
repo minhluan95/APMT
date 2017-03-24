@@ -91,10 +91,11 @@ namespace APMT.Areas.System.Controllers
 
         public ActionResult viewInfor_User(int? id)
         {
-            var userCompany = db.APMT_Company_User.SingleOrDefault(x => x.ID == id);
-            int? userID = userCompany.User_id;
-            APMT_User user = db.APMT_User.Find(userID);
+
+            APMT_User user = db.APMT_User.Find(id);
+
             ViewBag.User = user;
+
             return View(user);
         }
 
