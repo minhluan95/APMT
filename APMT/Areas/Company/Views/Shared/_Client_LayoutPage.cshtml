@@ -161,7 +161,8 @@
         $(document).ready(function (request) {
             $('#somevalue').autocomplete({
                 source: 'autocomplete',
-                data: "{ 'term': '" + request.term + "'}",
+                //data: "{ 'term':'" + request.term + "'}",
+                data: "{'"+request.term+"'}",
 
             });
         })

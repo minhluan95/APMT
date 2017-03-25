@@ -12,7 +12,7 @@
 }
 <section class="content-header">
     <h1>
-        Member List
+        Members List
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -26,16 +26,16 @@
     <div class="row">
         <div class="col-xs-12 col-lg-12">
             @*<form class="form-inline">
-                <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
-                <button type="submit" class="form-control" onclick="">Search</button>
-            </form>*@
+                    <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
+                    <button type="submit" class="form-control" onclick="">Search</button>
+                </form>*@
             <p>@TempData["Message"]</p>
             <p style="color:red">@ViewBag.Result</p>
             <p style="color:red">@ViewBag.Message</p>
             <div class="box">
                 <div class="box-header">
                     <center>
-                        <h2 >Members Table</h2>
+                        <h2>Members Table</h2>
                     </center>
                 </div>
                 <div class="box-body">
@@ -45,8 +45,8 @@
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>No.</center></th>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Full Name</center></th>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Role </center></th>
-                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Status </center></th>
-                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Action</center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Enable </center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Delete</center></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,24 +62,38 @@
                                     </td>
 
                                     <td>
-                                        <div class="dropdown">
-                                            @if (@item.isAdministrator == true)
-                                            {
-                                                <center> <label>Administrator</label></center>
-                                            }
-                                            @if (@item.isCreator == true)
-                                            {
-                                                <center> <label>Creator</label></center>
-                                            }
-                                            @if (@item.isMember == true)
-                                            { <center> <label>Member</label></center>
-                                            }
-                                        </div>
+                                        <input class="icheckAdmin" type="checkbox"  checked="@item.isAdministrator" name="isAdministrator" id="isAdministrator" data-id="@item.id" /> Administrator
+
+                                        <br />
+                                        <input class="icheckCreator" type="checkbox" checked="@item.isCreator" name="isCreator" id="isCreator" data-id="@item.id" /> Creator
+                                        @*<div class="dropdown">
+                                                @if (@item.isAdministrator == true)
+                                                {
+                                                    <center> <label>Administrator</label></center>
+                                                }
+                                                @if (@item.isCreator == true)
+                                                {
+                                                    <center> <label>Creator</label></center>
+                                                }
+                                                @if (@item.isMember == true)
+                                                { <center> <label>Member</label></center>
+                                                }
+                                            </div>*@
                                     </td>
 
 
                                     <td>
-                                        <div class="dropdown">
+                                        <center>
+                                            @if(@item.isAllowed==1)
+                                            { 
+                                            <input class="icheckStatus" type="checkbox" checked="checked" data-id="@item.id" />
+                                            }
+                                            else
+                                            {
+                                                <input class="icheckStatus" type="checkbox" data-id="@item.id" />
+                                            }
+                                        </center>
+                                        @*<div class="dropdown">
                                             <center>
                                                 @if (@item.isAllowed == 1)
                                                 {
@@ -104,38 +118,14 @@
                                                     </ul>
                                                 }
                                             </center>
-                                        </div>
+                                        </div>*@
                                     </td>
                                     <td>
                                         <div class="dropdown">
                                             <center>
-                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                    Choose
-                                                    <span class="caret"></span>
-                                                </button>
-
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    @if (@item.isAdministrator == false)
-                                                    {
-                                                        <li>@Html.ActionLink("Set Administrator", "setAdministrator", new { id = @item.id })</li>
-                                                    }
-                                                    else
-                                                    {
-                                                        <li>@Html.ActionLink("Set Member", "setMember", new { id = @item.id })</li>
-                                                    }
-                                                    @if (@item.isCreator == false)
-                                                    {
-                                                        <li>@Html.ActionLink("Set Creator", "setCreator", new { id = @item.id })</li>
-                                                    }
-                                                    else
-                                                    {
-                                                        <li>@Html.ActionLink("Delete Role Creator", "setCreator", new { id = @item.id })</li>
-                                                    }
-
-
-                                                    <li>@Html.ActionLink("Delete Member", "deleteMember", new { id = @item.id }, new { onclick = "return confirm('Do you really want to delete the Member " + @item.fullName + "?')" })</li>
-
-                                                </ul>
+                                                <button class="btn btn-danger btnDeleteMember" type="button" aria-haspopup="true" aria-expanded="true" data-id="@item.id">
+                                                    Delete
+                                                </button>                          
                                             </center>
                                         </div>
                                     </td>
@@ -184,4 +174,69 @@
             </div>
         </div>
     </div>
+    @*Script dùng ajax băt sự kiện cho các chức năng
+    .setRole
+    .Delete Member
+    .Change Status
+     *@
+    <script>          
+            $('.icheckAdmin').click(function (e) {
+                var chkAdmin = $(this);
+                var id = chkAdmin.data('id');
+                var checked = chkAdmin.is(":checked");
+                $.ajax({
+                    url: "/Company/MemberManagement/setAdministrator",
+                    data: { id: id },
+                    datatype: "json",
+                    success: function (response) {
+                        console.log(response);
+                        console.log(chkAdmin);                    
+                    }
+                });
+            });         
+            $('.icheckCreator').click(function (e) {
+                var chkCreator = $(this);
+                var id = chkCreator.data('id');
+               
+                $.ajax({
+                    url: "/Company/MemberManagement/setCreator",
+                    data: { id: id },
+                    datatype: "json",
+                    success: function (response) {
+                        console.log(response);
+                        console.log(chkCreator);
+                     
+                    }
+                });
+            });
+            $('.btnDeleteMember').click(function (e) {
+                var btnDeleteMember = $(this);
+                var id = btnDeleteMember.data('id');
+        
+                $.ajax({
+                    url: "/Company/MemberManagement/deleteMember",
+                    data: { id: id },
+                    success: function (response) {
+                        console.log(response);
+                        console.log(btnDeleteMember);
+                       
+                    }
+                });
+            });
+            $('.icheckStatus').click(function (e) {
+                var chkStatus = $(this);
+                var id = chkStatus.data('id');
+           
+                $.ajax({
+                    url: "/Company/MemberManagement/setStatus",
+                    data: { id: id },
+                    success: function (response) {
+                        console.log(response);
+                        console.log(chkStatus);
+                    }
+                });
+            });
+
+    </script>
+
 </section>

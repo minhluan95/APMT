@@ -178,37 +178,27 @@ namespace APMT.Areas.Company.Controllers
                 return RedirectToAction("View_List");
         }
 
-        public ActionResult setAdministrator(int? id)
+        public JsonResult setAdministrator(int? id)
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-            if (user.isAdministrator == false)
-            {
-                user.isAdministrator = true;
-                user.isMember = false;
-            }
-            else
-            {
-                user.isAdministrator = false;
-            }
-            db.Entry(user).State = EntityState.Modified;
+            user.isAdministrator = !user.isAdministrator;
             db.SaveChanges();
-            return RedirectToAction("View_List");
+            return Json(new
+            {
+                user.isAdministrator
+            },JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult setCreator(int? id)
+        public JsonResult setCreator(int? id)
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-            if (user.isCreator == false)
-            {
-                user.isCreator = true;
-            }
-            else
-            {
-                user.isCreator = false;
-            }
-            db.Entry(user).State = EntityState.Modified;
+            user.isCreator = !user.isCreator;
             db.SaveChanges();
-            return RedirectToAction("View_List");
+           return Json(new
+            {
+                user.isCreator
+           }, JsonRequestBehavior.AllowGet);
+
         }
 
         public ActionResult setMember(int? id)
@@ -228,20 +218,27 @@ namespace APMT.Areas.Company.Controllers
             return RedirectToAction("View_List");
         }
 
-        public ActionResult setStatus(int? id)
+        public JsonResult setStatus(int? id)
         {
+            bool status = true;
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
             if (user.Allowed == 1)
             {
-                user.Allowed = 2;
+                user.Allowed = 0;
+                status = false;
             }
             else
             {
                 user.Allowed = 1;
+                status = true;
             }
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("View_List");
+            return Json(new
+            {
+               status
+            }, JsonRequestBehavior.AllowGet);
+
         }
 
         public ActionResult viewInfor_MB(int? id)
