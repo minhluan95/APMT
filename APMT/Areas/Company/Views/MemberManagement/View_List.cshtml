@@ -25,27 +25,28 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-lg-12">
-            <form class="form-inline">
+            @*<form class="form-inline">
                 <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
                 <button type="submit" class="form-control" onclick="">Search</button>
-            </form>
+            </form>*@
             <p>@TempData["Message"]</p>
             <p style="color:red">@ViewBag.Result</p>
             <p style="color:red">@ViewBag.Message</p>
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Member Table</h3>
+                    <center>
+                        <h2 >Members Table</h2>
+                    </center>
                 </div>
                 <div class="box-body">
                     <table id="memberlist" class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th class="col-lg-1"><center>No.</center></th>
-                                <th class="col-lg-1"><center>Full Name</center></th>
-                                <th class="col-lg-1"><center>Avatar</center></th>
-                                <th class="col-lg-1"><center>Role </center></th>
-                                <th class="col-lg-1"><center>Status </center></th>
-                                <th class="col-lg-1"><center>Action</center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>No.</center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Full Name</center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Role </center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Status </center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Action</center></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,11 +58,6 @@
                                     <td>
                                         <center>
                                             <a href="/Company/MemberManagement/viewInfor_MB/@item.id" data-toggle="modal" data-target="#myModal">@item.fullName</a>
-                                        </center>
-                                    </td>
-                                    <td>
-                                        <center>
-                                            <img style="width:50%;" src="~/Content/Images/Avatar_ProductAD.jpg" />
                                         </center>
                                     </td>
 
@@ -154,8 +150,8 @@
                         $(function () {
                             $('#memberlist').DataTable({
                                 "paging": true,
-                                "lengthChange": false,
-                                "searching": false,
+                                "lengthChange": true,
+                                "searching": true,
                                 "ordering": true,
                                 "info": true,
                                 "autoWidth": false

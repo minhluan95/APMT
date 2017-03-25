@@ -99,59 +99,60 @@ namespace APMT.Areas.Company.Controllers
 
         public ActionResult AddMember(FormCollection f)
         {
-            string trimEmail = "";
-            string email = f["somevalue"];
-            // string role = f["selectRole"];
-            if (email.Contains("("))
-            {
-                trimEmail = email.Substring(0, email.IndexOf('(')).Trim();
-            }
-            else
-            {
-                trimEmail = email;
-            }
-            try
-            {
-                var user = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail));
-                var userID = user.ID;
-                if (userID != null)
-                {
-                    if (user.Allowed == 1)
-                    {
-                        var existMember = db.APMT_Company_User.SingleOrDefault(x => x.User_id == userID);
-                        if (existMember == null)
-                        {
-                            APMT_Company_User companyUser = new APMT_Company_User();
-                            companyUser.Company_id = 1;
-                            companyUser.User_id = int.Parse(userID.ToString());
-                            companyUser.Allowed = 1;
-                            companyUser.isMember = true;
-                            companyUser.isAdministrator = false;
-                            companyUser.isCreator = false;
-                            db.APMT_Company_User.Add(companyUser);
-                            db.SaveChanges();
-                            TempData["Message"] = "Successful";
-                            return RedirectToAction("View_List");
-                        }
-                        else
-                        {
-                            TempData["Message"] = "This user was existed in this company!";
-                            return RedirectToAction("View_List");
-                        }
-                    }
-                    else
-                    {
-                        TempData["Message"] = "This user was Blocked";
-                        return RedirectToAction("View_List");
-                    }
-                }
-                return RedirectToAction("View_List");
-            }
-            catch (Exception e)
-            {
-                TempData["Message"] = "Add new Failure !";
-                return RedirectToAction("View_List");
-            }
+            //string trimEmail = "";
+            //string email = f["somevalue"];
+            //// string role = f["selectRole"];
+            //if (email.Contains("("))
+            //{
+            //    trimEmail = email.Substring(0, email.IndexOf('(')).Trim();
+            //}
+            //else
+            //{
+            //    trimEmail = email;
+            //}
+            //try
+            //{
+            //    var user = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail));
+            //    var userID = user.ID;
+            //    if (userID != null)
+            //    {
+            //        if (user.Allowed == 1)
+            //        {
+            //            var existMember = db.APMT_Company_User.SingleOrDefault(x => x.User_id == userID);
+            //            if (existMember == null)
+            //            {
+            //                APMT_Company_User companyUser = new APMT_Company_User();
+            //                companyUser.Company_id = 1;
+            //                companyUser.User_id = int.Parse(userID.ToString());
+            //                companyUser.Allowed = 1;
+            //                companyUser.isMember = true;
+            //                companyUser.isAdministrator = false;
+            //                companyUser.isCreator = false;
+            //                db.APMT_Company_User.Add(companyUser);
+            //                db.SaveChanges();
+            //                TempData["Message"] = "Successful";
+            //                return RedirectToAction("View_List");
+            //            }
+            //            else
+            //            {
+            //                TempData["Message"] = "This user was existed in this company!";
+            //                return RedirectToAction("View_List");
+            //            }
+            //        }
+            //        else
+            //        {
+            //            TempData["Message"] = "This user was Blocked";
+            //            return RedirectToAction("View_List");
+            //        }
+            //    }
+            //    return RedirectToAction("View_List");
+            //}
+            //catch (Exception e)
+            //{
+            //    TempData["Message"] = "Add new Failure !";
+            //    return RedirectToAction("View_List");
+            //}
+            return View();
         }
         [HttpGet]
         public ActionResult OpenProject(int? id)

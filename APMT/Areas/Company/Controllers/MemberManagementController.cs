@@ -122,10 +122,10 @@ namespace APMT.Areas.Company.Controllers
             }
             try
             {
-                var user = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail));
-                var userID = user.ID;
-                if (userID != null)
+                var user = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail));            
+                if (user != null)
                 {
+                    var userID = user.ID;
                     if (user.Allowed == 1)
                     {
                         var existMember = db.APMT_Company_User.SingleOrDefault(x => x.User_id == userID);
@@ -155,7 +155,13 @@ namespace APMT.Areas.Company.Controllers
                         return RedirectToAction("View_List");
                     }
                 }
-                return RedirectToAction("View_List");
+                else
+                {
+                    TempData["Message"] = "This user not Exist";
+                    return RedirectToAction("View_List");
+                }
+            
+           
             }
             catch (Exception e)
             {
@@ -166,18 +172,10 @@ namespace APMT.Areas.Company.Controllers
 
         public ActionResult deleteMember(int? id)
         {
-            try
-            {
                 var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
                 db.APMT_Company_User.Remove(user);
                 db.SaveChanges();
                 return RedirectToAction("View_List");
-            }
-            catch(Exception ex)
-            {
-                ViewBag.Message = "Can't delete this member!";
-                return RedirectToAction("View_List");
-            }
         }
 
         public ActionResult setAdministrator(int? id)
