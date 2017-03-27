@@ -12,90 +12,34 @@ namespace APMT.Areas.Company.Controllers
         private CP_SPMEntities1 db = new CP_SPMEntities1();
 
         // GET: Company/ManageMember
-        public ActionResult View_List(string searchString)
+        public ActionResult View_List()
         {
-            if (searchString != null)
+            return View();
+        }
+        public ActionResult getMember()
+        {
+            var query = from UserC in db.APMT_Company_User
+                        join user in db.APMT_User on UserC.User_id equals user.ID
+                        join company in db.APMT_Company on UserC.Company_id equals company.ID
+                        where company.ID == 1
+                        select new userCompany
+                        {
+                            id = UserC.ID,
+                            fullName = user.Fullname,
+                            email = user.Email,
+                            avartar = user.Avatar,
+                            createAt = user.Create_at.ToString(),
+                            updateAt = user.Update_at.ToString(),
+                            isAllowed = UserC.Allowed,
+                            isAdministrator = UserC.isAdministrator,
+                            isCreator = UserC.isCreator,
+                            isMember = UserC.isMember
+                        };
+            var lisMember = query.OrderByDescending(x => x.id).ToList();
+            return Json(new
             {
-                var query = from UserC in db.APMT_Company_User
-                            join user in db.APMT_User on UserC.User_id equals user.ID
-                            join company in db.APMT_Company on UserC.Company_id equals company.ID
-                            where (user.Fullname.Contains(searchString) || user.Email.Contains(searchString)) && company.ID == 1
-                            select new userCompany
-                            {
-                                id = UserC.ID,
-                                fullName = user.Fullname,
-                                email = user.Email,
-                                avartar = user.Avatar,
-                                createAt = user.Create_at.ToString(),
-                                updateAt = user.Update_at.ToString(),
-                                isAllowed = UserC.Allowed,
-                                isAdministrator = UserC.isAdministrator,
-                                isCreator = UserC.isCreator,
-                                isMember = UserC.isMember
-                            };
-                ViewBag.List = query.OrderByDescending(x => x.id).ToList();
-                int count = query.ToList().Count();
-                if (count > 0 && searchString.Length != 0)
-                {
-                    ViewBag.Result = "Finded " + count + " Result(s)";
-                }
-                else if (count > 0 && searchString.Length == 0)
-                {
-                    ViewBag.Result = "";
-                }
-                else
-                {
-                    ViewBag.Result = "Haven't result to find";
-                    var query1 = from UserC in db.APMT_Company_User
-                                 join user in db.APMT_User on UserC.User_id equals user.ID
-                                 join company in db.APMT_Company on UserC.Company_id equals company.ID
-                                 where company.ID == 1
-                                 select new userCompany
-                                 {
-                                     id = UserC.ID,
-                                     fullName = user.Fullname,
-                                     email = user.Email,
-                                     avartar = user.Avatar,
-                                     createAt = user.Create_at.ToString(),
-                                     updateAt = user.Update_at.ToString(),
-                                     isAllowed = UserC.Allowed,
-                                     isAdministrator = UserC.isAdministrator,
-                                     isCreator = UserC.isCreator,
-                                     isMember = UserC.isMember
-                                 };
-                    ViewBag.List = query1.OrderByDescending(x => x.id).ToList();
-                }
-                return View();
-            }
-            else
-            {
-                var query = from UserC in db.APMT_Company_User
-                            join user in db.APMT_User on UserC.User_id equals user.ID
-                            join company in db.APMT_Company on UserC.Company_id equals company.ID
-                            where company.ID == 1
-                            select new userCompany
-                            {
-                                id = UserC.ID,
-                                fullName = user.Fullname,
-                                email = user.Email,
-                                avartar = user.Avatar,
-                                createAt = user.Create_at.ToString(),
-                                updateAt = user.Update_at.ToString(),
-                                isAllowed = UserC.Allowed,
-                                isAdministrator = UserC.isAdministrator,
-                                isCreator = UserC.isCreator,
-                                isMember = UserC.isMember
-                            };
-                ViewBag.List = query.OrderByDescending(x => x.id).ToList();
-
-                return View();
-            }
-
-            //int pageSize = 3;
-            //int pageNumber = (page ?? 1);
-            //var lstUser = query.ToList().OrderByDescending(x => x.id).ToPagedList(pageNumber, pageSize);
-            //ViewBag.List = lstUser;
-            //return View(lstUser);
+                lisMember
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult autocomplete(string term)
@@ -107,75 +51,88 @@ namespace APMT.Areas.Company.Controllers
             return Json(filteredItems, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Add_New(FormCollection f)
+        public ActionResult Add_New(string stringEmail)
         {
             string trimEmail = "";
-            string email = f["somevalue"];
-            // string role = f["selectRole"];
-            if (email.Contains("("))
+            string mesg = "";
+            if (stringEmail != null)
             {
-                trimEmail = email.Substring(0, email.IndexOf('(')).Trim();
-            }
-            else
-            {
-                trimEmail = email;
-            }
-            try
-            {
-                var user = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail));            
-                if (user != null)
+                string email = stringEmail;
+                // string role = f["selectRole"];
+                if (email.Contains("("))
                 {
-                    var userID = user.ID;
-                    if (user.Allowed == 1)
+                    trimEmail = email.Substring(0, email.IndexOf('(')).Trim();
+                }
+                else
+                {
+                    trimEmail = email;
+                }
+                try
+                {
+                    var user = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail));
+                    if (user != null)
                     {
-                        var existMember = db.APMT_Company_User.SingleOrDefault(x => x.User_id == userID);
-                        if (existMember == null)
+                        var userID = user.ID;
+                        if (user.Allowed == 1)
                         {
-                            APMT_Company_User companyUser = new APMT_Company_User();
-                            companyUser.Company_id = 1;
-                            companyUser.User_id = int.Parse(userID.ToString());
-                            companyUser.Allowed = 1;
-                            companyUser.isMember = true;
-                            companyUser.isAdministrator = false;
-                            companyUser.isCreator = false;
-                            db.APMT_Company_User.Add(companyUser);
-                            db.SaveChanges();
-                            TempData["Message"] = "Successful";
-                            return RedirectToAction("View_List");
+                            var existMember = db.APMT_Company_User.SingleOrDefault(x => x.User_id == userID);
+                            if (existMember == null)
+                            {
+                                APMT_Company_User companyUser = new APMT_Company_User();
+                                companyUser.Company_id = 1;
+                                companyUser.User_id = int.Parse(userID.ToString());
+                                companyUser.Allowed = 1;
+                                companyUser.isMember = true;
+                                companyUser.isAdministrator = false;
+                                companyUser.isCreator = false;
+                                db.APMT_Company_User.Add(companyUser);
+                                db.SaveChanges();
+                                mesg = "Successful";
+
+                            }
+                            else
+                            {
+                                mesg = "This user was existed in this company!";
+                                //TempData["Message"] = "This user was existed in this company!";
+                                //return RedirectToAction("View_List");
+                            }
                         }
                         else
                         {
-                            TempData["Message"] = "This user was existed in this company!";
-                            return RedirectToAction("View_List");
+                            mesg = "This user was Blocked";
+                            //TempData["Message"] = "This user was Blocked";
+                            //return RedirectToAction("View_List");
                         }
                     }
                     else
                     {
-                        TempData["Message"] = "This user was Blocked";
-                        return RedirectToAction("View_List");
+                        mesg = "This user not Exist";
+                        //TempData["Message"] = "This user not Exist";
+                        //return RedirectToAction("View_List");
                     }
-                }
-                else
-                {
-                    TempData["Message"] = "This user not Exist";
-                    return RedirectToAction("View_List");
-                }
-            
-           
-            }
-            catch (Exception e)
-            {
-                TempData["Message"] = "Add new Failure !";
-                return RedirectToAction("View_List");
-            }
-        }
 
+
+                }
+                catch (Exception e)
+                {
+                    mesg = "Add new Failure,Please Try Again !";
+                    //TempData["Message"] = "Add new Failure !";
+                    //return RedirectToAction("View_List");
+                }
+
+            }
+            return Json(new
+            {
+                mesg
+            }, JsonRequestBehavior.AllowGet);
+
+        }
         public ActionResult deleteMember(int? id)
         {
-                var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-                db.APMT_Company_User.Remove(user);
-                db.SaveChanges();
-                return RedirectToAction("View_List");
+            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+            db.APMT_Company_User.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("View_List");
         }
 
         public JsonResult setAdministrator(int? id)
@@ -186,7 +143,7 @@ namespace APMT.Areas.Company.Controllers
             return Json(new
             {
                 user.isAdministrator
-            },JsonRequestBehavior.AllowGet);
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult setCreator(int? id)
@@ -194,10 +151,10 @@ namespace APMT.Areas.Company.Controllers
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
             user.isCreator = !user.isCreator;
             db.SaveChanges();
-           return Json(new
+            return Json(new
             {
                 user.isCreator
-           }, JsonRequestBehavior.AllowGet);
+            }, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -236,7 +193,7 @@ namespace APMT.Areas.Company.Controllers
             db.SaveChanges();
             return Json(new
             {
-               status
+                status
             }, JsonRequestBehavior.AllowGet);
 
         }
@@ -252,6 +209,18 @@ namespace APMT.Areas.Company.Controllers
             ViewBag.User = user;
 
             return View(user);
+        }
+        public int getId_User(string email)
+        {
+            APMT_User user = db.APMT_User.SingleOrDefault(x => x.Email.Equals(email));
+            if(user!=null)
+            {
+                return user.ID;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

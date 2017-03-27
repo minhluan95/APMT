@@ -1,13 +1,10 @@
 ﻿@using APMT.Areas.Company.Models
 @model userCompany
-@*@using PagedList.Mvc;
-    @model PagedList.IPagedList<userCompany>*@
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
-    var lst = (List<userCompany>)ViewBag.List;
-    int i = 0;
+    //var lst = (List<userCompany>)ViewBag.List;
+    //int i = 0;
 
 }
 <section class="content-header">
@@ -21,7 +18,25 @@
 </section>
 <section class="content">
     <div class="form-group">
-        @Html.Partial("Add_New")
+        @*@Html.Partial("Add_New")*@
+        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#Add_New_Modal">Add New</button>
+        @*<div id="AddNew" class="box collapse">
+                <!-- /.box-header -->
+                <!-- form start -->
+                <label id="result"></label>
+                <form role="form" action="~/Company/MemberManagement/Add_New/" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="exampleInputFile">Email</label>
+                            <input class="form-control" type="text" id="somevalue" name="somevalue" data-autocomplete-url="autocomplete" />
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary btn-md" onclick="Add_new">Add</button>
+                    </div>
+                </form>
+            </div>*@
     </div>
     <div class="row">
         <div class="col-xs-12 col-lg-12">
@@ -29,9 +44,7 @@
                     <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
                     <button type="submit" class="form-control" onclick="">Search</button>
                 </form>*@
-            <p>@TempData["Message"]</p>
-            <p style="color:red">@ViewBag.Result</p>
-            <p style="color:red">@ViewBag.Message</p>
+            @*<p>@TempData["Message"]</p>*@
             <div class="box">
                 <div class="box-header">
                     <center>
@@ -39,116 +52,66 @@
                     </center>
                 </div>
                 <div class="box-body">
-                    <table id="memberlist" class="table table-hover table-bordered">
+                    <table id="lstMember" class="table table-hover table-bordered">
                         <thead>
                             <tr>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>No.</center></th>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Full Name</center></th>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Role </center></th>
-                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Enable </center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-0 col-xs-1"><center>Enable </center></th>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Delete</center></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in lst)
-                            {
-                                i++;
-                                <tr>
-                                    <td><center>@i</center></td>
-                                    <td>
-                                        <center>
-                                            <a href="/Company/MemberManagement/viewInfor_MB/@item.id" data-toggle="modal" data-target="#myModal">@item.fullName</a>
-                                        </center>
-                                    </td>
+                            @*@foreach (var item in lst)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td><center>@i</center></td>
+                                        <td>
+                                            <center>
+                                                <a href="/Company/MemberManagement/viewInfor_MB/@item.id" data-toggle="modal" data-target="#myModal">@item.fullName</a>
+                                            </center>
+                                        </td>
 
-                                    <td>
-                                        <input class="icheckAdmin" type="checkbox"  checked="@item.isAdministrator" name="isAdministrator" id="isAdministrator" data-id="@item.id" /> Administrator
+                                        <td>
+                                            <input class="icheckAdmin" type="checkbox" checked="@item.isAdministrator" name="isAdministrator" id="isAdministrator" data-id="@item.id" /> Administrator
 
-                                        <br />
-                                        <input class="icheckCreator" type="checkbox" checked="@item.isCreator" name="isCreator" id="isCreator" data-id="@item.id" /> Creator
-                                        @*<div class="dropdown">
-                                                @if (@item.isAdministrator == true)
-                                                {
-                                                    <center> <label>Administrator</label></center>
-                                                }
-                                                @if (@item.isCreator == true)
-                                                {
-                                                    <center> <label>Creator</label></center>
-                                                }
-                                                @if (@item.isMember == true)
-                                                { <center> <label>Member</label></center>
-                                                }
-                                            </div>*@
-                                    </td>
+                                            <br />
+                                            <input class="icheckCreator" type="checkbox" checked="@item.isCreator" name="isCreator" id="isCreator" data-id="@item.id" /> Creator
+                                        </td>
 
 
-                                    <td>
-                                        <center>
-                                            @if(@item.isAllowed==1)
-                                            { 
-                                            <input class="icheckStatus" type="checkbox" checked="checked" data-id="@item.id" />
-                                            }
-                                            else
-                                            {
-                                                <input class="icheckStatus" type="checkbox" data-id="@item.id" />
-                                            }
-                                        </center>
-                                        @*<div class="dropdown">
+                                        <td>
                                             <center>
                                                 @if (@item.isAllowed == 1)
                                                 {
-                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Enable
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.id })</li>
-                                                    </ul>
+                                                    <input class="icheckStatus" type="checkbox" checked="checked" data-id="@item.id" />
                                                 }
                                                 else
                                                 {
-                                                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Disable
-                                                        <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.id })</li>
-                                                    </ul>
+                                                    <input class="icheckStatus" type="checkbox" data-id="@item.id" />
                                                 }
                                             </center>
-                                        </div>*@
-                                    </td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <center>
-                                                <button class="btn btn-danger btnDeleteMember" type="button" aria-haspopup="true" aria-expanded="true" data-id="@item.id">
-                                                    Delete
-                                                </button>                          
-                                            </center>
-                                        </div>
-                                    </td>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <center>
+                                                    <button class="btn btn-danger btnDeleteMember" type="button" aria-haspopup="true" aria-expanded="true" data-id="@item.id">
+                                                        Delete
+                                                    </button>
+                                                </center>
+                                            </div>
+                                        </td>
 
-                                </tr>
-                            }
+                                    </tr>
+                                }*@
+
                         </tbody>
                     </table>
                 </div>
                 <div class="col-sm-5 col-lg-5">
-                    <script>
-                        $(function () {
-                            $('#memberlist').DataTable({
-                                "paging": true,
-                                "lengthChange": true,
-                                "searching": true,
-                                "ordering": true,
-                                "info": true,
-                                "autoWidth": false
-                            });
-                        });
-                    </script>
-
+            
                 </div>
             </div>
             <!-- /.box-body -->
@@ -174,69 +137,46 @@
             </div>
         </div>
     </div>
-    @*Script dùng ajax băt sự kiện cho các chức năng
-    .setRole
-    .Delete Member
-    .Change Status
-     *@
-    <script>          
-            $('.icheckAdmin').click(function (e) {
-                var chkAdmin = $(this);
-                var id = chkAdmin.data('id');
-                var checked = chkAdmin.is(":checked");
-                $.ajax({
-                    url: "/Company/MemberManagement/setAdministrator",
-                    data: { id: id },
-                    datatype: "json",
-                    success: function (response) {
-                        console.log(response);
-                        console.log(chkAdmin);                    
-                    }
-                });
-            });         
-            $('.icheckCreator').click(function (e) {
-                var chkCreator = $(this);
-                var id = chkCreator.data('id');
-               
-                $.ajax({
-                    url: "/Company/MemberManagement/setCreator",
-                    data: { id: id },
-                    datatype: "json",
-                    success: function (response) {
-                        console.log(response);
-                        console.log(chkCreator);
-                     
-                    }
-                });
-            });
-            $('.btnDeleteMember').click(function (e) {
-                var btnDeleteMember = $(this);
-                var id = btnDeleteMember.data('id');
-        
-                $.ajax({
-                    url: "/Company/MemberManagement/deleteMember",
-                    data: { id: id },
-                    success: function (response) {
-                        console.log(response);
-                        console.log(btnDeleteMember);
-                       
-                    }
-                });
-            });
-            $('.icheckStatus').click(function (e) {
-                var chkStatus = $(this);
-                var id = chkStatus.data('id');
-           
-                $.ajax({
-                    url: "/Company/MemberManagement/setStatus",
-                    data: { id: id },
-                    success: function (response) {
-                        console.log(response);
-                        console.log(chkStatus);
-                    }
-                });
-            });
 
-    </script>
+    <div class="modal fade" id="Add_New_Modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Insert Member for Company</h4>
+                </div>
+                <div class="modal-body">
 
+                    <div class="form-group">
+                        <h5>Please Input your member's email.</h5>
+                        <label id="txtResult" style="color:#ff0621"></label><br />
+                        <label for="exampleInputFile">Email</label>
+                        <input class="form-control" type="text" id="somevalue" name="somevalue" data-autocomplete-url="autocomplete" />
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary btn-md" id="btnAdd">Add</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="btnClose">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+<script src="~/Content/client/scripts/MemberManagement.js"></script>
+@*<script>
+    $(function () {
+        $('#lstMember').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
+</script>*@
