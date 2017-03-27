@@ -1,6 +1,8 @@
 ﻿using APMT.Areas.Company.Models;
 using Models;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -11,12 +13,12 @@ namespace APMT.Areas.Company.Controllers
     {
         private CP_SPMEntities1 db = new CP_SPMEntities1();
 
-        // GET: Company/ManageMember
-        public ActionResult View_List()
+        public ActionResult Index()
         {
             return View();
         }
-        public ActionResult getMember()
+        // GET: Company/ManageMember
+        public ActionResult View_List()
         {
             var query = from UserC in db.APMT_Company_User
                         join user in db.APMT_User on UserC.User_id equals user.ID
@@ -36,6 +38,30 @@ namespace APMT.Areas.Company.Controllers
                             isMember = UserC.isMember
                         };
             var lisMember = query.OrderByDescending(x => x.id).ToList();
+            ViewBag.List = lisMember;
+            return View();
+        }
+        public JsonResult getMember()
+        {
+            var query = from UserC in db.APMT_Company_User
+                        join user in db.APMT_User on UserC.User_id equals user.ID
+                        join company in db.APMT_Company on UserC.Company_id equals company.ID
+                        where company.ID == 1
+                        select new userCompany
+                        {
+                            id = UserC.ID,
+                            fullName = user.Fullname,
+                            email = user.Email,
+                            avartar = user.Avatar,
+                            createAt = user.Create_at.ToString(),
+                            updateAt = user.Update_at.ToString(),
+                            isAllowed = UserC.Allowed,
+                            isAdministrator = UserC.isAdministrator,
+                            isCreator = UserC.isCreator,
+                            isMember = UserC.isMember
+                        };
+            var lisMember = query.OrderByDescending(x => x.id).ToList();
+           
             return Json(new
             {
                 lisMember
@@ -51,14 +77,13 @@ namespace APMT.Areas.Company.Controllers
             return Json(filteredItems, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Add_New(string stringEmail)
+        public ActionResult Add_New(FormCollection f)
         {
             string trimEmail = "";
             string mesg = "";
-            if (stringEmail != null)
+            if (f != null)
             {
-                string email = stringEmail;
-                // string role = f["selectRole"];
+                string email = f["somevalue"];
                 if (email.Contains("("))
                 {
                     trimEmail = email.Substring(0, email.IndexOf('(')).Trim();
@@ -87,49 +112,67 @@ namespace APMT.Areas.Company.Controllers
                                 companyUser.isCreator = false;
                                 db.APMT_Company_User.Add(companyUser);
                                 db.SaveChanges();
-                                mesg = "Successful";
+                                //mesg = "Successful";
+                                TempData["Message"]= "Successful";
+                                return RedirectToAction("View_List");
 
                             }
                             else
                             {
-                                mesg = "This user was existed in this company!";
-                                //TempData["Message"] = "This user was existed in this company!";
-                                //return RedirectToAction("View_List");
+                                //mesg = "This user was existed in this company!";
+                                TempData["Message"] = "This user was existed in this company!";
+                                return RedirectToAction("View_List");
+
                             }
                         }
                         else
                         {
-                            mesg = "This user was Blocked";
-                            //TempData["Message"] = "This user was Blocked";
-                            //return RedirectToAction("View_List");
+                            //mesg = "This user was Blocked";
+                            TempData["Message"] = "This user was Blocked";
+                            return RedirectToAction("View_List");
+
                         }
                     }
                     else
                     {
-                        mesg = "This user not Exist";
-                        //TempData["Message"] = "This user not Exist";
-                        //return RedirectToAction("View_List");
+                        //mesg = "This user not Exist";
+                        TempData["Message"] = "This user not Exist";
+                        return RedirectToAction("View_List");
+
                     }
 
 
                 }
                 catch (Exception e)
                 {
-                    mesg = "Add new Failure,Please Try Again !";
-                    //TempData["Message"] = "Add new Failure !";
-                    //return RedirectToAction("View_List");
+                    //mesg = "Add new Failure,Please Try Again !";
+                    TempData["Message"] = "Add new Failure !";
+                    return RedirectToAction("View_List");
+
                 }
 
             }
-            return Json(new
-            {
-                mesg
-            }, JsonRequestBehavior.AllowGet);
+            else { 
+              TempData["Message"] = "Please Input Email";
+                return RedirectToAction("View_List");
+
+            }
+            //return Json(new
+            //{
+            //    mesg
+            //}, JsonRequestBehavior.AllowGet);
 
         }
-        public ActionResult deleteMember(int? id)
+        [HttpGet]
+        public ActionResult Delete(int id)
         {
             var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
+            return View(user);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirm(int id) { 
+           var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
             db.APMT_Company_User.Remove(user);
             db.SaveChanges();
             return RedirectToAction("View_List");

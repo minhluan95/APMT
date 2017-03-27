@@ -26,7 +26,7 @@
     <link href="~/Content/css/dataTables.bootstrap.css" rel="stylesheet" />
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="body-content hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         @{Html.RenderPartial("~/Areas/Company/Views/Shared/Partial/_Client_HeaderPartial.cshtml"); }
         <!-- Left side column. contains the logo and sidebar -->
@@ -141,7 +141,12 @@
             </div>
         </div>
     </div>
-
+<style>
+    .modal-body.large{
+        width: 80%;
+        height:80%;
+    }
+</style>
     
 
     <script type="text/javascript">
@@ -156,7 +161,7 @@
         });
     </script>
 
-    @*<script type="text/javascript" language="javascript">
+    <script type="text/javascript" language="javascript">
 
         $(document).ready(function (request) {
             $("#somevalue").autocomplete({
@@ -166,7 +171,7 @@
 
             });
         })
-    </script>*@
+    </script>
     <!-- Modal -->
     
 

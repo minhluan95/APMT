@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
-    //var lst = (List<userCompany>)ViewBag.List;
-    //int i = 0;
+    var lst = (List<userCompany>)ViewBag.List;
+    int i = 0;
 
 }
 <section class="content-header">
@@ -17,34 +17,10 @@
     </ol>
 </section>
 <section class="content">
-    <div class="form-group">
-        @*@Html.Partial("Add_New")*@
-        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#Add_New_Modal">Add New</button>
-        @*<div id="AddNew" class="box collapse">
-                <!-- /.box-header -->
-                <!-- form start -->
-                <label id="result"></label>
-                <form role="form" action="~/Company/MemberManagement/Add_New/" method="post">
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label for="exampleInputFile">Email</label>
-                            <input class="form-control" type="text" id="somevalue" name="somevalue" data-autocomplete-url="autocomplete" />
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary btn-md" onclick="Add_new">Add</button>
-                    </div>
-                </form>
-            </div>*@
-    </div>
     <div class="row">
         <div class="col-xs-12 col-lg-12">
-            @*<form class="form-inline">
-                    <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
-                    <button type="submit" class="form-control" onclick="">Search</button>
-                </form>*@
-            @*<p>@TempData["Message"]</p>*@
+            @Html.Partial("Add_New")
+                <p style="color:#ff0621">@TempData["Message"]</p>
             <div class="box">
                 <div class="box-header">
                     <center>
@@ -52,7 +28,7 @@
                     </center>
                 </div>
                 <div class="box-body">
-                    <table id="lstMember" class="table table-hover table-bordered">
+                    <table id="lstMember" class="table table-hover table-bordered text-center">
                         <thead>
                             <tr>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>No.</center></th>
@@ -63,55 +39,61 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in lst)
-                                {
-                                    i++;
-                                    <tr>
-                                        <td><center>@i</center></td>
-                                        <td>
-                                            <center>
-                                                <a href="/Company/MemberManagement/viewInfor_MB/@item.id" data-toggle="modal" data-target="#myModal">@item.fullName</a>
-                                            </center>
-                                        </td>
+                            @foreach (var item in lst)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>
+                                        
+                                            <a href="/Company/MemberManagement/viewInfor_MB/@item.id" data-toggle="modal" data-target="#myModal">@item.fullName</a>
+                                        
+                                    </td>
 
-                                        <td>
-                                            <input class="icheckAdmin" type="checkbox" checked="@item.isAdministrator" name="isAdministrator" id="isAdministrator" data-id="@item.id" /> Administrator
+                                    <td>
+                                        <input class="icheckAdmin" type="checkbox" checked="@item.isAdministrator" name="isAdministrator" id="isAdministrator" onclick="return setAdmin(@item.id)" /> Administrator
 
-                                            <br />
-                                            <input class="icheckCreator" type="checkbox" checked="@item.isCreator" name="isCreator" id="isCreator" data-id="@item.id" /> Creator
-                                        </td>
+                                        <br />
+                                        <input class="icheckCreator" type="checkbox" checked="@item.isCreator" name="isCreator" id="isCreator" onclick="return setCreator(@item.id)" /> Creator
+                                    </td>
 
 
-                                        <td>
-                                            <center>
-                                                @if (@item.isAllowed == 1)
-                                                {
-                                                    <input class="icheckStatus" type="checkbox" checked="checked" data-id="@item.id" />
-                                                }
-                                                else
-                                                {
-                                                    <input class="icheckStatus" type="checkbox" data-id="@item.id" />
-                                                }
-                                            </center>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <center>
-                                                    <button class="btn btn-danger btnDeleteMember" type="button" aria-haspopup="true" aria-expanded="true" data-id="@item.id">
-                                                        Delete
-                                                    </button>
-                                                </center>
-                                            </div>
-                                        </td>
+                                    <td>
+                                        
+                                            @if (@item.isAllowed == 1)
+                                            {
+                                                <input class="icheckStatus" type="checkbox" checked="checked" onclick="return setStatus(@item.id)" />
+                                            }
+                                            else
+                                            {
+                                                <input class="icheckStatus" type="checkbox" onclick="return setStatus(@item.id)" />
+                                            }
+                                        
+                                    </td>
+                                    <td>                              
+                                                <a style="color: red" class="delete-link glyphicon glyphicon-remove" href="/Company/MemberManagement/Delete/@item.id"></a>                                                                              
+                                    </td>
 
-                                    </tr>
-                                }*@
+                                </tr>
+                            }
 
                         </tbody>
                     </table>
                 </div>
                 <div class="col-sm-5 col-lg-5">
-            
+                    <script>
+                        $(function () {
+                            $('#lstMember').DataTable({
+                                "paging": true,
+                                "lengthChange": true,
+                                "searching": true,
+                                "ordering": true,
+                                "info": true,
+                                "autoWidth": false,
+                                "columnDefs": [{ targets: -1, orderable: false }, { targets: -2, orderable: false }, { targets: -3, orderable: false }]
+                            });
+                        })
+                    </script>
                 </div>
             </div>
             <!-- /.box-body -->
@@ -137,46 +119,20 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="Add_New_Modal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Insert Member for Company</h4>
-                </div>
-                <div class="modal-body">
-
-                    <div class="form-group">
-                        <h5>Please Input your member's email.</h5>
-                        <label id="txtResult" style="color:#ff0621"></label><br />
-                        <label for="exampleInputFile">Email</label>
-                        <input class="form-control" type="text" id="somevalue" name="somevalue" data-autocomplete-url="autocomplete" />
-
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary btn-md" id="btnAdd">Add</button>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="btnClose">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
-<script src="~/Content/client/scripts/MemberManagement.js"></script>
-@*<script>
-    $(function () {
-        $('#lstMember').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
+<script> 
+    $('.delete-link').click(function (e) {
+        var a_href = $(this).attr('href'); /* Lấy giá trị của thuộc tính href */
+        e.preventDefault(); /* Không thực hiện action mặc định */
+        $.ajax({ /* Gửi request lên server */
+            url: a_href, /* Nội dung trong Delete.cshtml cụ thể là deleteModal div được server trả về */
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) { /* Sau khi nhận được giá */
+                $('.body-content').prepend(data); /* body-content div (định nghĩa trong _Layout.cshtml) sẽ thêm deleteModal div vào dưới cùng */
+                $('#deleteModal').modal('show'); /* Hiển thị deleteModal div dưới kiểu modal */
+            }
         });
     });
-</script>*@
+</script>
+<script src="~/Content/client/scripts/MemberManagement.js"></script>
