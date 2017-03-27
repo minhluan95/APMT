@@ -8,8 +8,9 @@
     int i = 0;
 }
 <section class="content-header">
-    <h1>
-        Client List
+    <h1 align="center">
+        <b>CLIENT LIST</b>
+
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -17,111 +18,137 @@
     </ol>
 </section>
 <section class="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <form class="form-inline">
-                <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
-                <button type="submit" class="form-control" onclick="">Search</button>
-            </form>
-            <div class="box">
-                <!-- /.box-header -->
-                <div class="box-header">
-                    <h3 class="box-title">Client Table</h3>
-                </div>
-                <div class="box-body">
 
-                    <p>@ViewBag.Result</p>
-                    <table id="clientlist" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th><center>No.</center></th>
-                                <th><center>Client Name</center></th>
-                                <th><center>Date Created</center></th>
-                                <th><center>Status</center></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in lst)
-                            {
-                                i++;
-                                <tr>
-                                    <td><center>@i</center></td>
-                                    <td><center>@item.Name</center></td>
-                                    <td>
-                                        <center>
-                                            @item.Register_at
-                                        </center>
-                                    </td>
+
+    <div class="box">
+
+        <div class="box-body">
+
+
+            <p>@ViewBag.Result</p>
+            <table id="clientlist" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th><center>No.</center></th>
+                        <th><center>Client Name</center></th>
+                        <th><center>Date Created</center></th>
+                        <th><center>Enable</center></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in lst)
+                    {
+                        i++;
+                        <tr>
+                            <td><center>@i</center></td>
+                            <td><center>@item.Name</center></td>
+                            <td>
+                                <center>
+                                    @item.Register_at
+                                </center>
+                            </td>
+                            <td>
+                                <center>
                                     @if (@item.Allowed == true)
                                     {
-                                        <td>
-                                            <div class="dropdown">
-                                                <center>
-                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        <b> Enable</b>
-                                                        <span class="caret"></span>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li role="separator" class="divider"></li>
-                                                        <li><b>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</b></li>
-                                                    </ul>
-                                                </center>
-                                            </div>
-                                        </td>
-
+                                        <input class="icheckStatus" type="checkbox" checked="checked" data-id="@item.ID" />
                                     }
                                     else
                                     {
-
-                                        <td>
-                                            <div class="dropdown">
-                                                <center>
-                                                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        <b> Disable</b>
-                                                        <span class="caret"></span>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li role="separator" class="divider"></li>
-                                                        <li><b>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</b></li>
-                                                    </ul>
-                                                </center>
-                                            </div>
-                                        </td>
+                                        <input class="icheckStatus" type="checkbox" data-id="@item.ID" />
                                     }
-                                </tr>
-                            }
-                        </tbody>
-                        @*<tfoot>
-                                <tr>
-                                    <th>Client Name</th>
-                                    <th>Date Created</th>
-                                    <th>Status</th>
-                                </tr>
-                            </tfoot>*@
-                    </table>
+                                </center>
+                            </td>
 
-                    <div class="col-sm-7">
-                        <script>
-                            $(function () {
-                                $('#clientlist').DataTable({
-                                    "paging": true,
-                                    "lengthChange": false,
-                                    "searching": false,
-                                    "ordering": true,
-                                    "info": true,
-                                    "autoWidth": false
-                                });
-                            });
-                        </script>
-                    </div>
-                </div>
-                <!-- /.box-body -->
+                            @*    @if (@item.Allowed == true)
+                                                                        {
+                                <td>
+                                                                            <div class="dropdown">
+                                                                                <center>
+                                                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                        <b> Enable</b>
+                                                                                        <span class="caret"></span>
+                                                                                    </button>
+
+                                                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                                                        <li role="separator" class="divider"></li>
+                                                                                        <li><b>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</b></li>
+                                                                                    </ul>
+                                                                                </center>
+                                                                            </div>
+                                                                        </td>
+
+                                                                    }
+                                                                    else
+                                                                    {
+
+                                                                        <td>
+                                                                            <div class="dropdown">
+                                                                                <center>
+                                                                                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                                        <b> Disable</b>
+                                                                                        <span class="caret"></span>
+                                                                                    </button>
+
+                                                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                                                        <li role="separator" class="divider"></li>
+                                                                                        <li><b>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</b></li>
+                                                                                    </ul>
+                                                                                </center>
+                                                                            </div>
+
+                                                                        </td> *@
+
+
+                        </tr>
+                    }
+                </tbody>
+                @*<tfoot>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Date Created</th>
+                            <th>Status</th>
+                        </tr>
+                    </tfoot>*@
+            </table>
+
+            <div class="col-sm-7">
+                <script>
+                    $(function () {
+                        $('#clientlist').DataTable({
+                            "paging": true,
+                            "lengthChange": true,
+                            "searching": true,
+                            "ordering": true,
+                            "info": true,
+                            "autoWidth": false
+                        });
+                    });
+
+
+
+
+                    $('.icheckStatus').click(function (e) {
+                        var chkStatus = $(this);
+                        var id = chkStatus.data('id');
+
+                        $.ajax({
+                            url: "/Company/MemberManagement/setStatus",
+                            data: { id: id },
+                            success: function (response) {
+                                console.log(response);
+                                console.log(chkStatus);
+                            }
+                        });
+                    });
+
+
+                </script>
             </div>
-            <!-- /.box -->
         </div>
-        <!-- /.col -->
+        <!-- /.box-body -->
     </div>
-    <!-- /.row -->
+    <!-- /.box -->
+
 </section>
+
