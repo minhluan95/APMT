@@ -112,15 +112,15 @@
                         $(function () {
                             $('#projectlist').DataTable({
                                 "paging": true,
-                                "lengthChange": false,
-                                "searching": false,
+                                "lengthChange": true,
+                                "searching": true,
                                 "ordering": true,
                                 "info": true,
-                                "autoWidth": false
+                                "autoWidth": false,
+                                "columnDefs": [{ targets: -1, orderable: false }, { targets: -2, orderable: false }, { targets: -3, orderable: false }]
                             });
-                        });
+                        })
                     </script>
-
                 </div>
             </div>
         </div>
