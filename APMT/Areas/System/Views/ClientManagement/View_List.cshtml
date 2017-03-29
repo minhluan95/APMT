@@ -8,9 +8,8 @@
     int i = 0;
 }
 <section class="content-header">
-    <h1 align="center">
-        <b>CLIENT LIST</b>
-
+    <h1>
+        Client List
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -21,7 +20,11 @@
 
 
     <div class="box">
-
+        <div class="box-header">
+            <center>
+                <h2>Client Table</h2>
+            </center>
+        </div>
         <div class="box-body">
 
 
@@ -48,71 +51,28 @@
                                 </center>
                             </td>
                             <td>
-                                <center>
-                                    @if (@item.Allowed == true)
-                                    {
-                                        <input class="icheckStatus" type="checkbox" checked="checked" data-id="@item.ID" />
-                                    }
-                                    else
-                                    {
-                                        <input class="icheckStatus" type="checkbox" data-id="@item.ID" />
-                                    }
-                                </center>
+
+                                @if (@item.Allowed == true)
+                                {
+                                    <center>
+                                        <input class="icheckStatus" type="checkbox" checked="checked" onclick="return setStatus(@item.ID)" />
+                                    </center>
+                                }
+                                else
+                                {
+                                    <center>
+                                        <input class="icheckStatus" type="checkbox" onclick="return setStatus(@item.ID)" />
+                                    </center>
+                                }
+
                             </td>
-
-                            @*    @if (@item.Allowed == true)
-                                                                        {
-                                <td>
-                                                                            <div class="dropdown">
-                                                                                <center>
-                                                                                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                                                        <b> Enable</b>
-                                                                                        <span class="caret"></span>
-                                                                                    </button>
-
-                                                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                                                        <li role="separator" class="divider"></li>
-                                                                                        <li><b>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</b></li>
-                                                                                    </ul>
-                                                                                </center>
-                                                                            </div>
-                                                                        </td>
-
-                                                                    }
-                                                                    else
-                                                                    {
-
-                                                                        <td>
-                                                                            <div class="dropdown">
-                                                                                <center>
-                                                                                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                                                        <b> Disable</b>
-                                                                                        <span class="caret"></span>
-                                                                                    </button>
-
-                                                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                                                        <li role="separator" class="divider"></li>
-                                                                                        <li><b>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</b></li>
-                                                                                    </ul>
-                                                                                </center>
-                                                                            </div>
-
-                                                                        </td> *@
-
 
                         </tr>
                     }
                 </tbody>
-                @*<tfoot>
-                        <tr>
-                            <th>Client Name</th>
-                            <th>Date Created</th>
-                            <th>Status</th>
-                        </tr>
-                    </tfoot>*@
             </table>
 
-            <div class="col-sm-7">
+            <div class="col-sm-5 col-lg-5">
                 <script>
                     $(function () {
                         $('#clientlist').DataTable({
@@ -121,28 +81,10 @@
                             "searching": true,
                             "ordering": true,
                             "info": true,
-                            "autoWidth": false
+                            "autoWidth": false,
+                            "columnDefs": [{ targets: -1, orderable: false }, { targets: -2, orderable: false }]
                         });
-                    });
-
-
-
-
-                    $('.icheckStatus').click(function (e) {
-                        var chkStatus = $(this);
-                        var id = chkStatus.data('id');
-
-                        $.ajax({
-                            url: "/Company/MemberManagement/setStatus",
-                            data: { id: id },
-                            success: function (response) {
-                                console.log(response);
-                                console.log(chkStatus);
-                            }
-                        });
-                    });
-
-
+                    })
                 </script>
             </div>
         </div>
@@ -151,4 +93,5 @@
     <!-- /.box -->
 
 </section>
+<script src="~/Content/client/scripts/ClientManagement.js"></script>
 

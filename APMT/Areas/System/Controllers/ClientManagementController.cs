@@ -54,22 +54,29 @@ namespace APMT.Areas.System.Controllers
             }
         }
 
-        public ActionResult setStatus(int? id)
+        public JsonResult setStatus(int? id)
         {
+            bool status = true;
             var company = db.APMT_Company.FirstOrDefault(x => x.ID == id);
             if (company.Allowed == true)
             {
                 company.Allowed = false;
                 company.Update_at = DateTime.Now;
+                status = false;
             }
             else
             {
                 company.Allowed = true;
+
                 company.Update_at = DateTime.Now;
+                status = true;
             }
             db.Entry(company).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("View_List");
+            return Json(new
+            {
+                status
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -57,7 +57,6 @@
                                         <input class="icheckCreator" type="checkbox" checked="@item.isCreator" name="isCreator" id="isCreator" onclick="return setCreator(@item.id)" /> Creator
                                     </td>
 
-
                                     <td>
                                         
                                             @if (@item.isAllowed == 1)
@@ -70,6 +69,7 @@
                                             }
                                         
                                     </td>
+
                                     <td>                              
                                                 <a style="color: red" class="delete-link glyphicon glyphicon-remove" href="/Company/MemberManagement/Delete/@item.id"></a>                                                                              
                                     </td>

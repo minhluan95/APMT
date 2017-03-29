@@ -20,12 +20,14 @@
     <div class="row">
         <div class="col-xs-12 col-lg-12">
             @*<form class="form-inline">
-                <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
-                <button type="submit" class="form-control" onclick="">Search</button>
-            </form>*@
+                    <input class="form-control" placeholder="Input keyword" id="searchString" name="searchString" type="text" />
+                    <button type="submit" class="form-control" onclick="">Search</button>
+                </form>*@
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">User Table</h3>
+                    <center>
+                        <h2>Users Table</h2>
+                    </center>
                 </div>
                 <div class="box-body">
                     <p>@ViewBag.Result</p>
@@ -34,9 +36,8 @@
                             <tr>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>No.</center></th>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Full Name</center></th>
-                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Avatar</center></th>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Role </center></th>
-                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Status </center></th>
+                                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><center>Enable </center></th>
 
                             </tr>
                         </thead>
@@ -51,99 +52,45 @@
                                     </td>
                                     <td>
                                         <center>
-                                            <img style="width:50%;" src="~/Content/Images/Avatar_ProductAD.jpg" />
+                                            <input class="icheckAdmin" type="checkbox" checked="@item.IsProAdmin" name="isProAdministrator" id="isProAdministrator" onclick="return setProAdmin(@item.ID)" /> Product Administrator
                                         </center>
                                     </td>
-                                    @if (@item.IsProAdmin == true)
-                                    {
-                                        <td>
-                                            <div class="dropdown">
-                                                <center>
-                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Product Administrator
-                                                        <span class="caret"></span>
-                                                    </button>
 
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li>@Html.ActionLink("User", "setUser", new { id = @item.ID })</li>
-                                                    </ul>
-                                                </center>
-                                            </div>
-                                        </td>
-                                    }
-                                    else if (@item.IsProAdmin == false)
-                                    {
-                                        <td>
-                                            <div class="dropdown">
-                                                <center>
-                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        User
-                                                        <span class="caret"></span>
-                                                    </button>
+                                    <td>
 
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li>@Html.ActionLink("Product Administrator", "setProAdministrator", new { id = @item.ID })</li>
-                                                    </ul>
-                                                </center>
-                                            </div>
-                                        </td>
-                                    }
+                                        @if (@item.Allowed == 1)
+                                        {
+                                            <center>
+                                                <input class="icheckStatus" type="checkbox" checked="checked" onclick="return setStatus(@item.ID)" />
+                                            </center>
+                                        }
+                                        else
+                                        {
+                                            <center>
+                                                <input class="icheckStatus" type="checkbox" onclick="return setStatus(@item.ID)" />
+                                            </center>
+                                        }
 
-                                    @if (@item.Allowed == 1)
-                                    {
-                                        <td>
-                                            <div class="dropdown">
-                                                <center>
-                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Enable
-                                                        <span class="caret"></span>
-                                                    </button>
+                                    </td>
 
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Disable", "setStatus", new { id = @item.ID })</li>
-                                                    </ul>
-                                                </center>
-                                            </div>
-                                        </td>
-
-                                    }
-                                    else
-                                    {
-
-                                        <td>
-                                            <div class="dropdown">
-                                                <center>
-                                                    <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                        Disable
-                                                        <span class="caret"></span>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                        <li role="separator" class="divider"></li>
-                                                        <li>@Html.ActionLink("Enable", "setStatus", new { id = @item.ID })</li>
-                                                    </ul>
-                                                </center>
-                                            </div>
-                                        </td>
-                                    }
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-5 col-lg-5">
                     <script>
                         $(function () {
                             $('#userlist').DataTable({
                                 "paging": true,
-                                "lengthChange": false,
-                                "searching": false,
+                                "lengthChange": true,
+                                "searching": true,
                                 "ordering": true,
                                 "info": true,
-                                "autoWidth": false
+                                "autoWidth": false,
+                                "columnDefs": [{ targets: -1, orderable: false }, { targets: -2, orderable: false }]
                             });
-                        });
+                        })
                     </script>
                 </div>
             </div>
@@ -169,4 +116,4 @@
         </div>
     </div>
 </section>
-
+<script src="~/Content/client/scripts/UserManagerment.js"></script>

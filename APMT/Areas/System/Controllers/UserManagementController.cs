@@ -55,13 +55,16 @@ namespace APMT.Areas.System.Controllers
             }
         }
 
-        public ActionResult setProAdministrator(int? id)
+        public JsonResult setProAdministrator(int? id)
         {
             var user = db.APMT_User.FirstOrDefault(x => x.ID == id);
-            user.IsProAdmin = true;
-            db.Entry(user).State = EntityState.Modified;
+            user.IsProAdmin = !user.IsProAdmin;
             db.SaveChanges();
-            return RedirectToAction("View_List");
+            return Json(new
+            {
+                user.IsProAdmin
+            }, JsonRequestBehavior.AllowGet);
+
         }
 
         public ActionResult setUser(int? id)
@@ -73,21 +76,30 @@ namespace APMT.Areas.System.Controllers
             return RedirectToAction("View_List");
         }
 
-        public ActionResult setStatus(int? id)
+        public JsonResult setStatus(int? id)
         {
+            bool status = true;
             var user = db.APMT_User.FirstOrDefault(x => x.ID == id);
             if (user.Allowed == 1)
             {
-                user.Allowed = 2;
+                user.Allowed = 0;
+                status = false;
             }
             else
             {
                 user.Allowed = 1;
+                status = true;
             }
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("View_List");
+            return Json(new
+            {
+                status
+            }, JsonRequestBehavior.AllowGet);
+
         }
+
+
 
         public ActionResult viewInfor_User(int? id)
         {
