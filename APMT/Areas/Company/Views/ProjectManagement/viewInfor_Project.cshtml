@@ -6,33 +6,46 @@
     Layout = null;
 }
 <div class="row primary box-body">
-    <div class="col-xs-9"><h1>@Html.DisplayFor(model => model.Name)</h1></div>
-    <div class="col-xs-4"><img style="width:100%;" src="~/Content/Images/Avatar_ProductAD.jpg" /></div>
-    <div class="col-xs-6">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
+    <div class="col-xs-12 col-lg-12 col-md-12 text-center"><h1>@Html.DisplayFor(model => model.Name)</h1></div>
+    <div class="col-xs-12 col-lg-12 col-md-12">
 
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.EndDay)
-            </dt>
+        <div class="col-lg-3">
+            Project Name
+        </div>
+        <div class="form-group">
+            <div class="col-lg-8">
+                @Html.TextBoxFor(model => model.Name, new { id = "txtName", size = 50 })
+            </div>
+        </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.EndDay)
-            </dd>
+        <div class="col-lg-3">
+            Description
+        </div>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StartDay)
-            </dt>
+        <div class="form-group">
+            <div class="col-lg-8">
+                @Html.TextAreaFor(model => model.Description, new { @id = "txtDes", rows = 5, cols = 49 })
+            </div>
+        </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.StartDay)
-            </dd>
-        </dl>
+        <div class="form-group">
+            <div class="col-lg-3">
+                <label for="exampleInputFile">Start Day:</label>
+            </div>
+            <div class="col-lg-8">
+                <input size="50" name="dtStartDay" value="Model.StartDay" data-provide="datepicker">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-3">
+                <label for="exampleInputFile">End Day:</label>
+            </div>
+            <div class="col-lg-8">
+                <input size="50" name="dtEndDay" value="Model.EndDay" data-provide="datepicker">
+            </div>
+        </div>
+
     </div>
 </div>
 <div class="modal-footer">
