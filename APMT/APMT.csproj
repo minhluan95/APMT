@@ -256,6 +256,7 @@
     <Content Include="Content\client\images\bg_header.jpg" />
     <Content Include="Content\client\scripts\application.js" />
     <Content Include="Content\client\scripts\ClientManagement.js" />
+    <Content Include="Content\client\scripts\ProjectManagement.js" />
     <Content Include="Content\client\scripts\MemberManagement.js" />
     <Content Include="Content\client\scripts\UserManagerment.js" />
     <Content Include="Content\client\styles\docs.css" />

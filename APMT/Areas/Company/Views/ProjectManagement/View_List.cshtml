@@ -33,8 +33,8 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Project Name</th>
-                                <th> Manager Name</th>                       
-                                <th> Status</th>
+                                <th>Manager Name</th>                       
+                                <th>Enable</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -42,8 +42,6 @@
                             @foreach (var item in lst)
                             {
                                 i++;
-
-
                                 <tr>
                                     <td>@i</td>
                                     <td>
@@ -51,27 +49,33 @@
                                         <a href="/Company/ProjectManagement/viewInfor_Project/@item.ID" data-toggle="modal" data-target="#myModalProject">@item.ProjectName</a>
                                     </td>
                                     <td>@item.ManagerName</td>
-                                    @if (@item.Status == true)
-                                    {
-                                        <td>Running</td>
-                                    }
-                                    else
-                                    {
-                                        <td>Blocked</td>
-                                    }
+                                    <td>
+
+                                        @if (@item.Status == true)
+                                        {
+                                            <input class="icheckStatus" type="checkbox" checked="checked" onclick="return setStatus(@item.ID)" />
+                                        }
+                                        else
+                                        {
+                                            <input class="icheckStatus" type="checkbox" onclick="return setStatus(@item.ID)" />
+                                        }
+
+                                    </td>
                                     <td>
                                         @*<a href="@Url.Action("AddMember","ProjectManagement")" class="btn btn-primary">Add Member</a>
                         <a href="/Company/ProjectManagement/Delete/@item.ID" data-href="#" data-toggle="#" data-target="#">Delete</a>*@
                                         <div class="dropdown">
                                             <center>
-                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                @*<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                                     Choose
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                     <li>@Html.ActionLink("Add Member", "AddMember")</li>
                                                     <li>@Html.ActionLink("Delete", "Delete", new { id = @item.ID })</li>
-                                                </ul>
+                                                </ul>*@
+                                                <a style="color: blue" class="addmember-link" href=""/Company/ProjectManagement/Addmember/@item.ID"">Add member</a>    
+                                                <a style="color: red" class="delete-link glyphicon glyphicon-remove" href="/Company/ProjectManagement/Delete/@item.ID"></a>   
                                             </center>
                                         </div>
                                     </td>

@@ -239,22 +239,30 @@ namespace APMT.Areas.Company.Controllers
             return View();
 
         }
-        public ActionResult AddMember()
+        public ActionResult AddMember(int id_project)
         {
+            if(id_project!=null)
+            { 
             var query = from P_member in db.APMT_Project_User
                         join compUser in db.APMT_Company_User on P_member.User_company_id equals compUser.ID
                         join user in db.APMT_User on compUser.User_id equals user.ID
                         where compUser.Company_id == CompanyID
                         select new projectMember
                         {
-                            ID_projectMember = P_member.ID,
+                            ID=P_member.ID,
+                            ID_project = id_project,
                             ID_User = user.ID,
                             fullName = user.Fullname,
                             Allowed = P_member.Allowed,
                             email = user.Email
                         };
-
-            ViewBag.LstMember = query.OrderByDescending(x => x.ID_projectMember).ToList();
+                ViewBag.LstMember = query.OrderByDescending(x => x.ID_project).ToList();
+            }
+            else
+            {
+                ViewBag.LstMember = null;
+            }
+       
             return View();
 
         }

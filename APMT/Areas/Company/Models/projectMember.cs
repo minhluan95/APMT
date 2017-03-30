@@ -7,7 +7,8 @@ namespace APMT.Areas.Company.Models
 {
     public class projectMember
     {
-        public int ID_projectMember { get; set; }
+        public int ID { get; set; }
+        public int ID_project { get; set; }
         public int ID_User { get; set; }
         public String fullName { get; set; }
         public String email { get; set; }

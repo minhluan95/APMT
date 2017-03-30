@@ -44,7 +44,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Name </th>
-                                <th>Role </th>
+                                <th>Email </th>
                                 <th>Enable </th>
                                 <th>Action</th>
                             </tr>
@@ -61,16 +61,16 @@
 
                                         @if (@item.Allowed == 1)
                                         {
-                                            <input class="icheckStatus" type="checkbox" checked="checked" onclick="return setStatus(@item.ID_projectMember)" />
+                                            <input class="icheckStatus" type="checkbox" checked="checked" onclick="return setStatus(@item.ID)" />
                                         }
                                         else
                                         {
-                                            <input class="icheckStatus" type="checkbox" onclick="return setStatus(@item.ID_projectMember)" />
+                                            <input class="icheckStatus" type="checkbox" onclick="return setStatus(@item.ID)" />
                                         }
 
                                     </td>
                                     <td>
-                                        <a style="color: red" class="delete-link glyphicon glyphicon-remove" href="/Company/ProjectManagement/Delete/@item.ID_projectMember"></a>
+                                        <a style="color: red" class="delete-link glyphicon glyphicon-remove" href="/Company/ProjectManagement/Delete/@item.ID"></a>
                                     </td>
                                 </tr>
                             }
