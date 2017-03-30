@@ -2,8 +2,10 @@
     Layout = null;
 }
 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#AddNew">Add Project</button>
-<div id="AddNew" class="box collapse box box-primary">
+<div id="AddNew" class="box collapsed">
     <!-- /.box-header -->
     <!-- form start -->
     <form role="form" action="/Company/ProjectManagement/Add_New/" method="post">
@@ -20,15 +22,7 @@
             <div class="form-group">
                 <label for="exampleInputFile">Manager:</label>
                 <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Choose a name
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Cù Minh Luân</a></li>
-                        <li><a href="#">Du Kim Quang</a></li>
-                        <li role="separator" class="divider"></li>
-                    </ul>
+                    <input class="form-control" type="text" id="txt_PMember_Email" name="txt_PMember_Email" data-autocomplete-url="autocomplete" />
                 </div>
             </div>   
             <div class="form-group">

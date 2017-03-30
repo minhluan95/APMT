@@ -217,6 +217,7 @@
     <Compile Include="Areas\Company\Controllers\ProjectManagementController.cs" />
     <Compile Include="Areas\Company\Models\AuthorizeSystem.cs" />
     <Compile Include="Areas\Company\Models\managerProject.cs" />
+    <Compile Include="Areas\Company\Models\projectMember.cs" />
     <Compile Include="Areas\Company\Models\ReflectionController.cs" />
     <Compile Include="Areas\Company\Models\userCompany.cs" />
     <Compile Include="Areas\System\Controllers\ClientManagementController.cs" />
@@ -430,7 +431,6 @@
     <Content Include="Areas\System\Views\UserManagement\Update_Profile.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\View_Details.cshtml" />
     <Content Include="Areas\System\Views\UserManagement\View_List.cshtml" />
-    <Content Include="Areas\Company\Views\MemberManagement\deleteMember.cshtml" />
     <Content Include="Areas\Company\Views\MemberManagement\setAdministrator.cshtml" />
     <Content Include="Areas\Company\Views\MemberManagement\setCreator.cshtml" />
     <Content Include="Areas\Company\Views\MemberManagement\setMember.cshtml" />
@@ -531,8 +531,12 @@
     <Content Include="Content\client\styles\square\_effect9.scss" />
     <Content Include="Content\client\templates\index.jade" />
     <Content Include="Content\client\templates\layout.jade" />
+    <Content Include="Areas\Company\Views\MemberManagement\Index.cshtml" />
+    <Content Include="Areas\Company\Views\MemberManagement\Delete.cshtml" />
+    <Content Include="Areas\Company\Views\ProjectManagement\Delete.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\User\View_Details.cshtml" />
+    <Content Include="Views\User\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\D.o.T - Pham Ngoc Duy\PhanQuyen\StaticResource\StaticResource.csproj">

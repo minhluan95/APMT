@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- jvectormap -->
     <!-- Theme style -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
     <link href="~/Content/Titatoogle/dist/titatoggle-dist.css" rel="stylesheet" />
 
@@ -162,8 +163,19 @@
     <script type="text/javascript" language="javascript">
 
         $(document).ready(function (request) {
-            $("#somevalue").autocomplete({
-                source: 'autocomplete',
+            $("#txtCM_email").autocomplete({
+                source: 'autocompleteC_Member',
+                //data: "{ 'term':'" + request.term + "'}",
+                data: "{term : '"+request.term+"'}",
+
+            });
+        })
+    </script>
+    <script type="text/javascript" language="javascript">
+
+        $(document).ready(function (request) {
+            $("#txt_PMember_Email").autocomplete({
+                source: 'autocompleteP_Member',
                 //data: "{ 'term':'" + request.term + "'}",
                 data: "{term : '"+request.term+"'}",
 

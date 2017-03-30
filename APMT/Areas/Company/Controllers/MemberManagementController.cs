@@ -12,7 +12,7 @@ namespace APMT.Areas.Company.Controllers
     public class MemberManagementController : Controller
     {
         private CP_SPMEntities1 db = new CP_SPMEntities1();
-
+        int CompanyID = 1;
         public ActionResult Index()
         {
             return View();
@@ -23,7 +23,7 @@ namespace APMT.Areas.Company.Controllers
             var query = from UserC in db.APMT_Company_User
                         join user in db.APMT_User on UserC.User_id equals user.ID
                         join company in db.APMT_Company on UserC.Company_id equals company.ID
-                        where company.ID == 1
+                        where company.ID == CompanyID
                         select new userCompany
                         {
                             id = UserC.ID,
@@ -46,7 +46,7 @@ namespace APMT.Areas.Company.Controllers
             var query = from UserC in db.APMT_Company_User
                         join user in db.APMT_User on UserC.User_id equals user.ID
                         join company in db.APMT_Company on UserC.Company_id equals company.ID
-                        where company.ID == 1
+                        where company.ID == CompanyID
                         select new userCompany
                         {
                             id = UserC.ID,
@@ -68,7 +68,7 @@ namespace APMT.Areas.Company.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult autocomplete(string term)
+        public ActionResult autocompleteC_Member(string term)
         {
             var query = from user in db.APMT_User
                         where (user.Email.Contains(term) || user.Fullname.Contains(term)) && user.Allowed == 1
@@ -83,7 +83,7 @@ namespace APMT.Areas.Company.Controllers
             string mesg = "";
             if (f != null)
             {
-                string email = f["somevalue"];
+                string email = f["txtCM_email"];
                 if (email.Contains("("))
                 {
                     trimEmail = email.Substring(0, email.IndexOf('(')).Trim();
@@ -104,7 +104,7 @@ namespace APMT.Areas.Company.Controllers
                             if (existMember == null)
                             {
                                 APMT_Company_User companyUser = new APMT_Company_User();
-                                companyUser.Company_id = 1;
+                                companyUser.Company_id = CompanyID;
                                 companyUser.User_id = int.Parse(userID.ToString());
                                 companyUser.Allowed = 1;
                                 companyUser.isMember = true;
