@@ -5,26 +5,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0887a0d815fa4cc8a071f9fa55bc4ae5" Name="Diagram1">
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Action" Width="1.5" PointX="12" PointY="0.875" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Activity" Width="1.5" PointX="9.75" PointY="12.25" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Company" Width="1.5" PointX="3" PointY="5.75" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Company_User" Width="1.5" PointX="5.25" PointY="5.5" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Controller" Width="1.5" PointX="9.75" PointY="1.25" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Language" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Permission" Width="1.5" PointX="14.25" PointY="1" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Process" Width="1.5" PointX="7.5" PointY="10.875" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Process_Role" Width="1.5" PointX="9.75" PointY="9.625" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_ProductAdmin" Width="1.5" PointX="12" PointY="4.875" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Project" Width="1.5" PointX="7.5" PointY="2.75" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Project_User" Width="1.5" PointX="7.5" PointY="7" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_Task" Width="1.5" PointX="12" PointY="12.25" />
-        <EntityTypeShape EntityType="CP_SPMModel.APMT_User" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="CP_SPMModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Action" Width="1.5" PointX="5" PointY="0.875" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Activity" Width="1.5" PointX="7.5" PointY="12.125" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Activity_to_Activity" Width="1.5" PointX="9.75" PointY="11.75" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Activity_Type" Width="1.5" PointX="5.25" PointY="17.125" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Company" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Company_User" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Controller" Width="1.5" PointX="2.75" PointY="1.25" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Language" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Permission" Width="1.5" PointX="7.25" PointY="1" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Process" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Process_Role" Width="1.5" PointX="7.5" PointY="17.25" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_ProductAdmin" Width="1.5" PointX="5" PointY="19.875" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Project" Width="1.5" PointX="5.25" PointY="5.375" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Project_User" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_Task" Width="1.5" PointX="9.75" PointY="15.75" />
+        <EntityTypeShape EntityType="CP_SPMModel.APMT_User" Width="1.5" PointX="0.75" PointY="3.375" />
+        <EntityTypeShape EntityType="CP_SPMModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.75" />
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Action_APMT_Controller" />
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Permission_APMT_Action" />
-        <AssociationConnector Association="CP_SPMModel.FK_APMT_Activity_APMT_Process" />
+        <AssociationConnector Association="CP_SPMModel.FK_APMT_Activity_APMT_Activity_Type" />
+        <AssociationConnector Association="CP_SPMModel.FK_APMT_Activity_APMT_Process1" />
+        <AssociationConnector Association="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Activity" />
+        <AssociationConnector Association="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Activity1" />
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Task_APMT_Activity" />
-        <AssociationConnector Association="CP_SPMModel.FK_APMT_Company_APMT_User" />
+        <AssociationConnector Association="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Process" />
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Company_User_APMT_Company" />
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Project_APMT_Company" />
         <AssociationConnector Association="CP_SPMModel.FK_APMT_Company_User_APMT_User" />

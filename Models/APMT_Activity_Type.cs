@@ -15,41 +15,27 @@ namespace Models
 using System;
     using System.Collections.Generic;
     
-public partial class APMT_User
+public partial class APMT_Activity_Type
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public APMT_User()
+    public APMT_Activity_Type()
     {
 
-        this.APMT_Company_User = new HashSet<APMT_Company_User>();
+        this.APMT_Activity = new HashSet<APMT_Activity>();
 
     }
 
 
     public int ID { get; set; }
 
-    public string Email { get; set; }
-
-    public string Fullname { get; set; }
-
-    public string Password { get; set; }
-
-    public string Avatar { get; set; }
-
-    public int Allowed { get; set; }
-
-    public System.DateTime Create_at { get; set; }
-
-    public System.DateTime Update_at { get; set; }
-
-    public bool IsProAdmin { get; set; }
+    public string Name { get; set; }
 
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<APMT_Company_User> APMT_Company_User { get; set; }
+    public virtual ICollection<APMT_Activity> APMT_Activity { get; set; }
 
 }
 

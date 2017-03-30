@@ -438,7 +438,6 @@
     <Content Include="Areas\Company\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Company\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Company\Views\MemberManagement\setStatus.cshtml" />
-    <Content Include="Areas\Company\Views\MemberManagement\viewInfor.cshtml" />
     <Content Include="Content\client\scripts\main.coffee" />
     <Content Include="Content\client\styles\bourbon\addons\_button.scss" />
     <Content Include="Content\client\styles\bourbon\addons\_clearfix.scss" />
@@ -536,6 +535,8 @@
     <Content Include="Areas\Company\Views\MemberManagement\Delete.cshtml" />
     <Content Include="Areas\Company\Views\ProjectManagement\Delete.cshtml" />
     <Content Include="Areas\Company\Views\ProjectManagement\View_Members.cshtml" />
+    <Content Include="Areas\Company\Views\ProjectManagement\viewInfor_Project.cshtml" />
+    <Content Include="Areas\Company\Views\MemberManagement\viewInfor_MB.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\User\View_Details.cshtml" />
     <Content Include="Views\User\Home.cshtml" />

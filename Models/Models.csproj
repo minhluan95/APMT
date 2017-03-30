@@ -72,6 +72,12 @@
     <Compile Include="APMT_Activity.cs">
       <DependentUpon>APMTDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="APMT_Activity_to_Activity.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APMT_Activity_Type.cs">
+      <DependentUpon>APMTDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="APMT_Company.cs">
       <DependentUpon>APMTDbContext.tt</DependentUpon>
     </Compile>

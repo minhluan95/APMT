@@ -46,7 +46,7 @@
                                     <td>@i</td>
                                     <td>
                                         @*@Html.ActionLink(item.name, "ListProcess", "ProcessManagement", new { @id = item.id }, null)*@
-                                        <a href="/Company/ProjectManagement/viewInfor_Project/@item.ID" data-toggle="modal" data-target="#myModalProject">@item.ProjectName</a>
+                                        <a href="/Company/ProjectManagement/viewInfor_Project/@item.ID" id="viewInfor_link">@item.ProjectName</a>
                                     </td>
                                     <td>@item.ManagerName</td>
                                     <td>
@@ -94,23 +94,32 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" tabindex="-1" role="dialog" id="myModalProject">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">APMT Project Information</h4>
-                </div>
-                <div class="modal-body">
-                    @Html.Partial("viewInfor_Project")
-                </div>
-                @*<div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>*@
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
 </section>
+<script>
+    $('.delete-link').click(function (e) {
+        var a_href = $(this).attr('href'); /* Lấy giá trị của thuộc tính href */
+        e.preventDefault(); /* Không thực hiện action mặc định */
+        $.ajax({ /* Gửi request lên server */
+            url: a_href, /* Nội dung trong Delete.cshtml cụ thể là deleteModal div được server trả về */
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) { /* Sau khi nhận được giá */
+                $('.body-content').prepend(data); /* body-content div (định nghĩa trong _Layout.cshtml) sẽ thêm deleteModal div vào dưới cùng */
+                $('#deleteModal').modal('show'); /* Hiển thị deleteModal div dưới kiểu modal */
+            }
+        });
+    });
+    $('#viewInfor_link').click(function (e) {
+            var a_href = $(this).attr('href'); /* Lấy giá trị của thuộc tính href */
+            e.preventDefault(); /* Không thực hiện action mặc định */
+            $.ajax({ /* Gửi request lên server */
+                url: a_href, /* Nội dung trong Delete.cshtml cụ thể là deleteModal div được server trả về */
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) { /* Sau khi nhận được giá */
+                    $('.body-content').prepend(data); /* body-content div (định nghĩa trong _Layout.cshtml) sẽ thêm deleteModal div vào dưới cùng */
+                    $('#myModalProject').modal('show'); /* Hiển thị deleteModal div dưới kiểu modal */
+                }
+            });
+        });
+</script>

@@ -15,26 +15,24 @@ namespace Models
 using System;
     using System.Collections.Generic;
     
-public partial class APMT_Task
+public partial class APMT_Activity_to_Activity
 {
 
     public int ID { get; set; }
 
-    public string Name { get; set; }
+    public Nullable<int> FromAc { get; set; }
 
-    public string Description { get; set; }
+    public Nullable<int> ToAC { get; set; }
 
-    public string JsonContent { get; set; }
-
-    public Nullable<int> Weight { get; set; }
-
-    public Nullable<int> Predecessor { get; set; }
-
-    public Nullable<int> Activity_Id { get; set; }
+    public Nullable<int> Process_ID { get; set; }
 
 
 
     public virtual APMT_Activity APMT_Activity { get; set; }
+
+    public virtual APMT_Activity APMT_Activity1 { get; set; }
+
+    public virtual APMT_Process APMT_Process { get; set; }
 
 }
 

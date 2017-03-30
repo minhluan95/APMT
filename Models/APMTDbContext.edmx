@@ -23,7 +23,25 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Process_Id" Type="int" />
           <Property Name="Weigth" Type="int" />
-          <Property Name="Type" Type="varchar" MaxLength="2" />
+          <Property Name="Type_id" Type="int" />
+          <Property Name="activity_key" Type="int" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="APMT_Activity_to_Activity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromAc" Type="int" />
+          <Property Name="ToAC" Type="int" />
+          <Property Name="Process_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="APMT_Activity_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="APMT_Company">
           <Key>
@@ -78,7 +96,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="JsonContent" Type="varchar(max)" />
+          <Property Name="JsonContent" Type="nvarchar(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Creator_Id" Type="int" />
           <Property Name="Allowed" Type="bit" />
@@ -172,8 +190,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_APMT_Activity_APMT_Process">
-          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="0..1" />
+        <Association Name="FK_APMT_Activity_APMT_Activity_Type">
+          <End Role="APMT_Activity_Type" Type="Self.APMT_Activity_Type" Multiplicity="0..1" />
+          <End Role="APMT_Activity" Type="Self.APMT_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Activity_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Activity">
+              <PropertyRef Name="Type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Activity_APMT_Process1">
+          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="APMT_Activity" Type="Self.APMT_Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="APMT_Process">
@@ -184,15 +216,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_APMT_Company_APMT_User">
-          <End Role="APMT_User" Type="Self.APMT_User" Multiplicity="0..1" />
-          <End Role="APMT_Company" Type="Self.APMT_Company" Multiplicity="*" />
+        <Association Name="FK_APMT_Activity_to_Activity_APMT_Activity">
+          <End Role="APMT_Activity" Type="Self.APMT_Activity" Multiplicity="0..1" />
+          <End Role="APMT_Activity_to_Activity" Type="Self.APMT_Activity_to_Activity" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="APMT_User">
+            <Principal Role="APMT_Activity">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="APMT_Company">
-              <PropertyRef Name="Admin_id" />
+            <Dependent Role="APMT_Activity_to_Activity">
+              <PropertyRef Name="FromAc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Activity_to_Activity_APMT_Activity1">
+          <End Role="APMT_Activity" Type="Self.APMT_Activity" Multiplicity="0..1" />
+          <End Role="APMT_Activity_to_Activity" Type="Self.APMT_Activity_to_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Activity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Activity_to_Activity">
+              <PropertyRef Name="ToAC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Activity_to_Activity_APMT_Process">
+          <End Role="APMT_Process" Type="Self.APMT_Process" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="APMT_Activity_to_Activity" Type="Self.APMT_Activity_to_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Process">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Activity_to_Activity">
+              <PropertyRef Name="Process_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -305,7 +363,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_APMT_Task_APMT_Activity">
-          <End Role="APMT_Activity" Type="Self.APMT_Activity" Multiplicity="0..1" />
+          <End Role="APMT_Activity" Type="Self.APMT_Activity" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="APMT_Task" Type="Self.APMT_Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="APMT_Activity">
@@ -319,6 +379,8 @@
         <EntityContainer Name="CP_SPMModelStoreContainer">
           <EntitySet Name="APMT_Action" EntityType="Self.APMT_Action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APMT_Activity" EntityType="Self.APMT_Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Activity_to_Activity" EntityType="Self.APMT_Activity_to_Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APMT_Activity_Type" EntityType="Self.APMT_Activity_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APMT_Company" EntityType="Self.APMT_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APMT_Company_User" EntityType="Self.APMT_Company_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APMT_Controller" EntityType="Self.APMT_Controller" Schema="dbo" store:Type="Tables" />
@@ -336,13 +398,25 @@
             <End Role="APMT_Controller" EntitySet="APMT_Controller" />
             <End Role="APMT_Action" EntitySet="APMT_Action" />
           </AssociationSet>
-          <AssociationSet Name="FK_APMT_Activity_APMT_Process" Association="Self.FK_APMT_Activity_APMT_Process">
+          <AssociationSet Name="FK_APMT_Activity_APMT_Activity_Type" Association="Self.FK_APMT_Activity_APMT_Activity_Type">
+            <End Role="APMT_Activity_Type" EntitySet="APMT_Activity_Type" />
+            <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Activity_APMT_Process1" Association="Self.FK_APMT_Activity_APMT_Process1">
             <End Role="APMT_Process" EntitySet="APMT_Process" />
             <End Role="APMT_Activity" EntitySet="APMT_Activity" />
           </AssociationSet>
-          <AssociationSet Name="FK_APMT_Company_APMT_User" Association="Self.FK_APMT_Company_APMT_User">
-            <End Role="APMT_User" EntitySet="APMT_User" />
-            <End Role="APMT_Company" EntitySet="APMT_Company" />
+          <AssociationSet Name="FK_APMT_Activity_to_Activity_APMT_Activity" Association="Self.FK_APMT_Activity_to_Activity_APMT_Activity">
+            <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+            <End Role="APMT_Activity_to_Activity" EntitySet="APMT_Activity_to_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Activity_to_Activity_APMT_Activity1" Association="Self.FK_APMT_Activity_to_Activity_APMT_Activity1">
+            <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+            <End Role="APMT_Activity_to_Activity" EntitySet="APMT_Activity_to_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Activity_to_Activity_APMT_Process" Association="Self.FK_APMT_Activity_to_Activity_APMT_Process">
+            <End Role="APMT_Process" EntitySet="APMT_Process" />
+            <End Role="APMT_Activity_to_Activity" EntitySet="APMT_Activity_to_Activity" />
           </AssociationSet>
           <AssociationSet Name="FK_APMT_Company_User_APMT_Company" Association="Self.FK_APMT_Company_User_APMT_Company">
             <End Role="APMT_Company" EntitySet="APMT_Company" />
@@ -392,6 +466,8 @@
         <EntityContainer Name="CP_SPMEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="APMT_Action" EntityType="CP_SPMModel.APMT_Action" />
           <EntitySet Name="APMT_Activity" EntityType="CP_SPMModel.APMT_Activity" />
+          <EntitySet Name="APMT_Activity_to_Activity" EntityType="CP_SPMModel.APMT_Activity_to_Activity" />
+          <EntitySet Name="APMT_Activity_Type" EntityType="CP_SPMModel.APMT_Activity_Type" />
           <EntitySet Name="APMT_Company" EntityType="CP_SPMModel.APMT_Company" />
           <EntitySet Name="APMT_Company_User" EntityType="CP_SPMModel.APMT_Company_User" />
           <EntitySet Name="APMT_Controller" EntityType="CP_SPMModel.APMT_Controller" />
@@ -413,17 +489,29 @@
             <End Role="APMT_Action" EntitySet="APMT_Action" />
             <End Role="APMT_Permission" EntitySet="APMT_Permission" />
           </AssociationSet>
-          <AssociationSet Name="FK_APMT_Activity_APMT_Process" Association="CP_SPMModel.FK_APMT_Activity_APMT_Process">
+          <AssociationSet Name="FK_APMT_Activity_APMT_Activity_Type" Association="CP_SPMModel.FK_APMT_Activity_APMT_Activity_Type">
+            <End Role="APMT_Activity_Type" EntitySet="APMT_Activity_Type" />
+            <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Activity_APMT_Process1" Association="CP_SPMModel.FK_APMT_Activity_APMT_Process1">
             <End Role="APMT_Process" EntitySet="APMT_Process" />
             <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Activity_to_Activity_APMT_Activity" Association="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Activity">
+            <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+            <End Role="APMT_Activity_to_Activity" EntitySet="APMT_Activity_to_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APMT_Activity_to_Activity_APMT_Activity1" Association="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Activity1">
+            <End Role="APMT_Activity" EntitySet="APMT_Activity" />
+            <End Role="APMT_Activity_to_Activity" EntitySet="APMT_Activity_to_Activity" />
           </AssociationSet>
           <AssociationSet Name="FK_APMT_Task_APMT_Activity" Association="CP_SPMModel.FK_APMT_Task_APMT_Activity">
             <End Role="APMT_Activity" EntitySet="APMT_Activity" />
             <End Role="APMT_Task" EntitySet="APMT_Task" />
           </AssociationSet>
-          <AssociationSet Name="FK_APMT_Company_APMT_User" Association="CP_SPMModel.FK_APMT_Company_APMT_User">
-            <End Role="APMT_User" EntitySet="APMT_User" />
-            <End Role="APMT_Company" EntitySet="APMT_Company" />
+          <AssociationSet Name="FK_APMT_Activity_to_Activity_APMT_Process" Association="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Process">
+            <End Role="APMT_Process" EntitySet="APMT_Process" />
+            <End Role="APMT_Activity_to_Activity" EntitySet="APMT_Activity_to_Activity" />
           </AssociationSet>
           <AssociationSet Name="FK_APMT_Company_User_APMT_Company" Association="CP_SPMModel.FK_APMT_Company_User_APMT_Company">
             <End Role="APMT_Company" EntitySet="APMT_Company" />
@@ -478,9 +566,34 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Process_Id" Type="Int32" />
           <Property Name="Weigth" Type="Int32" />
-          <Property Name="Type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="APMT_Process" Relationship="CP_SPMModel.FK_APMT_Activity_APMT_Process" FromRole="APMT_Activity" ToRole="APMT_Process" />
+          <Property Name="Type_id" Type="Int32" />
+          <Property Name="activity_key" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="APMT_Activity_Type" Relationship="CP_SPMModel.FK_APMT_Activity_APMT_Activity_Type" FromRole="APMT_Activity" ToRole="APMT_Activity_Type" />
+          <NavigationProperty Name="APMT_Process" Relationship="CP_SPMModel.FK_APMT_Activity_APMT_Process1" FromRole="APMT_Activity" ToRole="APMT_Process" />
+          <NavigationProperty Name="APMT_Activity_to_Activity" Relationship="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Activity" FromRole="APMT_Activity" ToRole="APMT_Activity_to_Activity" />
+          <NavigationProperty Name="APMT_Activity_to_Activity1" Relationship="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Activity1" FromRole="APMT_Activity" ToRole="APMT_Activity_to_Activity" />
           <NavigationProperty Name="APMT_Task" Relationship="CP_SPMModel.FK_APMT_Task_APMT_Activity" FromRole="APMT_Activity" ToRole="APMT_Task" />
+        </EntityType>
+        <EntityType Name="APMT_Activity_to_Activity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromAc" Type="Int32" />
+          <Property Name="ToAC" Type="Int32" />
+          <Property Name="Process_ID" Type="Int32" />
+          <NavigationProperty Name="APMT_Activity" Relationship="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Activity" FromRole="APMT_Activity_to_Activity" ToRole="APMT_Activity" />
+          <NavigationProperty Name="APMT_Activity1" Relationship="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Activity1" FromRole="APMT_Activity_to_Activity" ToRole="APMT_Activity" />
+          <NavigationProperty Name="APMT_Process" Relationship="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Process" FromRole="APMT_Activity_to_Activity" ToRole="APMT_Process" />
+        </EntityType>
+        <EntityType Name="APMT_Activity_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="APMT_Activity" Relationship="CP_SPMModel.FK_APMT_Activity_APMT_Activity_Type" FromRole="APMT_Activity_Type" ToRole="APMT_Activity" />
         </EntityType>
         <EntityType Name="APMT_Company">
           <Key>
@@ -492,7 +605,6 @@
           <Property Name="Allowed" Type="Boolean" />
           <Property Name="Register_at" Type="DateTime" Precision="0" />
           <Property Name="Update_at" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="APMT_User" Relationship="CP_SPMModel.FK_APMT_Company_APMT_User" FromRole="APMT_Company" ToRole="APMT_User" />
           <NavigationProperty Name="APMT_Company_User" Relationship="CP_SPMModel.FK_APMT_Company_User_APMT_Company" FromRole="APMT_Company" ToRole="APMT_Company_User" />
           <NavigationProperty Name="APMT_Project" Relationship="CP_SPMModel.FK_APMT_Project_APMT_Company" FromRole="APMT_Company" ToRole="APMT_Project" />
         </EntityType>
@@ -546,11 +658,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="JsonContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JsonContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Creator_Id" Type="Int32" />
           <Property Name="Allowed" Type="Boolean" />
-          <NavigationProperty Name="APMT_Activity" Relationship="CP_SPMModel.FK_APMT_Activity_APMT_Process" FromRole="APMT_Process" ToRole="APMT_Activity" />
+          <NavigationProperty Name="APMT_Activity" Relationship="CP_SPMModel.FK_APMT_Activity_APMT_Process1" FromRole="APMT_Process" ToRole="APMT_Activity" />
+          <NavigationProperty Name="APMT_Activity_to_Activity" Relationship="CP_SPMModel.FK_APMT_Activity_to_Activity_APMT_Process" FromRole="APMT_Process" ToRole="APMT_Activity_to_Activity" />
           <NavigationProperty Name="APMT_Company_User" Relationship="CP_SPMModel.FK_APMT_Process_APMT_Company_User" FromRole="APMT_Process" ToRole="APMT_Company_User" />
           <NavigationProperty Name="APMT_Process_Role" Relationship="CP_SPMModel.FK_APMT_Process_Role_APMT_Process" FromRole="APMT_Process" ToRole="APMT_Process_Role" />
         </EntityType>
@@ -626,7 +739,6 @@
           <Property Name="Create_at" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Update_at" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IsProAdmin" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="APMT_Company" Relationship="CP_SPMModel.FK_APMT_Company_APMT_User" FromRole="APMT_User" ToRole="APMT_Company" />
           <NavigationProperty Name="APMT_Company_User" Relationship="CP_SPMModel.FK_APMT_Company_User_APMT_User" FromRole="APMT_User" ToRole="APMT_Company_User" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -663,8 +775,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_APMT_Activity_APMT_Process">
-          <End Type="CP_SPMModel.APMT_Process" Role="APMT_Process" Multiplicity="0..1" />
+        <Association Name="FK_APMT_Activity_APMT_Activity_Type">
+          <End Type="CP_SPMModel.APMT_Activity_Type" Role="APMT_Activity_Type" Multiplicity="0..1" />
+          <End Type="CP_SPMModel.APMT_Activity" Role="APMT_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Activity_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Activity">
+              <PropertyRef Name="Type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Activity_APMT_Process1">
+          <End Type="CP_SPMModel.APMT_Process" Role="APMT_Process" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="CP_SPMModel.APMT_Activity" Role="APMT_Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="APMT_Process">
@@ -675,8 +801,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_APMT_Task_APMT_Activity">
+        <Association Name="FK_APMT_Activity_to_Activity_APMT_Activity">
           <End Type="CP_SPMModel.APMT_Activity" Role="APMT_Activity" Multiplicity="0..1" />
+          <End Type="CP_SPMModel.APMT_Activity_to_Activity" Role="APMT_Activity_to_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Activity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Activity_to_Activity">
+              <PropertyRef Name="FromAc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Activity_to_Activity_APMT_Activity1">
+          <End Type="CP_SPMModel.APMT_Activity" Role="APMT_Activity" Multiplicity="0..1" />
+          <End Type="CP_SPMModel.APMT_Activity_to_Activity" Role="APMT_Activity_to_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APMT_Activity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="APMT_Activity_to_Activity">
+              <PropertyRef Name="ToAC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APMT_Task_APMT_Activity">
+          <End Type="CP_SPMModel.APMT_Activity" Role="APMT_Activity" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="CP_SPMModel.APMT_Task" Role="APMT_Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="APMT_Activity">
@@ -687,15 +839,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_APMT_Company_APMT_User">
-          <End Type="CP_SPMModel.APMT_User" Role="APMT_User" Multiplicity="0..1" />
-          <End Type="CP_SPMModel.APMT_Company" Role="APMT_Company" Multiplicity="*" />
+        <Association Name="FK_APMT_Activity_to_Activity_APMT_Process">
+          <End Type="CP_SPMModel.APMT_Process" Role="APMT_Process" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CP_SPMModel.APMT_Activity_to_Activity" Role="APMT_Activity_to_Activity" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="APMT_User">
+            <Principal Role="APMT_Process">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="APMT_Company">
-              <PropertyRef Name="Admin_id" />
+            <Dependent Role="APMT_Activity_to_Activity">
+              <PropertyRef Name="Process_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -814,10 +968,30 @@
           <EntitySetMapping Name="APMT_Activity">
             <EntityTypeMapping TypeName="CP_SPMModel.APMT_Activity">
               <MappingFragment StoreEntitySet="APMT_Activity">
-                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="activity_key" ColumnName="activity_key" />
+                <ScalarProperty Name="Type_id" ColumnName="Type_id" />
                 <ScalarProperty Name="Weigth" ColumnName="Weigth" />
                 <ScalarProperty Name="Process_Id" ColumnName="Process_Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Activity_to_Activity">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Activity_to_Activity">
+              <MappingFragment StoreEntitySet="APMT_Activity_to_Activity">
+                <ScalarProperty Name="Process_ID" ColumnName="Process_ID" />
+                <ScalarProperty Name="ToAC" ColumnName="ToAC" />
+                <ScalarProperty Name="FromAc" ColumnName="FromAc" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APMT_Activity_Type">
+            <EntityTypeMapping TypeName="CP_SPMModel.APMT_Activity_Type">
+              <MappingFragment StoreEntitySet="APMT_Activity_Type">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

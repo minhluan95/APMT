@@ -112,6 +112,7 @@ namespace APMT.Areas.Company.Controllers
         }
         public ActionResult View_Members(int id)
         {
+               
                 var query = from P_member in db.APMT_Project_User
                             join compUser in db.APMT_Company_User on P_member.User_company_id equals compUser.ID
                             join user in db.APMT_User on compUser.User_id equals user.ID
@@ -127,13 +128,16 @@ namespace APMT.Areas.Company.Controllers
                                 email = user.Email,
                                 projectName = project.Name
                             };
-                ViewBag.LstMember = query.OrderByDescending(x => x.ID).ToList();
+                TempData["id_project"] = id;
+            TempData["name_project"] = db.APMT_Project.SingleOrDefault(x => x.ID == id).Name.ToString();
+            ViewBag.LstMember = query.OrderByDescending(x => x.ID).ToList();
             return View();
 
         }
         [HttpPost]
-        public ActionResult AddMember(FormCollection f,APMT_Project project)
+        public ActionResult Add_New_Member(FormCollection f)
         {
+            int id_project = int.Parse(TempData["id_project"].ToString());
             string trimEmail = "";
             if (f != null)
             {
@@ -148,6 +152,7 @@ namespace APMT.Areas.Company.Controllers
                 }
                 try
                 {
+                    int? manager_id = db.APMT_Project.SingleOrDefault(x => x.ID == id_project).Manager_Id;
                     var user = db.APMT_User.SingleOrDefault(x => x.Email.Equals(trimEmail));
                     if (user != null)
                     {
@@ -155,24 +160,31 @@ namespace APMT.Areas.Company.Controllers
                         if (user.Allowed == 1)
                         {
                             var existMember = db.APMT_Company_User.SingleOrDefault(x => x.User_id == userID);
-                            if (existMember == null)
+                            if (existMember != null)
                             {
+                                if(existMember.ID!=manager_id)
+                                { 
                                 APMT_Project_User projectUser = new APMT_Project_User();
-                                projectUser.User_company_id = userID;
-                                projectUser.Project_id = project.ID;
+                                projectUser.User_company_id = existMember.ID;
+                                projectUser.Project_id = id_project;
                                 projectUser.Allowed = 1;
                                 db.APMT_Project_User.Add(projectUser);
                                 db.SaveChanges();
                                 //mesg = "Successful";
                                 TempData["Message"] = "Successful";
-                                return View();
-
+                                return RedirectToAction("View_Members", new { id = id_project });
+                                }
+                                else
+                                {
+                                    TempData["Message"] = "This user is Manager this project";
+                                    return RedirectToAction("View_Members", new { id = id_project });
+                                }
                             }
                             else
                             {
                                 //mesg = "This user was existed in this company!";
                                 TempData["Message"] = "This user was existed in this company!";
-                                return View();
+                                return RedirectToAction("View_Members", new { id = id_project });
 
                             }
                         }
@@ -180,7 +192,7 @@ namespace APMT.Areas.Company.Controllers
                         {
                             //mesg = "This user was Blocked";
                             TempData["Message"] = "This user was Blocked";
-                            return View();
+                            return RedirectToAction("View_Members", new { id = id_project });
 
                         }
                     }
@@ -188,7 +200,7 @@ namespace APMT.Areas.Company.Controllers
                     {
                         //mesg = "This user not Exist";
                         TempData["Message"] = "This user not Exist";
-                        return View();
+                        return RedirectToAction("View_Members", new { id = id_project });
 
                     }
 
@@ -198,15 +210,14 @@ namespace APMT.Areas.Company.Controllers
                 {
                     //mesg = "Add new Failure,Please Try Again !";
                     TempData["Message"] = "Add new Failure !";
-                    return View();
-
+                    return RedirectToAction("View_Members", new { id = id_project });
                 }
 
             }
             else
             {
                 TempData["Message"] = "Please Input Email";
-                return View();
+                return RedirectToAction("View_Members", new { id = id_project });
 
             }
             //return Json(new
@@ -271,21 +282,22 @@ namespace APMT.Areas.Company.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int id)
         {
+            int id_project = int.Parse(TempData["id_project"].ToString());
             var user = db.APMT_Project_User.FirstOrDefault(x => x.ID == id);
             db.APMT_Project_User.Remove(user);
             db.SaveChanges();
-            return RedirectToAction("AddMember");
+            return RedirectToAction("View_Members", new { id = id_project });
         }
-        [HttpPost]
-        public ActionResult UpdateActivity([Bind(Include = "ID,Name,Description,Weigth,Process_id,Type_id,activity_key,Category")]APMT_Activity a)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(a).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("SetupActivity", new { id = a.Process_Id });
-            }
-            return View(a);
-        }
+        //[HttpPost]
+        //public ActionResult UpdateActivity([Bind(Include = "ID,Name,Description,Weigth,Process_id,Type_id,activity_key,Category")]APMT_Activity a)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(a).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("SetupActivity", new { id = a.Process_Id });
+        //    }
+        //    return View(a);
+        //}
     }
 }

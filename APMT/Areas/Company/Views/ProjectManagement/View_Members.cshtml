@@ -6,6 +6,7 @@
     var i = 0;
 }
 <section class="content">
+    <label style="color:red"> @TempData["Message"]</label>
     <div class="row">
         <div class="col-xs-12 col-lg-12">
             @Html.Partial("Add_New_Member")
@@ -13,7 +14,7 @@
                 <hr />
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <h1 class="text-center">List Members of <span style="color: red">@lst[0].projectName </span></h1>
+                    <h1 class="text-center">List Members of <span style="color: red">@TempData["name_project"]</span></h1>
                     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
                     </div>
                     <br />
