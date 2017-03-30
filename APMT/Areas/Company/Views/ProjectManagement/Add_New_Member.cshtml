@@ -1,0 +1,26 @@
+﻿@using APMT.Areas.Company.Models
+@{
+    ViewBag.Title = "Add_New_Member";
+    Layout = null;
+}
+<button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#AddNew">Add New Member</button>
+<div id="AddNew" class="box collapse">
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" action="~/Company/ProjectManagement/Add_New_Member/" method="post">
+        <div class="box-body">
+            <div class="form-group">
+                @*<label for="exampleInputFile">Name</label><br />*@
+                <!-- Single button -->
+                <div class="dropdown">
+                    <label for="exampleInputFile">Email</label>
+                    <input class="form-control" type="text" id="txt_PMember_Email" name="txt_PMember_Email" data-autocomplete-url="autocompleteP_Member" />
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary btn-md">Add</button>
+        </div>
+    </form>
+</div>

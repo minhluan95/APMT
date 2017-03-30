@@ -20,7 +20,7 @@
     <div class="row">
         <!-- left column -->
         <div class="col-md-12">
-            @Html.Partial("Add_New")
+            @Html.Partial("Add_New_Project")
             <br />
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -35,7 +35,7 @@
                                 <th>Project Name</th>
                                 <th>Manager Name</th>                       
                                 <th>Enable</th>
-                                <th>Delete</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,19 +62,10 @@
 
                                     </td>
                                     <td>
-                                        @*<a href="@Url.Action("AddMember","ProjectManagement")" class="btn btn-primary">Add Member</a>
-                        <a href="/Company/ProjectManagement/Delete/@item.ID" data-href="#" data-toggle="#" data-target="#">Delete</a>*@
+                            
                                         <div class="dropdown">
-                                            <center>
-                                                @*<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                    Choose
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    <li>@Html.ActionLink("Add Member", "AddMember")</li>
-                                                    <li>@Html.ActionLink("Delete", "Delete", new { id = @item.ID })</li>
-                                                </ul>*@
-                                                <a style="color: blue" class="addmember-link" href=""/Company/ProjectManagement/Addmember/@item.ID"">Add member</a>    
+                                            <center>                                            
+                                                <a style="color: blue" class="addmember-link" href="/Company/ProjectManagement/View_Members/@item.ID">Add member</a>    
                                                 <a style="color: red" class="delete-link glyphicon glyphicon-remove" href="/Company/ProjectManagement/Delete/@item.ID"></a>   
                                             </center>
                                         </div>

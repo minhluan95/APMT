@@ -1,41 +1,19 @@
 ﻿@using APMT.Areas.Company.Models
 @{
-    ViewBag.Title = "AddMember";
+    ViewBag.Title = "View Member";
     Layout = "~/Areas/Company/Views/Shared/_Client_LayoutPage.cshtml";
     var lst = (List<projectMember>)ViewBag.LstMember;
     var i = 0;
 }
-
-
 <section class="content">
     <div class="row">
         <div class="col-xs-12 col-lg-12">
-            <button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#AddNew">Add New Member</button>
-            <div id="AddNew" class="box collapse">
-                <!-- /.box-header -->
-                <!-- form start -->
-                <form role="form" action="~/Company/ManageProject/AddNew/" method="post">
-                    <div class="box-body">
-                        <div class="form-group">
-                            @*<label for="exampleInputFile">Name</label><br />*@
-                            <!-- Single button -->
-                            <div class="dropdown">
-                                <label for="exampleInputFile">Email</label>
-                                <input class="form-control" type="text" id="txt_PMember_Email" name="txt_PMember_Email" data-autocomplete-url="autocomplete" />
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary btn-md">Add</button>
-                    </div>
-                </form>
-            </div>
+            @Html.Partial("Add_New_Member")
             <div class="box">
                 <hr />
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <h1 class="text-center">List Members Of APMT Project</h1>
+                    <h1 class="text-center">List Members of <span style="color: red">@lst[0].projectName </span></h1>
                     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12">
                     </div>
                     <br />
@@ -76,7 +54,7 @@
                             }
                         </tbody>
 
-                    </table>                 
+                    </table>
                     <div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
                 </div>
                 <!-- /.box-body -->
@@ -120,4 +98,13 @@
             }
         });
     });
+    function setStatus(id) {
+        $.ajax({
+            url: "/Company/ProjectManagement/setStatus/" + id,
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    }
+
 </script>

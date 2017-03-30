@@ -175,7 +175,7 @@
 
         $(document).ready(function (request) {
             $("#txt_PMember_Email").autocomplete({
-                source: 'autocompleteP_Member',
+                source: '/Company/ProjectManagement/autocompleteP_Member',
                 //data: "{ 'term':'" + request.term + "'}",
                 data: "{term : '"+request.term+"'}",
 

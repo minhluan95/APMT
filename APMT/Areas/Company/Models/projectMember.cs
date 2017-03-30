@@ -9,11 +9,10 @@ namespace APMT.Areas.Company.Models
     {
         public int ID { get; set; }
         public int ID_project { get; set; }
+        public String projectName { get; set; }
         public int ID_User { get; set; }
         public String fullName { get; set; }
         public String email { get; set; }
         public int? Allowed { get; set; }
-   
-
     }
 }

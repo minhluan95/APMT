@@ -414,8 +414,8 @@
     <Content Include="Areas\Company\Views\MemberManagement\View_List.cshtml" />
     <Content Include="Areas\Company\Views\ProcessManagement\AddMember.cshtml" />
     <Content Include="Areas\Company\Views\ProcessManagement\ListProcess.cshtml" />
-    <Content Include="Areas\Company\Views\ProjectManagement\AddMember.cshtml" />
-    <Content Include="Areas\Company\Views\ProjectManagement\Add_New.cshtml" />
+    <Content Include="Areas\Company\Views\ProjectManagement\Add_New_Member.cshtml" />
+    <Content Include="Areas\Company\Views\ProjectManagement\Add_New_Project.cshtml" />
     <Content Include="Areas\Company\Views\ProjectManagement\View_List.cshtml" />
     <Content Include="Areas\Company\Views\Shared\_Client_LayoutPage.cshtml" />
     <Content Include="Areas\Company\Views\Shared\_RegisterClientLayout.cshtml" />
@@ -535,6 +535,7 @@
     <Content Include="Areas\Company\Views\MemberManagement\Index.cshtml" />
     <Content Include="Areas\Company\Views\MemberManagement\Delete.cshtml" />
     <Content Include="Areas\Company\Views\ProjectManagement\Delete.cshtml" />
+    <Content Include="Areas\Company\Views\ProjectManagement\View_Members.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\User\View_Details.cshtml" />
     <Content Include="Views\User\Home.cshtml" />

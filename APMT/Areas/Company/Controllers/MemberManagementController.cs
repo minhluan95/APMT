@@ -201,23 +201,6 @@ namespace APMT.Areas.Company.Controllers
 
         }
 
-        public ActionResult setMember(int? id)
-        {
-            var user = db.APMT_Company_User.FirstOrDefault(x => x.ID == id);
-            if (user.isMember == false)
-            {
-                user.isMember = true;
-                user.isAdministrator = false;
-            }
-            else
-            {
-                user.isMember = false;
-            }
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("View_List");
-        }
-
         public JsonResult setStatus(int? id)
         {
             bool status = true;
